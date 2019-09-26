@@ -5,6 +5,7 @@ object cursor {
 	var property position = game.at(16,8)
 	method image() = "cursor.png"
 
+
 }
 
 object movimiento {
