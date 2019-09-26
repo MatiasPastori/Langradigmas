@@ -1,15 +1,15 @@
-### Nombre del Juego
+### Langradigmas
 
 ![capturaJuego](assets/capturaJuego.png)
 
-#### Grupo: Nombre del Grupo
+#### Grupo: AlPastoElChicken
 
 Integrantes:
 
-- Juana Azurduy
-- Alicia Moreau
-- Joe Balachi
-- Benedict Arnold
+- Camila Albite
+- Matias Pastori
+- Nahuel Varisco
+- Franco Fresno
 
 #### Descripción e instrucciones
 
