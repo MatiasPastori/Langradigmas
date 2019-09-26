@@ -1,5 +1,0 @@
-import wollok.game.*
-
-program nombreDeSuJuego {
-	game.start()
-}

@@ -2,8 +2,8 @@ import wollok.game.*
 
 
 object cursor {
-	var property position = game.at(16,8)
-	method image() = "cursor.png"
+	var property position = game.center()
+	method image() = "cursorGood.png"
 
 
 }
