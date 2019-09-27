@@ -1,11 +1,26 @@
 import wollok.game.*
 
 object cursor {
+	var hayAlgoSeleccionado = false
+	var unidad = null
 
 	var property position = game.center()
 
 	method image() = "cursorGood.png"
 
+	method seleccionar() {
+		if (!hayAlgoSeleccionado) {
+			var lista = game.getObjectsIn(self.position()).filter({objeto => objeto != self})
+			unidad = self.agarrarUnidad(lista)
+			if (unidad != null) hayAlgoSeleccionado = true
+		}else if (unidad != null) {
+			unidad.mover(position)
+			hayAlgoSeleccionado = false
+			unidad = null
+		}
+	}
+	
+	method agarrarUnidad(lista) = if(lista.size() > 0) lista.head() else null
 }
 
 object movimiento {
