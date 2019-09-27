@@ -18,7 +18,7 @@ object escenario {
 		
 				
 		// Pruebas
-		var comandanteBueno = new Comandante(position = game.at(10, 10), image = "comandante.png")
+		var comandanteBueno = new Comandante(position = game.at(10, 10), image = "comandanteBueno.png")
 		game.addVisual(comandanteBueno)
 
 
