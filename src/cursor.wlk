@@ -1,6 +1,7 @@
 import wollok.game.*
 
 object cursor {
+	//var jugadorActual = jugador1 Recordar poner esto cuando se creen los object jugador
 	var hayAlgoSeleccionado = false
 //	var unidad = null
 	
@@ -32,12 +33,16 @@ object cursor {
 	method setObjetoColisionado(algo) { objetoColisionado = algo }
 	method hayAlgoColisionado() = objetoColisionado != null
 	method colisionadoSeleccionable() = objetoColisionado.esSeleccionable()
+				// Ver comandantes.wlk para ver la implementacion de esSeleccionable()	
 	
-	method seleccionar2() {
+	method seleccionar() {
+		
 		if (self.hayAlgoColisionado() && self.colisionadoSeleccionable()) {
+			// Si hay algo colisionado y es seleccionable => lo muevo
+			  // Quizas mas adelante se pase a llamar esMovible, puede que seleccionemos mas cosas que no sean movibles
+			
 			objetoColisionado.mover(position)
-			// Quizás me interese guardar en hayAlgoSeleccionado el true y sacarlo luego del if
-			// hayAlgoSeleccionado = true
+			// hayAlgoSeleccionado = true (quizas quiera guardar esto y sacarlo fuera del if)
 			// Por si quiero hacer algo mas pero por ahora la implementacion es basica
 		}
 		// hayAlgoSeleccionado = false

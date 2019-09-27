@@ -23,8 +23,11 @@ object escenario {
 		game.addVisual(comandanteBueno)		
 		
 		/////////////////////////////////////////////
+		// Guardo constantemente lo que haya detras del cursor NO ME IMPORTA QUE, unidades, piedras, objetos
+		// Cualquier cosa con colision
+		// Lo pienso asi porque capaz mas adelante queremos poder seleccionar otras cosas que no sean comandantes
 		game.whenCollideDo(cursor, { algo => cursor.setObjetoColisionado(algo) })
-		keyboard.s().onPressDo { cursor.seleccionar2() }	
+		keyboard.s().onPressDo { cursor.seleccionar() }	
 		
 		
 	}
