@@ -1,17 +1,12 @@
 import wollok.game.*
+import escenario.*
 
-class Comandante {
-	var property position
+class Arquero {
+	const movimiento = 2
+	const comandante
+	var vida = 8
+	var property posicion
 	var property image
-	
-<<<<<<< HEAD
-	method mover(new_position) {
-		position = game.at(new_position.x(), new_position.y())
-	}
-=======
-	const movimiento = 1
-	var vida = 10
-	var tropa = []
 	
 	method mover() {}
 	method combatir() {
@@ -19,6 +14,5 @@ class Comandante {
 		// Ambos pueden morir / ambos pueden ser dañados
 		// Tambien se calcula el daño que hara con respecto a las bonificaciones de terreno, etc
 	}
-	method reclutar(soldado) = tropa.add(soldado)
->>>>>>> 95859357fff49f4fce61ff21ed80ac79e894c82b
+	
 }
