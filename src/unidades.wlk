@@ -8,6 +8,7 @@ class Arquero {
 	var property position
 	var property image
 	
+	method esSeleccionable() = true
 	method mover(new_position) {
 		position = game.at(new_position.x(), new_position.y())
 	}
@@ -16,5 +17,4 @@ class Arquero {
 		// Ambos pueden morir / ambos pueden ser dañados
 		// Tambien se calcula el daño que hara con respecto a las bonificaciones de terreno, etc
 	}
-	method esSeleccionable() = true
 }

@@ -3,61 +3,36 @@ import wollok.game.*
 object cursor {
 	//var jugadorActual = jugador1 Recordar poner esto cuando se creen los object jugador
 	//var hayAlgoSeleccionado = true
-	//var unidad = null
-	
-	/////////////////////
-	var objetoColisionado = null // PARTE DE LA SOLUC 2
-	/////////////////////
-
+	var unidad = null
 	var property position = game.center()
 
 	method image() = "cursorGood.png"
 
-//	method seleccionar() {
-//		if (unidad == null) {
-//			unidad = self.agarrarUnidadDeLaPosicionActual()
-//		}else {
-//			unidad.mover(position)
-//			unidad = null
-//		}
-//	}
-//	
-//	method agarrarUnidadDeLaPosicionActual() { 
-//		var lista = game.getObjectsIn(self.position()).filter({objeto => objeto != self})
-//		if(lista.size() > 0 && lista.head().esSeleccionable()) return lista.head() else return null
-//	}
-
-	/////////////////////////////////////////////////////////////////////////
-	// SOLUC 2	
-	method setObjetoColisionado(algo) { objetoColisionado = algo }
-	method hayAlgoColisionado() = objetoColisionado != null
-	method colisionadoSeleccionable() = objetoColisionado.esSeleccionable()
-				// Ver comandantes.wlk para ver la implementacion de esSeleccionable()	
-	
 	method seleccionar() {
-		
-		if (self.hayAlgoColisionado() && self.colisionadoSeleccionable()) {
-			
-			// Si hay algo colisionado y es seleccionable => lo muevo
-			// Quizas mas adelante se pase a llamar esMovible, puede que seleccionemos mas cosas que no sean movibles
-			
-			objetoColisionado.mover(position)
-			// hayAlgoSeleccionado = true (quizas quiera guardar esto y sacarlo fuera del if)
-			// Por si quiero hacer algo mas pero por ahora la implementacion es basica
+		if (unidad == null) {
+			unidad = self.agarrarUnidadDeLaPosicionActual()
+		}else {
+			unidad.mover(position)
+			unidad = null
 		}
-		// hayAlgoSeleccionado = false
 	}
-	//////////////////////////////////////////////////////////////////////////
+	
+	method agarrarUnidadDeLaPosicionActual() { 
+		var lista = game.getObjectsIn(self.position()).filter({objeto => objeto != self})
+		return if(lista.size() > 0 && lista.head().esSeleccionable()) lista.head() else null
+	}
+
+
 	
 }
 
 object movimiento {
 
 	method configurarFlechas(visual) {
-		keyboard.up().onPressDo{ self.mover(arriba, visual)}
-		keyboard.down().onPressDo{ self.mover(abajo, visual)}
-		keyboard.left().onPressDo{ self.mover(izquierda, visual)}
-		keyboard.right().onPressDo{ self.mover(derecha, visual)}
+		keyboard.up().onPressDo    { self.mover(arriba, visual)}
+		keyboard.down().onPressDo  { self.mover(abajo, visual)}
+		keyboard.left().onPressDo  { self.mover(izquierda, visual)}
+		keyboard.right().onPressDo { self.mover(derecha, visual)}
 	}
 
 	method mover(direccion, cursor) {
