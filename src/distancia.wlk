@@ -1,3 +1,7 @@
+
+// Da la distancia entre dos puntos evaluada en cantidad de movimientos que una 
+// unidad necesita para llegar a la misma
+
 class Distancia {
 	var property position
 	

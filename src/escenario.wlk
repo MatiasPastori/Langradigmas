@@ -27,7 +27,6 @@ object escenario {
 		var unArqueroBueno = new Arquero(position = game.at(15,15), image = "arqueroBueno.png", comandante = comandanteBueno)
 		game.addVisual(unArqueroBueno)	
 		
-		
 	}
 	
 }

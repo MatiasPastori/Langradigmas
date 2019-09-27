@@ -12,16 +12,25 @@ object cursor {
 	method seleccionar() {
 		if (unidad == null) {
 			unidad = self.agarrarUnidadDeLaPosicionActual()
-		}else if (self.agarrarUnidadDeLaPosicionActual() == null) {
-			unidad.mover(position)
+		} else {
+			var distancia = new Distancia(position = unidad.position())
+			
+			if (self.casillaSinUnidades() && unidad.puedeLlegar(distancia.distanciaA(position))) {
+				unidad.disminuirMovimientosRestantes(distancia.distanciaA(position))
+				game.say(self,"Me movi " + distancia.distanciaA(position).toString() + "casillas :)")
+				unidad.mover(position)
+			}
 			unidad = null
 		}
+		
 	}
 	
 	method agarrarUnidadDeLaPosicionActual() { 
 		var lista = game.getObjectsIn(self.position()).filter({objeto => objeto.esSeleccionable()})
 		return if(lista.size() > 0) lista.head() else null
 	}
+	
+	method casillaSinUnidades() = self.agarrarUnidadDeLaPosicionActual() == null
 
 	method atacar() {}
 	
