@@ -12,21 +12,21 @@ object cursor {
 		if (unidad == null) {
 			unidad = self.agarrarUnidadDeLaPosicionActual()
 		}else if (self.agarrarUnidadDeLaPosicionActual() == null) {
-				unidad.mover(position)
-				unidad = null
+			unidad.mover(position)
+			unidad = null
 		}
 	}
 	
 	method agarrarUnidadDeLaPosicionActual() { 
-		var lista = game.getObjectsIn(self.position()).filter({objeto => objeto != self})
-		return if(lista.size() > 0 && lista.head().esSeleccionable()) lista.head() else null
+		var lista = game.getObjectsIn(self.position()).filter({objeto => objeto.esSeleccionable()})
+		return if(lista.size() > 0) lista.head() else null
 	}
 
 	method atacar() {}
 	
 	method atacarEspecial() {}
 
-	
+	method esSeleccionable() = false
 }
 
 object movimiento {
