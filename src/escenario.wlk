@@ -1,10 +1,11 @@
 import wollok.game.*
 import cursor.*
+import comandantes.*
 
 
-object stage {
+object escenario {
 
-	method configurate() {
+	method configurar() {
 		// CONFIGURACIÓN DEL JUEGO
 		game.title("Langradigmas")
 		game.height(17)
@@ -13,6 +14,14 @@ object stage {
 		//game.boardGround("store.png")
 		game.addVisual(cursor)
 		movimiento.configurarFlechas(cursor)
+		
+		// Pruebas
+//		var unComandante = new Comandante()
+//		unComandante.posicion().gameAt(0,0)
+//		game.addVisual(unComandante)
+
+
+		
 	}
 	
 }
