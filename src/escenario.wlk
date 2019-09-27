@@ -16,21 +16,12 @@ object escenario {
 
 		
 		
-<<<<<<< HEAD
 			
 		// Pruebas
 		var comandanteBueno = new Comandante(position = game.center(), image = "comandanteBueno.png")
 		game.addVisual(comandanteBueno)		
 		
-=======
-				
-	// Pruebas
-	var comandanteBueno = new Comandante(position = game.at(10, 10), image = "comandanteBueno.png")
-	game.addVisual(comandanteBueno)
 
-
-
->>>>>>> 95859357fff49f4fce61ff21ed80ac79e894c82b
 		
 		keyboard.s().onPressDo { cursor.seleccionar() }	
 	}
