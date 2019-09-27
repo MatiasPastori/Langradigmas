@@ -15,15 +15,18 @@ object escenario {
 		movimiento.configurarFlechas(cursor)
 
 		
+		//keyboard.s().onPressDo { cursor.seleccionar() }	
 		
 			
 		// Pruebas
 		var comandanteBueno = new Comandante(position = game.center(), image = "comandanteBueno.png")
 		game.addVisual(comandanteBueno)		
 		
-
+		/////////////////////////////////////////////
+		game.whenCollideDo(cursor, { algo => cursor.setObjetoColisionado(algo) })
+		keyboard.s().onPressDo { cursor.seleccionar2() }	
 		
-		keyboard.s().onPressDo { cursor.seleccionar() }	
+		
 	}
 	
 }
