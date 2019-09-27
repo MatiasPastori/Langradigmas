@@ -1,24 +1,12 @@
 import wollok.game.*
 
-object comandanteBueno inherits Comandante(game.at(0,0),"comandante.png")  {
-	
-}
-
-//object comandanteMalo inherits Comandante() {
-//	
-//}
-
 class Comandante {
-	const movimiento = 1
-	var vida = 10
-	var property posicion
-	var tropa = []
+	var property position
 	var property image
 	
-	constructor(posicionInicial, imagen) {
-		image = imagen
-		posicion = posicionInicial
-	}
+	const movimiento = 1
+	var vida = 10
+	var tropa = []
 	
 	method mover() {}
 	method combatir() {
@@ -27,5 +15,4 @@ class Comandante {
 		// Tambien se calcula el daño que hara con respecto a las bonificaciones de terreno, etc
 	}
 	method reclutar(soldado) = tropa.add(soldado)
-
 }

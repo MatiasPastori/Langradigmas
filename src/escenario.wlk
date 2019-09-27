@@ -2,7 +2,6 @@ import wollok.game.*
 import cursor.*
 import comandantes.*
 
-
 object escenario {
 
 	method configurar() {
@@ -14,11 +13,14 @@ object escenario {
 		//game.boardGround("store.png")
 		game.addVisual(cursor)
 		movimiento.configurarFlechas(cursor)
+
 		
-		// Pruebas
-		var unComandante = new Comandante(gameAt(0,0), "comandanteBueno.png")
-//		unComandante.posicion().gameAt(0,0)
-		game.addVisual(unComandante)
+		
+				
+	// Pruebas
+	var comandanteBueno = new Comandante(position = game.at(10, 10), image = "comandanteBueno.png")
+	game.addVisual(comandanteBueno)
+
 
 
 		
