@@ -25,7 +25,7 @@ object escenario {
 		var comandanteBueno = new Comandante(position = game.center(), image = "comandanteBueno.png")
 		game.addVisual(comandanteBueno)	
 		var unArqueroBueno = new Arquero(position = game.at(15,15), image = "arqueroBueno.png", comandante = comandanteBueno)
-		game.addVisual(unArqueroBueno)				
+		game.addVisual(unArqueroBueno)	
 		
 		
 	}

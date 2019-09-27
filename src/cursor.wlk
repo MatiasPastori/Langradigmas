@@ -1,4 +1,5 @@
 import wollok.game.*
+import distancia.*
 
 object cursor {
 	//var jugadorActual = jugador1 Recordar poner esto cuando se creen los object jugador
@@ -27,6 +28,7 @@ object cursor {
 	method atacarEspecial() {}
 
 	method esSeleccionable() = false
+
 }
 
 object movimiento {

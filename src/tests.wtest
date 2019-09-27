@@ -1,6 +1,9 @@
+import wollok.game.*
+import distancia.*
 
-test "¡sep, vale hacer tests también!" {
-
-	assert.that(false)
-
+test "Moverse de (2,2) a (4,4) consume 4 movimientos" {
+	var distancia = new Distancia()
+	var posFinal = game.at(4,4)
+	distancia.position(game.at(2,2))
+	assert.equals(distancia.distanciaA(posFinal),4)
 }
