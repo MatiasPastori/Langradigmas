@@ -1,6 +1,7 @@
 import wollok.game.*
 import cursor.*
 import comandantes.*
+import unidades.*
 
 object escenario {
 
@@ -20,7 +21,9 @@ object escenario {
 			
 		// Pruebas
 		var comandanteBueno = new Comandante(position = game.center(), image = "comandanteBueno.png")
-		game.addVisual(comandanteBueno)		
+		game.addVisual(comandanteBueno)	
+		var unArqueroBueno = new Arquero(position = game.at(15,15), image = "arqueroBueno.png", comandante = comandanteBueno)
+		game.addVisual(unArqueroBueno)				
 		
 		/////////////////////////////////////////////
 		// Guardo constantemente lo que haya detras del cursor NO ME IMPORTA QUE, unidades, piedras, objetos
