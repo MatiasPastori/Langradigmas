@@ -17,12 +17,13 @@ object cursor {
 			
 			if (self.casillaSinUnidades() && unidad.puedeLlegar(distancia.distanciaA(position))) {
 				unidad.disminuirMovimientosRestantes(distancia.distanciaA(position))
-				game.say(self,"Me movi " + distancia.distanciaA(position).toString() + "casillas :)")
+				game.say(unidad,"Me movi " + distancia.distanciaA(position).toString() + "casillas :)")
 				unidad.mover(position)
+			} else { // este else es solo de testing
+				game.say(unidad,"Me quedé sin movimientos, reiniciá el juego!")
 			}
 			unidad = null
 		}
-		
 	}
 	
 	method agarrarUnidadDeLaPosicionActual() { 
