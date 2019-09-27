@@ -22,6 +22,9 @@ object cursor {
 		return if(lista.size() > 0 && lista.head().esSeleccionable()) lista.head() else null
 	}
 
+	method atacar() {}
+	
+	method atacarEspecial() {}
 
 	
 }

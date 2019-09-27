@@ -18,3 +18,4 @@ class Arquero {
 		// Tambien se calcula el daño que hara con respecto a las bonificaciones de terreno, etc
 	}
 }
+																				

@@ -17,6 +17,8 @@ object escenario {
 
 		
 		keyboard.s().onPressDo { cursor.seleccionar() }	
+		keyboard.a().onPressDo { cursor.atacar() }	
+		keyboard.d().onPressDo { cursor.atacarEspecial() }
 		
 			
 		// Pruebas
