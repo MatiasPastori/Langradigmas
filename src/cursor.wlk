@@ -2,8 +2,8 @@ import wollok.game.*
 
 object cursor {
 	//var jugadorActual = jugador1 Recordar poner esto cuando se creen los object jugador
-	var hayAlgoSeleccionado = false
-//	var unidad = null
+	//var hayAlgoSeleccionado = true
+	//var unidad = null
 	
 	/////////////////////
 	var objetoColisionado = null // PARTE DE LA SOLUC 2
@@ -14,19 +14,18 @@ object cursor {
 	method image() = "cursorGood.png"
 
 //	method seleccionar() {
-//		if (!hayAlgoSeleccionado) {
-//			var lista = game.getObjectsIn(self.position()).filter({objeto => objeto != self})
-//			unidad = self.agarrarUnidad(lista)
-//			if (unidad != null) hayAlgoSeleccionado = true
-//		}else if (unidad != null) {
+//		if (unidad == null) {
+//			unidad = self.agarrarUnidadDeLaPosicionActual()
+//		}else {
 //			unidad.mover(position)
-//			hayAlgoSeleccionado = false
 //			unidad = null
 //		}
 //	}
 //	
-//	method agarrarUnidad(lista) = if(lista.size() > 0) lista.head() else null
-	
+//	method agarrarUnidadDeLaPosicionActual() { 
+//		var lista = game.getObjectsIn(self.position()).filter({objeto => objeto != self})
+//		if(lista.size() > 0 && lista.head().esSeleccionable()) return lista.head() else return null
+//	}
 
 	/////////////////////////////////////////////////////////////////////////
 	// SOLUC 2	
@@ -38,8 +37,9 @@ object cursor {
 	method seleccionar() {
 		
 		if (self.hayAlgoColisionado() && self.colisionadoSeleccionable()) {
+			
 			// Si hay algo colisionado y es seleccionable => lo muevo
-			  // Quizas mas adelante se pase a llamar esMovible, puede que seleccionemos mas cosas que no sean movibles
+			// Quizas mas adelante se pase a llamar esMovible, puede que seleccionemos mas cosas que no sean movibles
 			
 			objetoColisionado.mover(position)
 			// hayAlgoSeleccionado = true (quizas quiera guardar esto y sacarlo fuera del if)
