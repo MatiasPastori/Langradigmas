@@ -16,9 +16,9 @@ object escenario {
 		movimiento.configurarFlechas(cursor)
 		
 		// Pruebas
-//		var unComandante = new Comandante()
+		var unComandante = new Comandante(gameAt(0,0), "comandanteBueno.png")
 //		unComandante.posicion().gameAt(0,0)
-//		game.addVisual(unComandante)
+		game.addVisual(unComandante)
 
 
 		
