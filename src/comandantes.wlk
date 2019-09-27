@@ -6,6 +6,9 @@ class Comandante {
 	
 	method esSeleccionable() = true
 	method mover(new_position) {
-		position = game.at(new_position.x(), new_position.y())
+		var n_p_x = (new_position.x() - position.x()).limitBetween(-2, 2) 
+		var n_p_y = (new_position.y() - position.y()).limitBetween(-2, 2)
+
+		position = game.at(position.x() + n_p_x, position.y() + n_p_y)
 	}
 }

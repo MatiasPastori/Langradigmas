@@ -11,9 +11,9 @@ object cursor {
 	method seleccionar() {
 		if (unidad == null) {
 			unidad = self.agarrarUnidadDeLaPosicionActual()
-		}else {
-			unidad.mover(position)
-			unidad = null
+		}else if (self.agarrarUnidadDeLaPosicionActual() == null) {
+				unidad.mover(position)
+				unidad = null
 		}
 	}
 	
