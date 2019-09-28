@@ -1,9 +1,9 @@
 import wollok.game.*
 import distancia.*
+import jugadores.*
 
 object cursor {
-	//var jugadorActual = jugador1 Recordar poner esto cuando se creen los object jugador
-	//var hayAlgoSeleccionado = true
+	var jugadorActual = jugador1
 	var unidad = null
 	var property position = game.center()
 
