@@ -13,14 +13,13 @@ object cursor {
 		if (unidad == null) {
 			unidad = self.agarrarUnidadDeLaPosicionActual()
 		} else {
-			var distancia = new Distancia(position = unidad.position())
+			var distanciaEnMovimientos = new Distancia(position = unidad.position())
 			
-			if (self.casillaSinUnidades() && unidad.puedeLlegar(distancia.distanciaA(position))) {
-				unidad.disminuirMovimientosRestantes(distancia.distanciaA(position))
-				game.say(unidad,"Me movi " + distancia.distanciaA(position).toString() + "casillas :)")
+			if (self.esCasillaValida() && unidad.puedeLlegar(distanciaEnMovimientos.distanciaA(position))) {
 				unidad.mover(position)
+				game.say(unidad,"Me movi " + distanciaEnMovimientos.distanciaA(position).toString() + "casillas :)")
 			} else { // este else es solo de testing
-				game.say(unidad,"Me quedé sin movimientos, reiniciá el juego!")
+				game.say(unidad,"Está lejos o me quedé sin movimientos :(")
 			}
 			unidad = null
 		}
@@ -31,7 +30,7 @@ object cursor {
 		return if(lista.size() > 0) lista.head() else null
 	}
 	
-	method casillaSinUnidades() = self.agarrarUnidadDeLaPosicionActual() == null
+	method esCasillaValida() = self.agarrarUnidadDeLaPosicionActual() == null //Acá poner los limites del mapa tmb
 
 	method atacar() {}
 	
