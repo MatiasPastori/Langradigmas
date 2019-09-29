@@ -1,10 +1,15 @@
 import wollok.game.*
 
 class Comandante {
-	const movimientos = 1
+	const rangoDeAccion = 50
 	var vida = 10
 	var puedeMoverse = true // Recordar hacer puedeMoverse = true al finalizar CADA TURNO
 	var puedeAtacar = true  // Recordar hacer puedeAtacar = true al finalizar CADA TURNO
+	
+	var buffAtaque
+	var buffDefensa
+	var nivelAtaque
+	var nivelDefensa
 	
 	var property position
 	var property image
@@ -21,12 +26,25 @@ class Comandante {
 //		position = game.at(position.x() + n_p_x, position.y() + n_p_y)
 	}
 	
-	method combatir() {
-		// Aca va la logica del combate. El resultado afecta tanto al atacante como al atacado
-		// Ambos pueden morir / ambos pueden ser dañados
-		// Tambien se calcula el daño que hara con respecto a las bonificaciones de terreno, etc
-		puedeAtacar = false
-	}
+	method combatir(enemigo){
+		var danio 
+				if((self.nivelAtaque() - enemigo.nivelAtaque())>1 && (self.nivelDefensa() - enemigo.nivelDefensa())>1){
+					danio = 6.randomUpTo(10).truncate(0)
+				}else if((self.nivelAtaque() - enemigo.nivelAtaque())<1 && (self.nivelDefensa() - enemigo.nivelDefensa())>1){
+					danio = 1.randomUpTo(3).truncate(0)
+				}else if((self.nivelAtaque() - enemigo.nivelAtaque())>1 && (self.nivelDefensa() - enemigo.nivelDefensa())<1){
+					danio = (self.nivelAtaque() - enemigo.nivelDefensa()).abs().randomUpTo(4).truncate(0)
+				}else{ danio = 0.randomUpTo(2).truncate(0)}
+				enemigo.vida(-danio) 
+				enemigo.combatir(self)
+		}
 	
-	method puedeLlegar(movimientosNecesarios) = movimientosNecesarios <= movimientos && puedeMoverse
+	method nivelAtaque() = nivelAtaque
+	
+	method nivelDefensa() = nivelDefensa 
+	
+	method buffDeAtaque() = buffAtaque
+	method buffDeDefensa() = buffDefensa
+	
+	method puedeLlegar(movimientosNecesarios) = movimientosNecesarios <= rangoDeAccion && puedeMoverse
 }

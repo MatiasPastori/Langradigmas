@@ -22,14 +22,14 @@ object escenario {
 		
 			
 		// Pruebas
-		var comandanteBueno = new Comandante(position = game.at(1,8), image = "comandanteBueno.png")
+		var comandanteBueno = new Comandante(position = game.at(1,8), image = "comandanteBueno.png",buffAtaque=4,buffDefensa = 2,nivelAtaque = 25,nivelDefensa=22)
 		game.addVisual(comandanteBueno)	
 		var unArqueroBueno = new Arquero(position = game.at(2,9), image = "arqueroBueno.png", comandante = comandanteBueno)
 		game.addVisual(unArqueroBueno)
 		var otroArqueroBueno = new Arquero(position = game.at(2,7), image = "arqueroBueno.png", comandante = comandanteBueno)
 		game.addVisual(otroArqueroBueno)
 		
-		var comandanteMalo = new Comandante(position = game.at(game.width()-2,8), image = "comandanteMalo.png")
+		var comandanteMalo = new Comandante(position = game.at(game.width()-2,8), image = "comandanteMalo.png",buffAtaque=4,buffDefensa = 2,nivelAtaque = 25,nivelDefensa=22)
 		game.addVisual(comandanteMalo)	
 		var unCaballeroMalo = new Arquero(position = game.at(game.width()-3,9), image = "ejemplo.png", comandante = comandanteBueno)
 		game.addVisual(unCaballeroMalo)		

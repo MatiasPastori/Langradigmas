@@ -6,17 +6,19 @@ object cursor {
 	var jugadorActual = jugador1
 	var unidad = null
 	var property position = game.center()
+	var enemigosCercanos = []
 
 	method image() = "cursorGood.png"
 
 	method seleccionar() {
 		if (unidad == null) {
-			unidad = self.agarrarUnidadDeLaPosicionActual()
+			unidad = self.unidadEn(position)
 		} else {
 			var distanciaEnMovimientos = new Distancia(position = unidad.position())
 			
 			if (self.esCasillaValida() && unidad.puedeLlegar(distanciaEnMovimientos.distanciaA(position))) {
 				unidad.mover(position)
+				self.captarEnemigosCercanos()
 				game.say(unidad,"Me movi " + distanciaEnMovimientos.distanciaA(position).toString() + "casillas :)")
 			} else { // este else es solo de testing
 				game.say(unidad,"Está lejos o me quedé sin movimientos :(")
@@ -25,15 +27,37 @@ object cursor {
 		}
 	}
 	
-	method agarrarUnidadDeLaPosicionActual() { 
-		var lista = game.getObjectsIn(self.position()).filter({objeto => objeto.esSeleccionable()})
+	method atacar(){
+		if(unidad!= null && enemigosCercanos.contains(position)){
+			unidad.combatir(self.unidadEn(position))}
+	}
+	
+	method captarEnemigosCercanos(){
+		if(self.unidadEn(position.right(1))) 
+			game.addVisual("atacable.png")
+			enemigosCercanos.add(position.right(1))
+		if(self.unidadEn(position.left(1)))
+			game.addVisual("atacable.png")
+			enemigosCercanos.add(position.left(1))
+		if(self.unidadEn(position.up(1)))
+			game.addVisual("atacable.png")
+			enemigosCercanos.add(position.up(1))
+		if(self.unidadEn(position.down(1)))
+			game.addVisual("atacable.png")
+			enemigosCercanos.add(position.down(1))
+	}
+	
+	method mostrarRangoTransitable(){
+		
+	}
+	
+	method unidadEn(posicion) { 
+		var lista = game.getObjectsIn(posicion).filter({objeto => objeto.esSeleccionable()})
 		return if(lista.size() > 0) lista.head() else null
 	}
 	
-	method esCasillaValida() = self.agarrarUnidadDeLaPosicionActual() == null //Acá poner los limites del mapa tmb
+	method esCasillaValida() = self.unidadEn(position) == null //Acá poner los limites del mapa tmb
 
-	method atacar() {}
-	
 	method atacarEspecial() {}
 
 	method esSeleccionable() = false
