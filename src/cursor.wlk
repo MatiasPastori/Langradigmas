@@ -47,6 +47,21 @@ object movimiento {
 		keyboard.down().onPressDo  { self.mover(abajo, visual)}
 		keyboard.left().onPressDo  { self.mover(izquierda, visual)}
 		keyboard.right().onPressDo { self.mover(derecha, visual)}
+		
+//		NO DAR BOLA A ESTO, SOLO ESTOY BOLUDEANDO
+//      var activado = false 
+//		keyboard.shift().onPressDo{
+//			keyboard.up().onPressDo{ 
+//				if (!activado) {
+//					activado = true; 
+//					game.onTick(500, "movimiento", { self.mover(arriba, visual)})
+//				} else {
+//					activado = false;
+//					game.removeTickEvent("movimiento");
+//				}
+//				
+//			}
+//		}
 	}
 
 	method mover(direccion, cursor) {
