@@ -23,18 +23,18 @@ object escenario {
 			
 		// Start Pruebas
 		
-		var comandanteBueno = new Comandante(position = game.at(1,8), image = "comandanteBueno.png")
+		var comandanteBueno = new Comandante(position = game.at(1,8), image = "comandanteBuenoIddle1.png")
 		game.addVisual(comandanteBueno)	
-		var unArqueroBueno = new Arquero(position = game.at(2,9), image = "arqueroBueno.png", comandante = comandanteBueno)
+		var unArqueroBueno = new Arquero(position = game.at(2,9), image = "soldadoBuenoIddle1.png", comandante = comandanteBueno)
 		game.addVisual(unArqueroBueno)
-		var otroArqueroBueno = new Arquero(position = game.at(2,7), image = "arqueroBueno.png", comandante = comandanteBueno)
+		var otroArqueroBueno = new Arquero(position = game.at(2,7), image = "soldadoBuenoIddle1.png", comandante = comandanteBueno)
 		game.addVisual(otroArqueroBueno)
 		
 		var comandanteMalo = new Comandante(position = game.at(game.width()-2,8), image = "comandanteMalo.png")
 		game.addVisual(comandanteMalo)	
-		var unCaballeroMalo = new Arquero(position = game.at(game.width()-3,9), image = "ejemplo.png", comandante = comandanteBueno)
+		var unCaballeroMalo = new Arquero(position = game.at(game.width()-3,9), image = "arqueroMaloIddle1.png", comandante = comandanteBueno)
 		game.addVisual(unCaballeroMalo)		
-		var unSoldadoMalo = new Arquero(position = game.at(game.width()-3,7), image = "soldier.png", comandante = comandanteBueno)
+		var unSoldadoMalo = new Arquero(position = game.at(game.width()-3,7), image = "arqueroMaloIddle1.png", comandante = comandanteBueno)
 		game.addVisual(unSoldadoMalo)		
 		
 		// End Pruebas
