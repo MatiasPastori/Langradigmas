@@ -6,57 +6,45 @@ import distancia.*
 class Arquero {
 	const comandante
 	const rangoDeAccion = 50
-	var puedeMoverse = true // Recordar hacer puedeMoverse = true al finalizar CADA TURNO
 	var property vida = 10
-	
-	const nivelAtaque = 22
-	const nivelDefensa = 14
+	var puedeMoverse = true // Recordar hacer puedeMoverse = true al finalizar CADA TURNO
+	var property puedeAtacar = true  // Recordar hacer puedeAtacar = true al finalizar CADA TURNO
 	
 	var property position
 	var property image
 	
+	const property nivelAtaque = 20
+	const property nivelDefensa = 20
+	
+	method buffAtaque() = self.buffAtaquePorComandanteCerca() // + method buff depende de casillas ataque
+	method buffDefensa() = self.buffDefensaPorComandanteCerca() // + method buff depende de casillas defensa
+	
 	method esSeleccionable() = true
 	
-	method mover(new_position) {
-		position = game.at(new_position.x(), new_position.y())
+	method mover(nuevaPos) {
+		position = game.at(nuevaPos.x(), nuevaPos.y())
 		puedeMoverse = false
 	}
 	
-	method combatir(enemigo) {
-		var danio 
-				if((self.nivelAtaque() - enemigo.nivelAtaque())>1 && (self.nivelDefensa() - enemigo.nivelDefensa())>1){
-					danio = 6.randomUpTo(10).truncate(0)
-				}else if((self.nivelAtaque() - enemigo.nivelAtaque())<1 && (self.nivelDefensa() - enemigo.nivelDefensa())>1){
-					danio = 1.randomUpTo(3).truncate(0)
-				}else if((self.nivelAtaque() - enemigo.nivelAtaque())>1 && (self.nivelDefensa() - enemigo.nivelDefensa())<1){
-					danio = (self.nivelAtaque() - enemigo.nivelDefensa()).abs().randomUpTo(4).truncate(0)
-				}else{ danio = 0.randomUpTo(2).truncate(0)}
-				enemigo.vida(-danio) 
-				enemigo.combatir(self)
-		}
-		// Aca va la logica del combate. El resultado afecta tanto al atacante como al atacado
-		// Ambos pueden morir / ambos pueden ser dañados
-		// Tambien se calcula el daño que hara con respecto a las bonificaciones de terreno, etc
-	
 	method puedeLlegar(movimientosNecesarios) = movimientosNecesarios <= rangoDeAccion && puedeMoverse
+	
+	method combatir(enemigo) {
+		var danio = (self.nivelAtaque() + self.buffAtaque() - enemigo.nivelDefensa() - enemigo.buffDefensa()).limitBetween(0,10).randomUpTo(10).truncate(0)
+		enemigo.recibirDanio(danio) 
+		enemigo.combatir(self)
+		self.puedeAtacar(false)
+	}
+	
+	method recibirDanio(danio) { vida -= danio } // if vida <= 0, matar unidad aca
 
-	method bufoPorCercaniaDeAtaque() {
-		var distanciaAlComandante = new Distancia(position =self.position() )
-		if(distanciaAlComandante.distanciaA(comandante.position())<3){
-			return comandante.buffDeAtaque()
-		}else return 0
+	method buffAtaquePorComandanteCerca() {
+		var distanciaAlComandante = new Distancia(position = self.position() )
+		return if (distanciaAlComandante.distanciaA(comandante.position())<3) comandante.buffAtaqueQueOtorga() else 0
 	}
-	method bufoPorCercaniaDeDefensa() {
-		var distanciaAlComandante = new Distancia(position =self.position() )
-		if(distanciaAlComandante.distanciaA(comandante.position())<3){
-			return comandante.buffDeDefensa()
-		}else return 0
+	method buffDefensaPorComandanteCerca() {
+		var distanciaAlComandante = new Distancia(position = self.position() )
+		return if (distanciaAlComandante.distanciaA(comandante.position())<3) comandante.buffDefensaQueOtorga() else 0
 	}
-	
-	
-	method nivelAtaque() = nivelAtaque + self.bufoPorCercaniaDeAtaque()
-	
-	method nivelDefensa() = nivelDefensa + self.bufoPorCercaniaDeDefensa()
 
 }
 																				

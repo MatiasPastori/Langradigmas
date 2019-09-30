@@ -27,7 +27,7 @@ object cursor {
 	}
 	
 	method atacar(){
-		if(unidad != null && enemigosCercanos.contains(position)){
+		if(unidad != null && enemigosCercanos.contains(position) && unidad.puedeAtacar()){
 			unidad.combatir(self.unidadEn(position))
 			unidad = null
 		}
