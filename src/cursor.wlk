@@ -23,28 +23,33 @@ object cursor {
 			} else { // este else es solo de testing
 				game.say(unidad,"Está lejos o me quedé sin movimientos :(")
 			}
-			unidad = null
 		}
 	}
 	
 	method atacar(){
-		if(unidad!= null && enemigosCercanos.contains(position)){
-			unidad.combatir(self.unidadEn(position))}
+		if(unidad != null && enemigosCercanos.contains(position)){
+			unidad.combatir(self.unidadEn(position))
+			unidad = null
+		}
 	}
 	
 	method captarEnemigosCercanos(){
-		if(self.unidadEn(position.right(1))) 
-			game.addVisual("atacable.png")
+		if(self.unidadEn(position.right(1)) == null){ 
+			position.right(1).drawElement("atacable.png")
 			enemigosCercanos.add(position.right(1))
-		if(self.unidadEn(position.left(1)))
-			game.addVisual("atacable.png")
+		}
+		if(self.unidadEn(position.left(1)) == null){
+			position.right(1).drawElement("atacable.png")
 			enemigosCercanos.add(position.left(1))
-		if(self.unidadEn(position.up(1)))
-			game.addVisual("atacable.png")
+		}
+		if(self.unidadEn(position.up(1)) == null){
+			position.right(1).drawElement("atacable.png")
 			enemigosCercanos.add(position.up(1))
-		if(self.unidadEn(position.down(1)))
-			game.addVisual("atacable.png")
+		}
+		if(self.unidadEn(position.down(1)) == null){
+			position.right(1).drawElement("atacable.png")
 			enemigosCercanos.add(position.down(1))
+		}	
 	}
 	
 	method mostrarRangoTransitable(){
