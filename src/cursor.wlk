@@ -43,8 +43,6 @@ object cursor {
 		var posicionesCerca = [position.right(1),position.left(1),position.up(1),position.down(1)]
 		posicionesAtacables = posicionesCerca.filter{pos => self.unidadEn(pos) != null}
 		posicionesAtacables.forEach{pos => game.addVisualIn(new Visual(image="atacable.png"),pos)}
-		posicionesAtacables.forEach{pos => game.say(pos,game.getObjectsIn(pos).toString())}
-		
 	}
 	
 	method descaptarEnemigosCercanos() {
