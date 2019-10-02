@@ -7,7 +7,7 @@ object cursor {
 	var jugadorActual = jugador1
 	var unidad = null
 	var property position = game.center()
-	var enemigosCercanos = []
+	var posicionesAtacables = []
 
 	method image() = "cursorGood.png"
 
@@ -27,16 +27,16 @@ object cursor {
 	}
 	
 	method atacar(){
-		if(unidad != null && enemigosCercanos.contains(position) && unidad.puedeAtacar()){
+		if(unidad != null && posicionesAtacables.contains(position) && unidad.puedeAtacar()){
 			unidad.combatir(self.unidadEn(position))
 			unidad = null
 		}
 	}
 	
 	method captarEnemigosCercanos(){
-		var posicionesAtacables = [position.right(1),position.left(1),position.up(1),position.down(1)]
-		enemigosCercanos = posicionesAtacables.map{pos => self.unidadEn(pos)}.filter{obj => obj != null}
-		enemigosCercanos.forEach{enemigo => game.addVisualIn(new Visual(image="atacable.png"),enemigo.position())}
+		var posicionesCerca = [position.right(1),position.left(1),position.up(1),position.down(1)]
+		posicionesAtacables = posicionesCerca.filter{pos => self.unidadEn(pos) != null}
+		posicionesAtacables.forEach{pos => game.addVisualIn(new Visual(image="atacable.png"),pos)}
 	}
 	
 	method mostrarRangoTransitable(){
