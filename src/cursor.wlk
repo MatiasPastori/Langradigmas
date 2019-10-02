@@ -43,13 +43,16 @@ object cursor {
 		var posicionesCerca = [position.right(1),position.left(1),position.up(1),position.down(1)]
 		posicionesAtacables = posicionesCerca.filter{pos => self.unidadEn(pos) != null}
 		posicionesAtacables.forEach{pos => game.addVisualIn(new Visual(image="atacable.png"),pos)}
+		posicionesAtacables.forEach{pos => game.say(pos,game.getObjectsIn(pos).toString())}
+		
 	}
 	
 	method descaptarEnemigosCercanos() {
 		var espadasDeAtaque = []
-		posicionesAtacables.forEach{pos => espadasDeAtaque.add{game.getObjectsIn(pos).filter({objeto => objeto.image() == "atacable.png"})}}
-		posicionesAtacables.clear()
+		espadasDeAtaque = posicionesAtacables.map({pos => game.getObjectsIn(pos)})
+		espadasDeAtaque.filter{obj => obj.image() == "atacable.ong"}
 		espadasDeAtaque.forEach{espada => game.removeVisual(espada)}
+		posicionesAtacables.clear()
 	}
 	
 	method mostrarRangoTransitable(){
