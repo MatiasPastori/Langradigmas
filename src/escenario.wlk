@@ -32,9 +32,9 @@ object escenario {
 		
 		var comandanteMalo = new Comandante(position = game.at(game.width()-2,8), image = "comandanteMalo.png")
 		game.addVisual(comandanteMalo)	
-		var unCaballeroMalo = new Arquero(position = game.at(game.width()-3,9), image = "arqueroMaloIddle1.png", comandante = comandanteBueno)
+		var unCaballeroMalo = new Arquero(position = game.at(game.width()-3,9), image = "arqueroBueno.png", comandante = comandanteBueno)
 		game.addVisual(unCaballeroMalo)		
-		var unSoldadoMalo = new Arquero(position = game.at(game.width()-3,7), image = "arqueroMaloIddle1.png", comandante = comandanteBueno)
+		var unSoldadoMalo = new Arquero(position = game.at(game.width()-3,7), image = "arqueroBueno.png", comandante = comandanteBueno)
 		game.addVisual(unSoldadoMalo)		
 		
 		// End Pruebas
