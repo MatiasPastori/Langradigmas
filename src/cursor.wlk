@@ -29,6 +29,7 @@ object cursor {
 	method atacar(){
 		if(unidad != null && posicionesAtacables.contains(position) && unidad.puedeAtacar()){
 			unidad.combatir(self.unidadEn(position))
+			game.say(unidad, "Mi vida ahora es " + unidad.vida().toString())
 			unidad = null
 		}
 	}
