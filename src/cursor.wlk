@@ -14,15 +14,17 @@ object cursor {
 	method seleccionar() {
 		if (unidad == null) {
 			unidad = self.unidadEn(position)
+			self.captarEnemigosCercanos()
 		} else {
 			var distanciaEnMovimientos = new Distancia(position = unidad.position())
+			
+			self.descaptarEnemigosCercanos()
 			
 			if (self.esCasillaValida() && unidad.puedeLlegar(distanciaEnMovimientos.distanciaA(position))) {
 				unidad.mover(position)
 				self.captarEnemigosCercanos()
 			} else if (unidad.position() == position ) { 
 				unidad = null
-				self.descaptarEnemigosCercanos()
 			} else { game.say(unidad,"No puedo llegar allí :(") }
 		}
 	}
@@ -35,6 +37,8 @@ object cursor {
 			self.descaptarEnemigosCercanos()
 			game.say(unidad, "Mi vida despues de atacar es " + unidad.vida().toString())
 			game.say(unidadAtacada, "Me atacaron y quede en " + unidadAtacada.vida().toString() + "de vida")
+			unidadAtacada.chequearMuerte()
+			unidad.chequearMuerte()
 			unidad = null
 		}
 	}

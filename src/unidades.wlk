@@ -44,6 +44,10 @@ class Arquero {
 		var distanciaAlComandante = new Distancia(position = self.position() )
 		return if (distanciaAlComandante.distanciaA(comandante.position())<3) comandante.buffDefensaQueOtorga() else 0
 	}
+			
+	method chequearMuerte() {if(self.vida() < 1) self.morir()}
+		
+	method morir() {escenario.twilightZone(self)}
 
 }
 																				

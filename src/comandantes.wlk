@@ -1,4 +1,5 @@
 import wollok.game.*
+import escenario.*
 
 class Comandante {
 	const rangoDeAccion = 50
@@ -33,6 +34,9 @@ class Comandante {
 		self.puedeAtacar(false)
 	}
 	
-	method recibirDanio(danio) { vida -= danio } // if vida <= 0, matar unidad aca
+	method recibirDanio(danio) {vida -= danio} // if vida <= 0, matar unidad aca
 		
+	method chequearMuerte() {if(self.vida() < 1) self.morir()}
+		
+	method morir() {escenario.twilightZone(self)}
 }

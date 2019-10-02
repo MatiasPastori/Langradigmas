@@ -44,6 +44,11 @@ object escenario {
 		game.addVisual(cursor)
 	}
 	
+	method twilightZone(character){
+		character.position(game.at(100,100))
+		game.at(100, 100).clear()
+	}
+	
 }
 
 
