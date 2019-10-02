@@ -1,6 +1,7 @@
 import wollok.game.*
 import distancia.*
 import jugadores.*
+import visuals.*
 
 object cursor {
 	var jugadorActual = jugador1
@@ -19,10 +20,9 @@ object cursor {
 			if (self.esCasillaValida() && unidad.puedeLlegar(distanciaEnMovimientos.distanciaA(position))) {
 				unidad.mover(position)
 				self.captarEnemigosCercanos()
-				game.say(unidad,"Me movi " + distanciaEnMovimientos.distanciaA(position).toString() + "casillas :)")
-			} else { // este else es solo de testing
-				game.say(unidad,"Está lejos o me quedé sin movimientos :(")
-			}
+			} else if (unidad.position() == position ) { 
+				unidad = null
+			} else { game.say(unidad,"No puedo llegar allí :(") }
 		}
 	}
 	
@@ -34,22 +34,9 @@ object cursor {
 	}
 	
 	method captarEnemigosCercanos(){
-		if(self.unidadEn(position.right(1)) == null){ 
-			position.right(1).drawElement("atacable.png")
-			enemigosCercanos.add(position.right(1))
-		}
-		if(self.unidadEn(position.left(1)) == null){
-			position.right(1).drawElement("atacable.png")
-			enemigosCercanos.add(position.left(1))
-		}
-		if(self.unidadEn(position.up(1)) == null){
-			position.right(1).drawElement("atacable.png")
-			enemigosCercanos.add(position.up(1))
-		}
-		if(self.unidadEn(position.down(1)) == null){
-			position.right(1).drawElement("atacable.png")
-			enemigosCercanos.add(position.down(1))
-		}	
+		var posicionesAtacables = [position.right(1),position.left(1),position.up(1),position.down(1)]
+		enemigosCercanos = posicionesAtacables.map{pos => self.unidadEn(pos)}.filter{obj => obj != null}
+		enemigosCercanos.forEach{enemigo => game.addVisualIn(new Visual(image="atacable.png"),enemigo.position())}
 	}
 	
 	method mostrarRangoTransitable(){
