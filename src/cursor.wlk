@@ -34,7 +34,7 @@ object cursor {
 			unidadAtacada.combatir(unidad)
 			self.descaptarEnemigosCercanos()
 			game.say(unidad, "Mi vida despues de atacar es " + unidad.vida().toString())
-			game.say(unidadAtacada, "Me atacaron y quede en " + unidad.vida().toString() + "de vida")
+			game.say(unidadAtacada, "Me atacaron y quede en " + unidadAtacada.vida().toString() + "de vida")
 			unidad = null
 		}
 	}
@@ -47,9 +47,9 @@ object cursor {
 	
 	method descaptarEnemigosCercanos() {
 		var espadasDeAtaque = []
-		posicionesAtacables.forEach{pos => espadasDeAtaque.add{game.getObjectsIn(pos).filter({objeto => objeto.image() == "atacable.png"})}}
+		posicionesAtacables.forEach({pos => espadasDeAtaque.add(game.getObjectsIn(pos).filter({objeto => objeto.image() == "atacable.png"}).head())})
 		posicionesAtacables.clear()
-		espadasDeAtaque.forEach{espada => game.removeVisual(espada)}
+		espadasDeAtaque.forEach({espada => game.removeVisual(espada)})
 	}
 	
 	method mostrarRangoTransitable(){
