@@ -30,7 +30,6 @@ class Comandante {
 	method combatir(enemigo) {
 		var danio = (self.nivelAtaque() + self.buffAtaque() - enemigo.nivelDefensa() - enemigo.buffDefensa()).limitBetween(0,10).randomUpTo(10).truncate(0)
 		enemigo.recibirDanio(danio) 
-		enemigo.combatir(self)
 		self.puedeAtacar(false)
 	}
 	

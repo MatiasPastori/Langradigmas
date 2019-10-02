@@ -22,22 +22,34 @@ object cursor {
 				self.captarEnemigosCercanos()
 			} else if (unidad.position() == position ) { 
 				unidad = null
+				self.descaptarEnemigosCercanos()
 			} else { game.say(unidad,"No puedo llegar allí :(") }
 		}
 	}
 	
 	method atacar(){
 		if(unidad != null && posicionesAtacables.contains(position) && unidad.puedeAtacar()){
-			unidad.combatir(self.unidadEn(position))
-			game.say(unidad, "Mi vida ahora es " + unidad.vida().toString())
+			var unidadAtacada = self.unidadEn(position)
+			unidad.combatir(unidadAtacada)
+			unidadAtacada.combatir(unidad)
+			self.descaptarEnemigosCercanos()
+			game.say(unidad, "Mi vida despues de atacar es " + unidad.vida().toString())
+			game.say(unidadAtacada, "Me atacaron y quede en " + unidad.vida().toString() + "de vida")
 			unidad = null
 		}
 	}
 	
-	method captarEnemigosCercanos(){
+	method captarEnemigosCercanos() {
 		var posicionesCerca = [position.right(1),position.left(1),position.up(1),position.down(1)]
 		posicionesAtacables = posicionesCerca.filter{pos => self.unidadEn(pos) != null}
 		posicionesAtacables.forEach{pos => game.addVisualIn(new Visual(image="atacable.png"),pos)}
+	}
+	
+	method descaptarEnemigosCercanos() {
+		var espadasDeAtaque = []
+		posicionesAtacables.forEach{pos => espadasDeAtaque.add{game.getObjectsIn(pos).filter({objeto => objeto.image() == "atacable.png"})}}
+		posicionesAtacables.clear()
+		espadasDeAtaque.forEach{espada => game.removeVisual(espada)}
 	}
 	
 	method mostrarRangoTransitable(){
