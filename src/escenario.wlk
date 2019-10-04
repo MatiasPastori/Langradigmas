@@ -1,23 +1,30 @@
 import wollok.game.*
 import teclado.*
 import niveles.*
+import casillas.*
 import cursor.*
 import comandante.*
 import tirador.*
 
 object escenario {
+	const height = 17
+	const width = 31
+	var nivelActual = nivel1
 
 	method configurar() {
 		// CONFIGURACIÓN DEL JUEGO
 		game.title("Langradigmas")
-		game.height(17)
-		game.width(31)
+		game.height(height)
+		game.width(width)
 		//game.ground("original.gif")
 		//game.boardGround("algo.gif")
 		
 		teclado.setearTeclasMovimiento(cursor)
 		teclado.setearTeclasAccion(cursor)
-		self.setearCasillas()
+		
+		// Esto no funka todavia
+		//mapaCasillas.setearCasillasInternas()
+		//mapaCasillas.setearCasillasBorde()
 		
 			
 		// Start Pruebas
@@ -42,14 +49,13 @@ object escenario {
 		
 		game.addVisual(cursor)
 	}
+	method actualizarNivel() {
+		nivelActual.nivelSiguiente()
+	}
 	method twilightZone(character) {
 		character.position(game.at(100,100))
 		game.at(100, 100).clear()
 	}
-	method setearCasillas() {
-		
-	}
-	
 }
 
 
