@@ -16,7 +16,7 @@ object escenario {
 		//game.boardGround("algo.gif")
 		
 		teclado.setearTeclasMovimiento(cursor)
-		teclado.setearTeclasAccion()
+		teclado.setearTeclasAccion(cursor)
 		self.setearCasillas()
 		
 			

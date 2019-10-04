@@ -1,5 +1,4 @@
 import wollok.game.*
-import cursor.*
 
 object teclado {
 	method setearTeclasMovimiento(visual) {
@@ -9,7 +8,7 @@ object teclado {
 		keyboard.right().onPressDo { self.mover(derecha, visual)}
 	}
 	method mover(direccion, cursor) { cursor.position(direccion.siguiente(cursor.position())) }
-	method setearTeclasAccion() {
+	method setearTeclasAccion(cursor) {
 		keyboard.s().onPressDo { cursor.seleccionar() }	
 		keyboard.a().onPressDo { cursor.atacar() }	
 		keyboard.d().onPressDo { cursor.atacarEspecial() }
