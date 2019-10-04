@@ -1,6 +1,10 @@
 import wollok.game.*
 
 object casillas {
+	var property image
+	var property position
+	
+	var property imagenAccion
 
     method casillasBorde() {
     	// Retorna una lista de posiciones que corresponden a las casillas del borde del mapa

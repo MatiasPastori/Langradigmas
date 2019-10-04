@@ -1,4 +1,5 @@
 import wollok.game.*
+import teclado.*
 import niveles.*
 import cursor.*
 import comandante.*
@@ -13,12 +14,10 @@ object escenario {
 		game.width(31)
 		//game.ground("original.gif")
 		//game.boardGround("algo.gif")
-		movimiento.configurarFlechas(cursor)
-
 		
-		keyboard.s().onPressDo { cursor.seleccionar() }	
-		keyboard.a().onPressDo { cursor.atacar() }	
-		keyboard.d().onPressDo { cursor.atacarEspecial() }
+		teclado.setearTeclasMovimiento(cursor)
+		teclado.setearTeclasAccion()
+		self.setearCasillas()
 		
 			
 		// Start Pruebas
@@ -43,10 +42,12 @@ object escenario {
 		
 		game.addVisual(cursor)
 	}
-	
-	method twilightZone(character){
+	method twilightZone(character) {
 		character.position(game.at(100,100))
 		game.at(100, 100).clear()
+	}
+	method setearCasillas() {
+		
 	}
 	
 }
