@@ -14,16 +14,19 @@ object cursor {
 	method seleccionar() {
 		if (unidad == null) {
 			unidad = self.unidadEn(position)
-			self.captarEnemigosCercanos()
+			if (unidad != null && unidad.puedeAtacar())
+				self.captarEnemigosCercanos()
+			else
+				unidad = null
 		} else {
 			var distanciaEnMovimientos = new Distancia(position = unidad.position())
 			
-			self.descaptarEnemigosCercanos()
-			
 			if (self.esCasillaValida() && unidad.puedeLlegar(distanciaEnMovimientos.distanciaA(position))) {
+				self.descaptarEnemigosCercanos()
 				unidad.mover(position)
 				self.captarEnemigosCercanos()
 			} else if (unidad.position() == position ) { 
+				self.descaptarEnemigosCercanos()
 				unidad = null
 			} else { game.say(unidad,"No puedo llegar allí :(") }
 		}
