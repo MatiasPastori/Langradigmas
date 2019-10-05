@@ -43,6 +43,8 @@ object escenario {
 		var otroArqueroMalo = new Tirador(position = game.at(game.width()-3,7), image = "arqueroBueno.png", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 10, nivelDefensa = 10)
 		game.addVisual(otroArqueroMalo)		
 		
+		map_manager.mapear_casillas()
+		
 		// End Pruebas
 		
 		

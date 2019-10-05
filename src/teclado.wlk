@@ -1,4 +1,5 @@
 import wollok.game.*
+import casillas.*
 
 object teclado {
 	method setearTeclasMovimiento(visual) {
@@ -12,6 +13,7 @@ object teclado {
 		keyboard.s().onPressDo { cursor.seleccionar() }	
 		keyboard.a().onPressDo { cursor.atacar() }	
 		keyboard.d().onPressDo { cursor.atacarEspecial() }
+		keyboard.t().onPressDo { game.say(map_manager.access(2, 3), "hola") }
 	}
 }
 
