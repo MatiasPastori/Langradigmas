@@ -6,22 +6,24 @@ class My_position {
 }
 
 object map_manager {
-	var lista_x = []
+	var eje_x = []
 	
 	
-	method mapear_casillas() {
-		game.width().times({ i =>
-			var lista_y = []
-			game.height().times({ j =>
+	method generar_casillas() {
+		game.width().times({ 
+			i =>
+			var eje_y = []
+			game.height().times({ 
+				j =>
 				var casilla = new My_position(position = game.at(i, j))
 				game.addVisual(casilla)
-				lista_y.add(casilla)
+				eje_y.add(casilla)
 			})
-			lista_x.add(lista_y)
+			eje_x.add(eje_y)
 		})
 	}
 	
-	method access(_x, _y) = lista_x.get(_x).get(_y) 
+	method access(_x, _y) = eje_x.get(_x).get(_y) 
 }
 
 
