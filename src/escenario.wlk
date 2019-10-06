@@ -28,6 +28,7 @@ object escenario {
 		
 			
 		// Start Pruebas
+		map_manager.generar_casillas()
 		
 		var comandanteBueno = new Comandante(position = game.at(1,8), image = "comandanteBuenoIddle1.png", rangoDeAccion = 2, vida = 10, nivelAtaque = 20, nivelDefensa = 20)
 		game.addVisual(comandanteBueno)	
@@ -36,14 +37,13 @@ object escenario {
 		var otroSoldadoBueno = new Tirador(position = game.at(2,7), image = "soldadoBuenoIddle1.png", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 10, nivelDefensa = 10)
 		game.addVisual(otroSoldadoBueno)
 		
-		var comandanteMalo = new Comandante(position = game.at(game.width()-2,8), image = "comandanteMalo.png", rangoDeAccion = 2, vida = 10, nivelAtaque = 20, nivelDefensa = 20)
+		var comandanteMalo = new Comandante(position = game.at(game.width()-2,8), image = "comandanteMaloIddle1.png", rangoDeAccion = 2, vida = 10, nivelAtaque = 20, nivelDefensa = 20)
 		game.addVisual(comandanteMalo)	
-		var unArqueroMalo = new Tirador(position = game.at(game.width()-3,9), image = "arqueroBueno.png", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 10, nivelDefensa = 10)
-		game.addVisual(unArqueroMalo)		
-		var otroArqueroMalo = new Tirador(position = game.at(game.width()-3,7), image = "arqueroBueno.png", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 10, nivelDefensa = 10)
-		game.addVisual(otroArqueroMalo)		
+		var unTiradorMalo = new Tirador(position = game.at(game.width()-3,9), image = "tiradorMaloIddle1.png", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 10, nivelDefensa = 10)
+		game.addVisual(unTiradorMalo)		
+		var otroTiradorMalo = new Tirador(position = game.at(game.width()-3,7), image = "tiradorMaloIddle1.png", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 10, nivelDefensa = 10)
+		game.addVisual(otroTiradorMalo)		
 		
-		map_manager.generar_casillas()
 		
 		// End Pruebas
 		

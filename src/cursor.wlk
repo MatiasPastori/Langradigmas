@@ -37,6 +37,7 @@ object cursor {
 			var unidadAtacada = self.unidadEn(position)
 			unidad.combatir(unidadAtacada)
 			unidadAtacada.combatir(unidad)
+			unidad.puedeAtacar(false)
 			self.descaptarEnemigosCercanos()
 			game.say(unidad, "Mi vida despues de atacar es " + unidad.vida().toString())
 			game.say(unidadAtacada, "Me atacaron y quede en " + unidadAtacada.vida().toString() + "de vida")

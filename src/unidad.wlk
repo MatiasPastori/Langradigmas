@@ -30,7 +30,6 @@ class Unidad {
 	method combatir(enemigo) {
 		var danio = (self.nivelAtaque() + self.buffAtaque() - enemigo.nivelDefensa() - enemigo.buffDefensa()).limitBetween(0,10).randomUpTo(10).truncate(0)
 		enemigo.recibirDanio(danio) 
-		self.puedeAtacar(false)
 	}
 	
 	method recibirDanio(danio) {vida -= danio}

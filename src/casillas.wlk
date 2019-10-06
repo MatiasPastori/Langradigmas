@@ -2,7 +2,9 @@ import wollok.game.*
 
 class My_position {
 	var property position
-	method image() = "cursorGood.png"
+	var property image = "casillaPasto.png"
+	
+	method esSeleccionable() = false
 }
 
 object map_manager {
@@ -15,7 +17,7 @@ object map_manager {
 			var eje_y = []
 			game.height().times({ 
 				j =>
-				var casilla = new My_position(position = game.at(i, j))
+				var casilla = new My_position(position = game.at(i-1, j-1))
 				game.addVisual(casilla)
 				eje_y.add(casilla)
 			})
