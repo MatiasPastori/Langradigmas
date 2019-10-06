@@ -29,6 +29,7 @@ object escenario {
 			
 		// Start Pruebas
 		map_manager.generar_casillas()
+		map_manager.generar_bordes()
 		
 		var comandanteBueno = new Comandante(position = game.at(1,8), image = "comandanteBuenoIddle1.png", rangoDeAccion = 2, vida = 10, nivelAtaque = 20, nivelDefensa = 20)
 		game.addVisual(comandanteBueno)	
