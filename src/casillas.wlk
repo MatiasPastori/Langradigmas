@@ -8,15 +8,17 @@ class My_position {
 }
 
 object map_manager {
-	var eje_x = []
+	const ancho = game.width()
+    const alto = game.height()
+	var eje_x = [] // casillas internas
 	var borde = []
 	
 	
 	method generar_casillas() {
-		(game.width()-2).times({ 
+		(ancho-2).times({ 
 			i =>
 			var eje_y = []
-			(game.height()-2).times({ 
+			(alto-2).times({ 
 				j =>
 				var casilla = new My_position(position = game.at(i, j))
 				game.addVisual(casilla)
@@ -28,28 +30,18 @@ object map_manager {
 	method access(_x, _y) = eje_x.get(_x).get(_y) 
 
 	method generar_bordes() {
-		var casilla = new My_position(position = game.at(0,0), image = "casillaMontana.png") // No me agrega el 0,0 en el algoritmo de abajo
-		game.addVisual(casilla)
-		borde.add(casilla)
-		(game.width()-1).times({
-			i => 
-			casilla = new My_position(position = game.at(i,0), image = "casillaMontana.png")
-			game.addVisual(casilla)
-			borde.add(casilla)
-			casilla = new My_position(position = game.at(i,game.height()-1), image = "casillaMontana.png")
-			game.addVisual(casilla)
-			borde.add(casilla)
-		})
-		(game.height()-1).times({
-			j => 
-			casilla = new My_position(position = game.at(0,j), image = "casillaMontana.png")
-			game.addVisual(casilla)
-			borde.add(casilla)
-			casilla = new My_position(position = game.at(game.width()-1,j), image = "casillaMontana.png")
-			game.addVisual(casilla)
-			borde.add(casilla)
-		})
-	}
+		var posCasillas = []
+			(0 .. ancho-1).forEach{ i => posCasillas.add(new Position(x=i, y=0)) } // borde abajo
+			(0 .. ancho-1).forEach{ i => posCasillas.add(new Position(x=i, y=alto-1)) } // borde arriba
+			(1 .. alto-2).forEach{ i => posCasillas.add(new Position(x=0, y=i)) } // borde izquierdo
+			(1 .. alto-2).forEach{ i => posCasillas.add(new Position(x=ancho-1, y=i)) } // borde derecho
+			
+			posCasillas.forEach { posicion => 
+				var casilla = new My_position(position = posicion, image = "casillaMontana.png")
+				game.addVisual(casilla)
+				borde.add(casilla)	
+			}
+		}
 	method access_bordes(_x,_y) = borde.get{casilla => casilla.position(_x,_y)}	
 }
 
