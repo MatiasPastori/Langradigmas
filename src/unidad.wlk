@@ -2,6 +2,7 @@ import wollok.game.*
 import escenario.*
 import cursor.*
 import jugadores.*
+import visuals.*
 
 // Superclase
 class Unidad {
@@ -50,8 +51,8 @@ class Unidad {
 object iddle {
 	method cambiarSprite(unidad, id) {
 		game.onTick(1000,"iddle1",{ 
-			unidad.image(id + unidad.vida().toString() + "iddle1.png")
-			game.onTick(500,"iddle2", {unidad.image(id + unidad.vida().toString() + "iddle2.png")
+			unidad.image(id + "iddle1.png")
+			game.onTick(500,"iddle2", {unidad.image(id + "iddle2.png")
 				game.removeTickEvent("iddle2")
 			})
 		})
