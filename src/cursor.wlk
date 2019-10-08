@@ -21,7 +21,7 @@ object cursor {
 		} else {
 			var distanciaEnMovimientos = new Distancia(position = unidad.position())
 			
-			if (self.esCasillaValida() && unidad.puedeLlegar(distanciaEnMovimientos.distanciaA(position))) {
+			if (self.esCasillaOcupable() && unidad.puedeLlegar(distanciaEnMovimientos.distanciaA(position))) {
 				self.descaptarEnemigosCercanos()
 				unidad.mover(position)
 				self.captarEnemigosCercanos()
@@ -33,20 +33,24 @@ object cursor {
 	}
 	
 	method atacar(){
-		if(unidad != null && posicionesAtacables.contains(position) && unidad.puedeAtacar()){
-			var unidadAtacada = self.unidadEn(position)
-			unidad.combatir(unidadAtacada)
-			unidadAtacada.combatir(unidad)
-			unidad.puedeAtacar(false)
-			unidad.puedeMoverse(false)
-			self.descaptarEnemigosCercanos()
-			game.say(unidad, "Mi vida despues de atacar es " + unidad.vida().toString())
-			game.say(unidadAtacada, "Me atacaron y quede en " + unidadAtacada.vida().toString() + "de vida")
-			unidadAtacada.chequearMuerte()
-			unidad.chequearMuerte()
-			unidad = null
+		if ( unidad == null || !posicionesAtacables.contains(position) || !unidad.puedeAtacar()) {
+			self.error("No puedo hacer eso")
 		}
+		var unidadAtacada = self.unidadEn(position)
+		unidad.combatir(unidadAtacada)
+		unidadAtacada.combatir(unidad)
+		unidad.puedeAtacar(false)
+		unidad.puedeMoverse(false)
+		self.descaptarEnemigosCercanos()
+		game.say(unidad, "Mi vida despues de atacar es " + unidad.vida().toString())
+		game.say(unidadAtacada, "Me atacaron y quede en " + unidadAtacada.vida().toString() + "de vida")
+		unidadAtacada.chequearMuerte()
+		unidad.chequearMuerte()
+		unidad = null
+		
 	}
+	
+	method atacarEspecial() {}
 	
 	method captarEnemigosCercanos() {
 		var posicionesCerca = [position.right(1),position.left(1),position.up(1),position.down(1)]
@@ -70,9 +74,8 @@ object cursor {
 		return if(lista.size() > 0) lista.head() else null
 	}
 	
-	method esCasillaValida() = self.unidadEn(position) == null //Acá poner los limites del mapa tmb
+	method esCasillaOcupable() = self.unidadEn(position) == null //Acá poner los limites del mapa tmb
 
-	method atacarEspecial() {}
 
 	method esSeleccionable() = false
 }

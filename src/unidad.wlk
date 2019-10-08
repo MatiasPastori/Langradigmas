@@ -47,6 +47,19 @@ class Unidad {
 	}
 }
 
+object iddle {
+	method cambiarSprite(unidad, id) {
+		game.onTick(1000,"iddle1",{ 
+			unidad.image(id + unidad.vida().toString() + "iddle1.png")
+			game.onTick(500,"iddle2", {unidad.image(id + unidad.vida().toString() + "iddle2.png")
+				game.removeTickEvent("iddle2")
+			})
+		})
+	}	
+}
+object seleccion {
+	method cambiarSprite(unidad, id) {}
+}
 object ataque {
 	method cambiarSprite(unidad, id) {
 		// todavia no existen ataque1 y ataque2, seran dos sprites de mov de la unidad simulando el ataque
@@ -58,21 +71,6 @@ object ataque {
 				unidad.image(id + "gris.png") // todavia no existe ...gris.png
 			})
 		})
-	}	
-}
-object iddle {
-	method cambiarSprite(unidad, id) {
-		game.onTick(1000,"iddle1",{ 
-			unidad.image(id + "iddle1.png")
-			game.onTick(500,"iddle2", {unidad.image(id + "iddle2.png")
-				game.removeTickEvent("iddle2")
-			})
-		})
-	}	
-}
-object avance {
-	method cambiarSprite(unidad, id) {
-		// esto se implementara si se logra hacer que la unidad avance casillero por casillero hasta el destino
 	}	
 }
 
