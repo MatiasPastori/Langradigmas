@@ -13,7 +13,9 @@ object teclado {
 		keyboard.s().onPressDo { cursor.seleccionar() }	
 		keyboard.a().onPressDo { cursor.atacar() }	
 		keyboard.d().onPressDo { cursor.atacarEspecial() }
-		keyboard.t().onPressDo { game.say(map_manager.access(2, 3), "hola") }
+		
+		keyboard.t().onPressDo { game.say(mapManager.access(2, 3), "hola") }
+		keyboard.y().onPressDo { game.say(mapManager.accessBorde(0, 0), "hola") }
 	}
 }
 

@@ -1,6 +1,7 @@
 import wollok.game.*
 import distancia.*
 import jugadores.*
+import unidad.*
 import visuals.*
 
 object cursor {
@@ -41,12 +42,12 @@ object cursor {
 		unidadAtacada.combatir(unidad)
 		unidad.puedeAtacar(false)
 		unidad.puedeMoverse(false)
-		self.descaptarEnemigosCercanos()
-		game.say(unidad, "Mi vida despues de atacar es " + unidad.vida().toString())
-		game.say(unidadAtacada, "Me atacaron y quede en " + unidadAtacada.vida().toString() + "de vida")
+		unidad.cambiarSprite(ataque)
+		unidadAtacada.cambiarSprite(ataque)
 		unidadAtacada.chequearMuerte()
 		unidad.chequearMuerte()
 		unidad = null
+		self.descaptarEnemigosCercanos()
 		
 	}
 	
@@ -55,7 +56,7 @@ object cursor {
 	method captarEnemigosCercanos() {
 		var posicionesCerca = [position.right(1),position.left(1),position.up(1),position.down(1)]
 		posicionesAtacables = posicionesCerca.filter{pos => self.unidadEn(pos) != null}
-		posicionesAtacables.forEach{pos => game.addVisualIn(new Visual(image="atacable.png"),pos)}
+		posicionesAtacables.forEach{pos => game.addVisual(new Visual(image="atacable.png", position = pos))}
 	}
 	
 	method descaptarEnemigosCercanos() {
