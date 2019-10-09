@@ -14,7 +14,7 @@ class Unidad {
 	
 	var property position
 	var property image
-	var property imagenVida = new Visual(image = "10.png", position = position)
+	var property imagenVida = new Visual(image = "10.png", position = game.center())
 	
 	const property nivelAtaque
 	const property nivelDefensa
@@ -54,6 +54,7 @@ class Unidad {
 
 object iddle {
 	method cambiarSprite(unidad, id_jug) {
+		unidad.imagenVida().position(game.at(unidad.position().x(), unidad.position().y()))
 		game.onTick(1000,"iddle1",{ 
 			unidad.image(id_jug + "iddle1.png")
 			game.onTick(500,"iddle2", {unidad.image(id_jug + "iddle2.png")

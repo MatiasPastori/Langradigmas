@@ -34,17 +34,17 @@ object nivel1 {
 		jugador2.comprar(otroTiradorMalo)
 		
 		comandanteBueno.cambiarSprite(iddle)
-		game.addVisualIn(comandanteBueno.imagenVida(), comandanteBueno.position())
+		game.addVisual(comandanteBueno.imagenVida())
 		unSoldadoBueno.cambiarSprite(iddle)
-		game.addVisualIn(unSoldadoBueno.imagenVida(), unSoldadoBueno.position())
+		game.addVisual(unSoldadoBueno.imagenVida())
 		otroSoldadoBueno.cambiarSprite(iddle)
-		game.addVisualIn(otroSoldadoBueno.imagenVida(), otroSoldadoBueno.position())
+		game.addVisual(otroSoldadoBueno.imagenVida())
 		comandanteMalo.cambiarSprite(iddle)
-		game.addVisualIn(comandanteMalo.imagenVida(), comandanteMalo.position())
+		game.addVisual(comandanteMalo.imagenVida())
 		unTiradorMalo.cambiarSprite(iddle)
-		game.addVisualIn(unTiradorMalo.imagenVida(), unTiradorMalo.position())
+		game.addVisual(unTiradorMalo.imagenVida())
 		otroTiradorMalo.cambiarSprite(iddle)
-		game.addVisualIn(otroTiradorMalo.imagenVida(), otroTiradorMalo.position())
+		game.addVisual(otroTiradorMalo.imagenVida())
 		// End Pruebas
 	}
 	
