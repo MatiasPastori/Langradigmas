@@ -1,6 +1,7 @@
 import wollok.game.*
 import teclado.*
 import niveles.*
+import tienda.*
 import casillas.*
 import cursor.*
 
@@ -14,20 +15,19 @@ object escenario {
 		game.title("Langradigmas")
 		game.height(height)
 		game.width(width)
+		game.boardGround("tienda.png")
 		
 		teclado.setearTeclasMovimiento(cursor)
 		teclado.setearTeclasAccion(cursor)
+		teclado.setearTeclasTienda()
 		
 		mapManager.generarCasillas()
 		mapManager.generarBordes()
 		
-		nivelActual.iniciar()
-		
 		game.addVisual(cursor)
 	}
-	method actualizarNivel() {
-		nivelActual = nivelActual.siguiente()
-	}
+	method nivelActual() = nivelActual
+	method actualizarNivel() { nivelActual = nivelActual.siguiente() }
 	method twilightZone(character) {
 		character.imagenVida().position(game.at(100,100))
 		character.position(game.at(100,100))

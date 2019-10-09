@@ -1,4 +1,7 @@
 import wollok.game.*
+import escenario.*
+import tienda.*
+
 import casillas.*
 
 object teclado {
@@ -16,6 +19,14 @@ object teclado {
 		
 		keyboard.t().onPressDo { game.say(mapManager.access(2, 3), "hola") }
 		keyboard.y().onPressDo { game.say(mapManager.accessBorde(0, 0), "hola") }
+	}
+	method setearTeclasTienda() {
+		keyboard.k().onPressDo { 
+			if(tienda.habilitada()) {
+				escenario.nivelActual().iniciar()
+				tienda.habilitada(false)
+			} 
+		}
 	}
 }
 
