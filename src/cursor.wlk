@@ -5,23 +5,24 @@ import unidades.unidad.*
 import utilidades.visuals.*
 
 object cursor {
-	var jugadorActual = jugador1
+	var property jugadorActual = jugador1
 	var unidad = null
 	var property position = game.center()
+	var property image = jugadorActual.cursorImage()
 	var posicionesAtacables = []
 
-	method image() = jugadorActual.cursorImage()
 
 	method seleccionar() {
 		if (unidad == null) {
 			unidad = self.unidadEn(position)
-			if (unidad != null && unidad.puedeAtacar())
+			if (unidad != null && unidad.puedeAtacar()) {
 				self.captarEnemigosCercanos()
-			else
+			}
+			else {
 				unidad = null
+			}
 		} else {
 			var distanciaEnMovimientos = new Distancia(position = unidad.position())
-			
 			if (self.esCasillaOcupable() && unidad.puedeLlegar(distanciaEnMovimientos.distanciaA(position))) {
 				self.descaptarEnemigosCercanos()
 				unidad.mover(position)

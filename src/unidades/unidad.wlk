@@ -64,14 +64,30 @@ object iddle {
 	}	
 }
 object seleccion {
-	method cambiarSprite(unidad, id_jug) {}
+	method cambiarSprite(unidad, id_jug) {
+		game.removeTickEvent("iddle1")
+		game.removeTickEvent("iddle2")
+		unidad.imagenVida().image("transparente.png")
+		unidad.image("transparente.png")
+		cursor.image(id_jug + "Hold.png") 
+	}
+}
+object deseleccion {
+	method cambiarSprite(unidad, id_jug) {
+		unidad.cambiarSprite(iddle)
+		unidad.imagenVida().image(unidad.getVida().toString() + ".png")
+		cursor.image(cursor.jugadorActual().cursorImage())
+	}
 }
 object ataque {
 	method cambiarSprite(unidad, id_jug) {
-		if (unidad.getVida() > 0) { 
-			unidad.imagenVida().image(unidad.getVida().toString() + ".png")
-		}
-		iddle.cambiarSprite(unidad, id_jug) // vuelvo a iddle por ahora, despues voy a sacar esto y los sprites se hacen grises
+		if (unidad.getVida() > 0) { unidad.imagenVida().image(unidad.getVida().toString() + ".png") }
+		// aca va la logica que esta abajo
+		unidad.cambiarSprite(iddle) // esto va de momento
+		
+		//deseleccion.cambiarSprite(unidad, id_jug)
+		//unidad.image(id_jug + "gris.png") // todavia no existe ...gris.png
+		
 		// todavia no existen ataque1 y ataque2, seran dos sprites de mov de la unidad simulando el ataque
 		// comento el codigo porque me interesa que se le cambie el sprite de vida despues de atacar
 //		game.onTick(1000,"ataque1",{ 
@@ -79,7 +95,6 @@ object ataque {
 //			game.onTick(500,"ataque2", {unidad.image(id_jug + "ataque2.png")
 //				game.removeTickEvent("ataque1") // quiero que se ejecuten una vez cada uno pero separados por X segs
 //				game.removeTickEvent("ataque2") //  y despues se borran
-//				unidad.image(id + "gris.png") // todavia no existe ...gris.png
 //			})
 //		})
 	}	
