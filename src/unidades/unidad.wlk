@@ -1,8 +1,8 @@
 import wollok.game.*
-import escenario.*
+import escenario.escenario.*
 import cursor.*
 import jugadores.*
-import visuals.*
+import utilidades.visuals.*
 
 // Superclase
 class Unidad {

@@ -1,9 +1,9 @@
 import wollok.game.*
-import casillas.*
-import tienda.*
-import comandante.*
-import tirador.*
-import unidad.*
+import escenario.casillas.*
+import escenario.tienda.*
+import unidades.comandante.*
+import unidades.tirador.*
+import unidades.unidad.*
 import jugadores.*
 
 object nivel1 {

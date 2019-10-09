@@ -1,8 +1,8 @@
 import wollok.game.*
-import teclado.*
-import niveles.*
-import tienda.*
-import casillas.*
+import utilidades.teclado.*
+import escenario.niveles.*
+import escenario.tienda.*
+import escenario.casillas.*
 import cursor.*
 
 object escenario {

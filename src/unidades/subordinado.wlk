@@ -1,6 +1,6 @@
 import unidad.*
 import comandante.*
-import distancia.*
+import utilidades.distancia.*
 
 class Subordinado inherits Unidad {
 	var comandante

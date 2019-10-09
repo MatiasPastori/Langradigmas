@@ -1,5 +1,5 @@
 import wollok.game.*
-import distancia.*
+import utilidades.distancia.*
 
 test "Moverse de (2,2) a (4,4) consume 4 movimientos" {
 	var distancia = new Distancia()

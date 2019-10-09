@@ -1,8 +1,8 @@
 import wollok.game.*
-import escenario.*
-import tienda.*
+import escenario.escenario.*
+import escenario.tienda.*
 
-import casillas.*
+import escenario.casillas.*
 
 object teclado {
 	method setearTeclasMovimiento(visual) {

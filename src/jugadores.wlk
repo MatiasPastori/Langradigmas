@@ -1,4 +1,4 @@
-import unidad.*
+import unidades.unidad.*
 
 object jugador1 {
 	var unidades = []
