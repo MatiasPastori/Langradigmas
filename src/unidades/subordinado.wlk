@@ -9,13 +9,11 @@ class Subordinado inherits Unidad {
 	override method buffDefensa() = super() + self.buffDefensaPorComandanteCerca()
 	
 	method buffAtaquePorComandanteCerca() {
-		var distanciaAlComandante = new Distancia(position = self.position() )
-		return if (distanciaAlComandante.distanciaA(comandante.position())<3) comandante.buffAtaqueQueOtorga() else 0
+		return self.buff({comandante.buffAtaqueQueOtorga()})
 	}
 	
 	method buffDefensaPorComandanteCerca() {
-		var distanciaAlComandante = new Distancia(position = self.position() )
-		return if (distanciaAlComandante.distanciaA(comandante.position())<3) comandante.buffDefensaQueOtorga() else 0
+		return self.buff({comandante.buffDefensaQueOtorga()})
 	}
 	
 	method buff(bloque) {
