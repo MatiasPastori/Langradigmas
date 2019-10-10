@@ -15,9 +15,9 @@ object nivel1 {
 		
 		var comandanteBueno = new Comandante(position = game.at(1,8), image = "transparente.png", tipo = "comandante", rangoDeAccion = 2, vida = 10, nivelAtaque = 20, nivelDefensa = 20)
 		game.addVisual(comandanteBueno)	
-		var unSoldadoBueno = new Tirador(position = game.at(2,9), image = "transparente.png", tipo = "soldado", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 10, nivelDefensa = 10)
+		var unSoldadoBueno = new Tirador(position = game.at(2,9), image = "transparente.png", tipo = "guerrero", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 10, nivelDefensa = 10)
 		game.addVisual(unSoldadoBueno)
-		var otroSoldadoBueno = new Tirador(position = game.at(2,7), image = "transparente.png", tipo = "soldado", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 10, nivelDefensa = 10)
+		var otroSoldadoBueno = new Tirador(position = game.at(2,7), image = "transparente.png", tipo = "guerrero", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 10, nivelDefensa = 10)
 		game.addVisual(otroSoldadoBueno)
 		var comandanteMalo = new Comandante(position = game.at(game.width()-2,8), image = "transparente.png", tipo = "comandante", rangoDeAccion = 2, vida = 10, nivelAtaque = 20, nivelDefensa = 20)
 		game.addVisual(comandanteMalo)	

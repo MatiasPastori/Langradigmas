@@ -22,22 +22,17 @@ object cursor {
 		var unidadAtacada = self.unidadEn(position)
 		unidad.combatir(unidadAtacada)
 		unidadAtacada.combatir(unidad)
-		unidad.puedeAtacar(false)
-		unidad.puedeMoverse(false)
-		unidad.cambiarSprite(ataque)
-		unidadAtacada.cambiarSprite(ataque)
-		unidadAtacada.chequearMuerte()
-		unidad.chequearMuerte()
-		estado = estadoVacio
 		unidad.cambiarSprite(deseleccion)
+		unidad.puedeAtacar(false) // esto lo va a manejar TURNOS
+		unidad.puedeMoverse(false) // esto lo va a manejar TURNOS
+		estado = estadoVacio
 		self.descaptarEnemigosCercanos()
 		unidad = null		
 	}
 	
 	method verficarLaUnidadPuedaAtacar() {
-		if ( unidad == null || !posicionesAtacables.contains(position) || !unidad.puedeAtacar()) {
+		if ( unidad == null || !posicionesAtacables.contains(position) || !unidad.puedeAtacar()) 
 			self.error("No puedo hacer eso")
-		}
 	}
 	
 	method atacarEspecial() {}

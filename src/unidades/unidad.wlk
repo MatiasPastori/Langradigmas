@@ -35,59 +35,64 @@ class Unidad {
 	method puedeLlegar(rangoNecesario) = rangoNecesario <= rangoDeAccion && puedeMoverse
 	
 	method combatir(enemigo) {
-		var danio = (self.nivelAtaque() + self.buffAtaque() - enemigo.nivelDefensa() - enemigo.buffDefensa()).limitBetween(0,10).randomUpTo(10).truncate(0)
-		enemigo.recibirDanio(danio) 
+		var danioBruto = self.potencialDeDanio(enemigo).limitBetween(0,10)
+		var danioNeto = danioBruto.randomUpTo(10).truncate(0)
+		enemigo.recibirDanio(danioNeto)
 	}
 	
-	method recibirDanio(danio) {vida -= danio}
+	method potencialDeDanio(enemigo) = self.nivelAtaque() + self.buffAtaque() - enemigo.nivelDefensa() - enemigo.buffDefensa()
+
+	method recibirDanio(danio) {
+		vida -= danio
+		self.chequearMuerte()
+	}
 		
 	method chequearMuerte() {if(self.getVida() < 1) self.morir()}
 		
-	method morir() {escenario.twilightZone(self)}
-	
-	method cambiarSprite(accion) {
-		var jugador = "J1"
-		if (jugador2.getUnidades().contains(self)) jugador = "J2"
-		accion.cambiarSprite(self, tipo + jugador)
+	method morir() {
+		game.removeVisual(imagenVida)
+		game.removeVisual(self)
 	}
+	
+	method cambiarSprite(accion) {accion.cambiarSprite(self, tipo + self.idJugador())}
+	
+	method idJugador() = if (jugador1.getUnidades().contains(self)) "J1" else "J2"
 }
 
 object iddle {
-	method cambiarSprite(unidad, id_jug) {
+	method cambiarSprite(unidad, id_xjug) {
 		unidad.imagenVida().position(game.at(unidad.position().x(), unidad.position().y()))
 		game.onTick(1000,"iddle1",{ 
-			unidad.image(id_jug + "iddle1.png")
-			game.onTick(500,"iddle2", {unidad.image(id_jug + "iddle2.png")
+			unidad.image(id_xjug + "iddle1.png")
+			game.onTick(500,"iddle2", {unidad.image(id_xjug + "iddle2.png")
 				game.removeTickEvent("iddle2")
 			})
 		})
 	}	
 }
 object seleccion {
-	method cambiarSprite(unidad, id_jug) {
+	method cambiarSprite(unidad, id_xjug) {
 		game.removeTickEvent("iddle1")
 		game.removeTickEvent("iddle2")
 		unidad.imagenVida().image("transparente.png")
 		unidad.image("transparente.png")
-		cursor.image(id_jug + "Hold.png") 
+		cursor.image(id_xjug + "Hold.png") 
 	}
 }
 object deseleccion {
-	method cambiarSprite(unidad, id_jug) {
-		unidad.cambiarSprite(iddle)
-		unidad.imagenVida().image(unidad.getVida().toString() + ".png")
+	method cambiarSprite(unidad, id_xjug) {
+		if (unidad.getVida() > 0 ) {
+			unidad.cambiarSprite(iddle)
+			unidad.imagenVida().image(unidad.getVida().toString() + ".png")			
+		}
 		cursor.image(cursor.jugadorActual().cursorImage())
 	}
 }
 object ataque {
-	method cambiarSprite(unidad, id_jug) {
-		if (unidad.getVida() > 0) { unidad.imagenVida().image(unidad.getVida().toString() + ".png") }
-		// aca va la logica que esta abajo
-//		unidad.cambiarSprite(iddle) // esto va de momento
+	method cambiarSprite(unidad, id_xjug) {
+		if (unidad.getVida() > 0) {unidad.imagenVida().image(unidad.getVida().toString() + ".png")}
 		
-		deseleccion.cambiarSprite(unidad, id_jug)
 		//unidad.image(id_jug + "gris.png") // todavia no existe ...gris.png
-		
 		// todavia no existen ataque1 y ataque2, seran dos sprites de mov de la unidad simulando el ataque
 		// comento el codigo porque me interesa que se le cambie el sprite de vida despues de atacar
 //		game.onTick(1000,"ataque1",{ 

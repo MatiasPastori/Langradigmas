@@ -3,6 +3,7 @@ import escenario.escenario.*
 import escenario.tienda.*
 
 import escenario.casillas.*
+import cursor.*
 
 object teclado {
 	method setearTeclasMovimiento(visual) {
@@ -17,8 +18,7 @@ object teclado {
 		keyboard.a().onPressDo { cursor.atacar() }	
 		keyboard.d().onPressDo { cursor.atacarEspecial() }
 		
-		keyboard.t().onPressDo { game.say(mapManager.access(2, 3), "hola") }
-		keyboard.y().onPressDo { game.say(mapManager.accessBorde(0, 0), "hola") }
+		keyboard.t().onPressDo { game.say(cursor,cursor.unidadEn(cursor.position()).getVida().toString() ) }
 	}
 	method setearTeclasTienda() {
 		keyboard.k().onPressDo { 
