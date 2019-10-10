@@ -29,6 +29,8 @@ object cursor {
 		unidadAtacada.chequearMuerte()
 		unidad.chequearMuerte()
 		estado = estadoVacio
+		unidad = null
+		unidad.cambiarSprite(deseleccion)
 		self.descaptarEnemigosCercanos()
 		
 	}

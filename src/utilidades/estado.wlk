@@ -1,5 +1,6 @@
 import wollok.game.*
 import utilidades.distancia.*
+import unidades.unidad.*
 
 class EstadoAgarrado {
 	var unidad
@@ -14,6 +15,7 @@ class EstadoAgarrado {
 			cursor.descaptarEnemigosCercanos()
 			cursor.unidad(null)
 			cursor.estado(estadoVacio)
+			unidad.cambiarSprite(deseleccion)
 		} else { game.say(unidad,"No puedo llegar allí :(") }
 	}
 }
@@ -27,6 +29,7 @@ object estadoVacio {
 			cursor.captarEnemigosCercanos()
 			cursor.unidad(unidad)
 			cursor.estado(new EstadoAgarrado(unidad = unidad))
+			unidad.cambiarSprite(seleccion)
 		} else {
 			cursor.unidad(null)
 		}

@@ -83,9 +83,9 @@ object ataque {
 	method cambiarSprite(unidad, id_jug) {
 		if (unidad.getVida() > 0) { unidad.imagenVida().image(unidad.getVida().toString() + ".png") }
 		// aca va la logica que esta abajo
-		unidad.cambiarSprite(iddle) // esto va de momento
+//		unidad.cambiarSprite(iddle) // esto va de momento
 		
-		//deseleccion.cambiarSprite(unidad, id_jug)
+		deseleccion.cambiarSprite(unidad, id_jug)
 		//unidad.image(id_jug + "gris.png") // todavia no existe ...gris.png
 		
 		// todavia no existen ataque1 y ataque2, seran dos sprites de mov de la unidad simulando el ataque

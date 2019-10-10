@@ -5,7 +5,11 @@ object void {
 	var property nivelAtaque
 	var property nivelDefensa
 	
-	method esSeleccionable() = false
+	method puedeAtacar() = false
+	method puedeAtacar(x) {}
+	method puedeMoverse() = false
+	method puedeMoverse(x) {}
+ 	method esSeleccionable() = false
 	method buffAtaque() {}
 	method buffDefensa() {}	
 	method getVida() {}
