@@ -1,5 +1,6 @@
 import wollok.game.*
 import utilidades.distancia.*
+import utilidades.acciones.*
 import unidades.unidad.*
 
 class EstadoAgarrado {

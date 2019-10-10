@@ -1,9 +1,10 @@
 import wollok.game.*
 import utilidades.distancia.*
-import jugadores.*
-import unidades.unidad.*
 import utilidades.visuals.*
 import utilidades.estado.*
+import utilidades.acciones.*
+import jugadores.*
+import unidades.unidad.*
 
 object cursor {
 	var property jugadorActual = jugador1

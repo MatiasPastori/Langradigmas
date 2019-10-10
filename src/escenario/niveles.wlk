@@ -4,6 +4,7 @@ import escenario.tienda.*
 import unidades.comandante.*
 import unidades.tirador.*
 import unidades.unidad.*
+import utilidades.acciones.*
 import jugadores.*
 
 object nivel1 {
