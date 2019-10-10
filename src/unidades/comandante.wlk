@@ -7,6 +7,5 @@ class Comandante inherits Unidad {
 	method buffAtaqueQueOtorga() = 0
 	method buffDefensaQueOtorga() = 0
 	
-	method reclutar(subordinado) = subordinados.add(subordinado)
-	
+	method reclutar(subordinado) = subordinados.add(subordinado)	
 }

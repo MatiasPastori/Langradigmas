@@ -35,9 +35,7 @@ object cursor {
 	}
 	
 	method atacar(){
-		if ( unidad == null || !posicionesAtacables.contains(position) || !unidad.puedeAtacar()) {
-			self.error("No puedo hacer eso")
-		}
+		self.verficarLaUnidadPuedaAtacar()
 		var unidadAtacada = self.unidadEn(position)
 		unidad.combatir(unidadAtacada)
 		unidadAtacada.combatir(unidad)
@@ -50,6 +48,12 @@ object cursor {
 		unidad = null
 		self.descaptarEnemigosCercanos()
 		
+	}
+	
+	method verficarLaUnidadPuedaAtacar() {
+		if ( unidad == null || !posicionesAtacables.contains(position) || !unidad.puedeAtacar()) {
+			self.error("No puedo hacer eso")
+		}
 	}
 	
 	method atacarEspecial() {}
