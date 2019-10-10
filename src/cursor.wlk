@@ -3,35 +3,18 @@ import utilidades.distancia.*
 import jugadores.*
 import unidades.unidad.*
 import utilidades.visuals.*
+import utilidades.estado.*
 
 object cursor {
 	var property jugadorActual = jugador1
-	var unidad = null
+	var property unidad = null
 	var property position = game.center()
 	var property image = jugadorActual.cursorImage()
 	var posicionesAtacables = []
-
+	var property estado = estadoVacio
 
 	method seleccionar() {
-		if (unidad == null) {
-			unidad = self.unidadEn(position)
-			if (unidad != null && unidad.puedeAtacar()) {
-				self.captarEnemigosCercanos()
-			}
-			else {
-				unidad = null
-			}
-		} else {
-			var distanciaEnMovimientos = new Distancia(position = unidad.position())
-			if (self.esCasillaOcupable() && unidad.puedeLlegar(distanciaEnMovimientos.distanciaA(position))) {
-				self.descaptarEnemigosCercanos()
-				unidad.mover(position)
-				self.captarEnemigosCercanos()
-			} else if (unidad.position() == position ) { 
-				self.descaptarEnemigosCercanos()
-				unidad = null
-			} else { game.say(unidad,"No puedo llegar allí :(") }
-		}
+		estado.accion(self)
 	}
 	
 	method atacar(){
@@ -45,7 +28,7 @@ object cursor {
 		unidadAtacada.cambiarSprite(ataque)
 		unidadAtacada.chequearMuerte()
 		unidad.chequearMuerte()
-		unidad = null
+		estado = estadoVacio
 		self.descaptarEnemigosCercanos()
 		
 	}
