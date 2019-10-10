@@ -11,6 +11,7 @@ class EstadoAgarrado {
 			cursor.descaptarEnemigosCercanos()
 			unidad.mover(cursor.position())
 			cursor.captarEnemigosCercanos()
+			unidad.cambiarSprite(deseleccion)
 		} else if (unidad.position() == cursor.position()) { 
 			cursor.descaptarEnemigosCercanos()
 			cursor.unidad(null)
