@@ -30,7 +30,7 @@ object teclado {
 		}
 	}
 	method setearTeclasTurno() {keyboard.enter().onPressDo { 
-		if (!tienda.habilitada())  
+		if (!tienda.habilitada() && cursor.unidad() == null)  
 			turnoManager.finalizarTurno()
 	}}
 	method setearTeclaInicio() {keyboard.enter().onPressDo { 
