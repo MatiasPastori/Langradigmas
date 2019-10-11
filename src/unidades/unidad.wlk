@@ -47,6 +47,7 @@ class Unidad {
 	method recibirDanio(danio) {
 		vida -= danio
 		self.chequearMuerte()
+
 	}
 		
 	method chequearMuerte() {if(self.getVida() < 1) self.morir()}
