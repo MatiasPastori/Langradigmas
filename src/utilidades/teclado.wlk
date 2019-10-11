@@ -33,21 +33,9 @@ object teclado {
 
 			} 
 		}
-		keyboard.num(1).onPressDo {
-			if(tienda.habilitada()) {
-
-			} 
-		}
-		keyboard.num(2).onPressDo {
-			if(tienda.habilitada()) {
-
-			} 
-		}
-		keyboard.num(3).onPressDo {
-			if(tienda.habilitada()) {
-
-			} 
-		}
+		keyboard.num(1).onPressDo {if(tienda.habilitada()) {tienda.setIdUnidadCompra(1)}}
+		keyboard.num(2).onPressDo {if(tienda.habilitada()) {tienda.setIdUnidadCompra(2)}}
+		keyboard.num(3).onPressDo {if(tienda.habilitada()) {tienda.setIdUnidadCompra(3)}}
 	}
 	method setearTeclasTurno() {keyboard.enter().onPressDo { 
 		if (!tienda.habilitada() && cursor.unidad() == null)  

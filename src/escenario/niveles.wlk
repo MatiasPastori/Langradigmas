@@ -12,6 +12,10 @@ import cursor.*
 object nivel1 {
 	
 	method tienda() {
+		var comandanteBueno = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 50, vida = 10, nivelAtaque = 28, nivelDefensa =24 )
+		var comandanteMalo = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", rangoDeAccion = 2, vida = 10, nivelAtaque = 24, nivelDefensa = 30)
+		jugador1.comprar(comandanteBueno)
+		jugador2.comprar(comandanteMalo)
 		tienda.habilitada(true)
 		tienda.iniciar()
 	}

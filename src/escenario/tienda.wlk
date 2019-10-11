@@ -9,9 +9,9 @@ object tienda {
 	var numJug = new Visual(position = game.at(27,10), image = "tienda_" + estado.idJugador() + ".png" )
 	
 	method getNumJug() = numJug
+	method setIdUnidadCompra(num) {idUnidadCompra = num}
 	
-	method iniciar() {
-		game.addVisual(numJug)
-	}
+	method iniciar() {game.addVisual(numJug)}
+	method comprar() {estado.comprar(idUnidadCompra)}
 	method terminarCompra() = estado.terminarCompra()
 }
