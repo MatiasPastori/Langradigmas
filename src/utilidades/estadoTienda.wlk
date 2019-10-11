@@ -9,11 +9,14 @@ import jugadores.*
 
 object jugador1Comprando {
 	var unidad
+	var cantComprada = 0
 	
 	method idJugador() = jugador1.getId()
 	
 	method comprar(idUnidad) {
+		tienda.verificarCantidadUnidadesCompradas(cantComprada)
 		self.unidadComprada(idUnidad)
+		cantComprada++
 		return jugador1.comprar(unidad)
 	} 
 	
@@ -26,21 +29,29 @@ object jugador1Comprando {
 			unidad = new Caballeria(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "caballeria", comandante = jugador1.getUnidades().head(), rangoDeAccion = 50, vida = 10, nivelAtaque = 24, nivelDefensa = 20)
 	}
 	
+	method vender() = jugador1.vender()
+	
 	method terminarCompra() {
 		tienda.getNumJug().image("tienda_" + jugador2Comprando.idJugador() + ".png")
+		tienda.getComandanteJug().image("comandante" + jugador2Comprando.idJugador() + "iddle1.png")
 		tienda.estado(jugador2Comprando)
 	}	
 }
 
 object jugador2Comprando {
 	var unidad
+	var cantComprada = 0
 	
 	method idJugador() = jugador2.getId()
 	
 	method comprar(idUnidad) {
+		tienda.verificarCantidadUnidadesCompradas(cantComprada)
 		self.unidadComprada(idUnidad)
+		cantComprada++
 		return jugador2.comprar(unidad)
-	} 
+	}
+	
+	method vender() = jugador2.vender()
 	
 	method unidadComprada(idUnidad) {
 		if (idUnidad == 1) 
@@ -53,6 +64,7 @@ object jugador2Comprando {
 	
 	method terminarCompra() {
 		game.removeVisual(tienda.getNumJug())
+		game.removeVisual(tienda.getComandanteJug())
 		escenario.nivelActual().iniciar()
 		tienda.habilitada(false)
 	}
