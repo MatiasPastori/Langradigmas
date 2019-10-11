@@ -5,6 +5,7 @@ import utilidades.estado.*
 import utilidades.acciones.*
 import jugadores.*
 import unidades.unidad.*
+import unidades.void.*
 
 object cursor {
 	var property jugadorActual = jugador1
@@ -19,7 +20,7 @@ object cursor {
 	}
 	
 	method atacar(){
-		self.verficarLaUnidadPuedaAtacar()
+		self.verificarLaUnidadPuedaAtacar()
 		var unidadAtacada = self.unidadEn(position)
 		unidad.combatir(unidadAtacada)
 		unidadAtacada.combatir(unidad)
@@ -31,7 +32,7 @@ object cursor {
 		unidad = null		
 	}
 	
-	method verficarLaUnidadPuedaAtacar() {
+	method verificarLaUnidadPuedaAtacar() {
 		if ( unidad == null || !posicionesAtacables.contains(position) || !unidad.puedeAtacar()) 
 			self.error("No puedo hacer eso")
 	}
