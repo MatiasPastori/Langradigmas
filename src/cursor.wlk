@@ -9,7 +9,6 @@ import unidades.void.*
 import turnos.*
 
 object cursor {
-	//var property jugadorActual = turnoManager.getJugadorActual()
 	var property unidad = null
 	var property position = game.center()
 	var property image = turnoManager.getJugadorActual().cursorImage()
@@ -26,16 +25,17 @@ object cursor {
 		unidad.combatir(unidadAtacada)
 		unidadAtacada.combatir(unidad)
 		unidad.cambiarSprite(deseleccion)
-		unidad.puedeAtacar(false) // esto lo va a manejar TURNOS
-		unidad.puedeMoverse(false) // esto lo va a manejar TURNOS
+		turnoManager.yaAtaco(unidad)
 		estado = estadoVacio
 		self.descaptarEnemigosCercanos()
 		unidad = null		
 	}
 	
 	method verificarLaUnidadPuedaAtacar() {
-		if ( unidad == null || !posicionesAtacables.contains(position) || !unidad.puedeAtacar()) 
+		if ( unidad == null ) 
 			self.error("No puedo hacer eso")
+		if ( !posicionesAtacables.contains(position) || !turnoManager.puedeAtacar(unidad) )
+			unidad.error("No puedo hacer eso")
 	}
 	
 	method atacarEspecial() {}

@@ -28,7 +28,7 @@ object estadoVacio {
 	
 	method accion(cursor) {
 		unidad = cursor.unidadEn(cursor.position())
-		if (unidad != null && unidad.puedeAtacar() && turnoManager.esDelJugador(unidad)) {
+		if (unidad != null && turnoManager.puedeAtacar(unidad) && turnoManager.esDelJugadorActual(unidad)) {
 			cursor.captarEnemigosCercanos()
 			cursor.unidad(unidad)
 			cursor.estado(new EstadoAgarrado(unidad = unidad))

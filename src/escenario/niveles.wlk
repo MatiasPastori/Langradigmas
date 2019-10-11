@@ -6,33 +6,33 @@ import unidades.tirador.*
 import unidades.unidad.*
 import utilidades.acciones.*
 import jugadores.*
+import turnos.*
 
 object nivel1 {
 	
 	method iniciar() {
 		self.setearCasillas()
 		
-		// Start Pruebas
-		
-		var comandanteBueno = new Comandante(position = game.at(1,8), image = "transparente.png", tipo = "comandante", rangoDeAccion = 2, vida = 10, nivelAtaque = 28, nivelDefensa =24 )
+		// Start Pruebas		
+		var comandanteBueno = new Comandante(position = game.at(1,8), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 2, vida = 10, nivelAtaque = 28, nivelDefensa =24 )
 		game.addVisual(comandanteBueno)	
-		var soldadoBueno1 = new Tirador(position = game.at(2,9), image = "transparente.png", tipo = "guerrero", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 24, nivelDefensa = 20)
+		var soldadoBueno1 = new Tirador(position = game.at(2,9), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 24, nivelDefensa = 20)
 		game.addVisual(soldadoBueno1)
-		var soldadoBueno2 = new Tirador(position = game.at(2,7), image = "transparente.png", tipo = "guerrero", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 24, nivelDefensa = 20)
+		var soldadoBueno2 = new Tirador(position = game.at(2,7), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 24, nivelDefensa = 20)
 		game.addVisual(soldadoBueno2)
-		var soldadoBueno3 = new Tirador(position = game.at(3,9), image = "transparente.png", tipo = "guerrero", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 24, nivelDefensa = 20)
+		var soldadoBueno3 = new Tirador(position = game.at(3,9), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 24, nivelDefensa = 20)
 		game.addVisual(soldadoBueno3)
-		var soldadoBueno4 = new Tirador(position = game.at(3,7), image = "transparente.png", tipo = "guerrero", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 24, nivelDefensa = 20)
+		var soldadoBueno4 = new Tirador(position = game.at(3,7), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = comandanteBueno, rangoDeAccion = 4, vida = 10, nivelAtaque = 24, nivelDefensa = 20)
 		game.addVisual(soldadoBueno4)
-		var comandanteMalo = new Comandante(position = game.at(game.width()-2,8), image = "transparente.png", tipo = "comandante", rangoDeAccion = 2, vida = 10, nivelAtaque = 24, nivelDefensa = 30)
+		var comandanteMalo = new Comandante(position = game.at(game.width()-2,8), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", rangoDeAccion = 2, vida = 10, nivelAtaque = 24, nivelDefensa = 30)
 		game.addVisual(comandanteMalo)	
-		var tiradorMalo1 = new Tirador(position = game.at(game.width()-3,9), image = "transparente.png", tipo = "tirador", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 27, nivelDefensa = 12)
+		var tiradorMalo1 = new Tirador(position = game.at(game.width()-3,9), image = "transparente.png", jugadorDuenio = jugador2, tipo = "tirador", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 27, nivelDefensa = 12)
 		game.addVisual(tiradorMalo1)		
-		var tiradorMalo2 = new Tirador(position = game.at(game.width()-3,7), image = "transparente.png", tipo = "tirador", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 27, nivelDefensa = 12)
+		var tiradorMalo2 = new Tirador(position = game.at(game.width()-3,7), image = "transparente.png", jugadorDuenio = jugador2, tipo = "tirador", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 27, nivelDefensa = 12)
 		game.addVisual(tiradorMalo2)		
-		var tiradorMalo3 = new Tirador(position = game.at(game.width()-4,9), image = "transparente.png", tipo = "tirador", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 27, nivelDefensa = 12)
+		var tiradorMalo3 = new Tirador(position = game.at(game.width()-4,9), image = "transparente.png", jugadorDuenio = jugador2, tipo = "tirador", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 27, nivelDefensa = 12)
 		game.addVisual(tiradorMalo3)		
-		var tiradorMalo4 = new Tirador(position = game.at(game.width()-4,7), image = "transparente.png", tipo = "tirador", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 27, nivelDefensa = 12)
+		var tiradorMalo4 = new Tirador(position = game.at(game.width()-4,7), image = "transparente.png", jugadorDuenio = jugador2, tipo = "tirador", comandante = comandanteMalo, rangoDeAccion = 4, vida = 10, nivelAtaque = 27, nivelDefensa = 12)
 		game.addVisual(tiradorMalo4)	
 		
 		jugador1.comprar(comandanteBueno)
@@ -67,6 +67,9 @@ object nivel1 {
 		tiradorMalo4.cambiarSprite(iddle)
 		game.addVisual(tiradorMalo4.imagenVida())
 		// End Pruebas
+		
+		
+		turnoManager.iniciarTurno()
 	}
 	
 	method setearCasillas() {

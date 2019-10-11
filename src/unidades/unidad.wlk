@@ -1,16 +1,16 @@
 import wollok.game.*
 import escenario.escenario.*
 import cursor.*
-import jugadores.*
 import utilidades.visuals.*
 import utilidades.acciones.*
+import jugadores.*
+import turnos.*
 
 // Superclase
 class Unidad {
+	const jugadorDuenio
 	const rangoDeAccion
 	var vida
-	var property puedeAtacar = true
-	var property puedeMoverse = true
 	var tipo
 	
 	var property position
@@ -30,10 +30,10 @@ class Unidad {
 	method mover(nuevaPos) {
 		position = game.at(nuevaPos.x(), nuevaPos.y())
 		imagenVida.position(game.at(nuevaPos.x(), nuevaPos.y()))
-		puedeMoverse = false
+		turnoManager.seMovio(self)
 	}
 	
-	method puedeLlegar(rangoNecesario) = rangoNecesario <= rangoDeAccion && puedeMoverse
+	method puedeLlegar(rangoNecesario) = rangoNecesario <= rangoDeAccion && turnoManager.puedeMoverse(self)
 	
 	method combatir(enemigo) {
 		var danioBruto = self.potencialDeDanio(enemigo).limitBetween(0,10)
@@ -53,13 +53,14 @@ class Unidad {
 	method chequearMuerte() {if(self.getVida() < 1) self.morir()}
 		
 	method morir() {
+		jugadorDuenio.getUnidades().remove(self)
 		game.removeVisual(imagenVida)
 		game.removeVisual(self)
 	}
 	
 	method cambiarSprite(accion) {accion.cambiarSprite(self, tipo + self.idJugador())}
 	
-	method idJugador() = if (jugador1.getUnidades().contains(self)) "J1" else "J2"
+	method idJugador() = if (jugadorDuenio.equals(jugador1)) "J1" else "J2"
 }
 
 																				
