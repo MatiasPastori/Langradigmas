@@ -13,6 +13,7 @@ object jugador1 {
 	
 	method comprar(unidad) = unidades.add(unidad)
 	
+	method siguiente() = jugador2	
 }
 
 object jugador2 {	
@@ -27,4 +28,6 @@ object jugador2 {
 	}
 	
 	method comprar(unidad) = unidades.add(unidad)
+	
+	method siguiente() = jugador1
 }

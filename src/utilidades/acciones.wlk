@@ -1,6 +1,7 @@
 import wollok.game.*
 import unidades.unidad.*
 import cursor.*
+import turnos.*
 
 object iddle {
 	method cambiarSprite(unidad, id_xjug) {
@@ -28,7 +29,7 @@ object deseleccion {
 			unidad.cambiarSprite(iddle)
 			unidad.imagenVida().image(unidad.getVida().toString() + ".png")			
 		}
-		cursor.image(cursor.jugadorActual().cursorImage())
+		cursor.image(turnoManager.getJugadorActual().cursorImage())
 	}
 }
 object ataque {

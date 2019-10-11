@@ -1,6 +1,7 @@
 import wollok.game.*
 import escenario.escenario.*
 import escenario.tienda.*
+import turnos.*
 
 import escenario.casillas.*
 import cursor.*
@@ -27,6 +28,9 @@ object teclado {
 				tienda.habilitada(false)
 			} 
 		}
+	}
+	method setearTeclasTurno() {
+		keyboard.enter().onPressDo { turnoManager.finalizarTurno() }	
 	}
 }
 

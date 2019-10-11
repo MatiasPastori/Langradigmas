@@ -2,6 +2,7 @@ import wollok.game.*
 import utilidades.distancia.*
 import utilidades.acciones.*
 import unidades.unidad.*
+import turnos.*
 
 class EstadoAgarrado {
 	var unidad
@@ -27,7 +28,7 @@ object estadoVacio {
 	
 	method accion(cursor) {
 		unidad = cursor.unidadEn(cursor.position())
-		if (unidad != null && unidad.puedeAtacar()) {
+		if (unidad != null && unidad.puedeAtacar() && turnoManager.esDelJugador(unidad)) {
 			cursor.captarEnemigosCercanos()
 			cursor.unidad(unidad)
 			cursor.estado(new EstadoAgarrado(unidad = unidad))

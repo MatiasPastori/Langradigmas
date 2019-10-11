@@ -20,6 +20,7 @@ object escenario {
 		teclado.setearTeclasMovimiento(cursor)
 		teclado.setearTeclasAccion(cursor)
 		teclado.setearTeclasTienda()
+		teclado.setearTeclasTurno()
 		
 		mapManager.generarCasillas()
 		mapManager.generarBordes()

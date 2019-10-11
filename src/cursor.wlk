@@ -6,12 +6,13 @@ import utilidades.acciones.*
 import jugadores.*
 import unidades.unidad.*
 import unidades.void.*
+import turnos.*
 
 object cursor {
-	var property jugadorActual = jugador1
+	//var property jugadorActual = turnoManager.getJugadorActual()
 	var property unidad = null
 	var property position = game.center()
-	var property image = jugadorActual.cursorImage()
+	var property image = turnoManager.getJugadorActual().cursorImage()
 	var posicionesAtacables = []
 	var property estado = estadoVacio
 
