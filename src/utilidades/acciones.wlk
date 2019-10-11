@@ -35,16 +35,5 @@ object deseleccion {
 object ataque {
 	method cambiarSprite(unidad, id_xjug) {
 		if (unidad.getVida() > 0) {unidad.imagenVida().image(unidad.getVida().toString() + ".png")}
-		
-		//unidad.image(id_jug + "gris.png") // todavia no existe ...gris.png
-		// todavia no existen ataque1 y ataque2, seran dos sprites de mov de la unidad simulando el ataque
-		// comento el codigo porque me interesa que se le cambie el sprite de vida despues de atacar
-//		game.onTick(1000,"ataque1",{ 
-//			unidad.image(id_jug + "ataque1.png")
-//			game.onTick(500,"ataque2", {unidad.image(id_jug + "ataque2.png")
-//				game.removeTickEvent("ataque1") // quiero que se ejecuten una vez cada uno pero separados por X segs
-//				game.removeTickEvent("ataque2") //  y despues se borran
-//			})
-//		})
 	}	
 }

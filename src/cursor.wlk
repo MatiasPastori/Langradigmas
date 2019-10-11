@@ -27,6 +27,7 @@ object cursor {
 		unidad.cambiarSprite(deseleccion)
 		turnoManager.yaAtaco(unidad)
 		estado = estadoVacio
+		unidad.image(unidad.getTipo() + unidad.idJugador() + "gris.png")
 		self.descaptarEnemigosCercanos()
 		unidad = null		
 	}

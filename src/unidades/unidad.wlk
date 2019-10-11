@@ -26,6 +26,7 @@ class Unidad {
 	method buffDefensa() = 0 // depende de casillas
 	
 	method getVida() = vida
+	method getTipo() = tipo
 	
 	method mover(nuevaPos) {
 		position = game.at(nuevaPos.x(), nuevaPos.y())
@@ -39,7 +40,8 @@ class Unidad {
 		var danioBruto = self.potencialDeDanio(enemigo).limitBetween(0,10)
 		var danioNeto = danioBruto.randomUpTo(10).truncate(0)
 		enemigo.recibirDanio(danioNeto)
-		self.imagenVida().image(self.getVida().toString() + ".png")
+		self.cambiarSprite(ataque)
+		//self.imagenVida().image(self.getVida().toString() + ".png")
 	}
 	
 	method potencialDeDanio(enemigo) = self.nivelAtaque() + self.buffAtaque() - enemigo.nivelDefensa() - enemigo.buffDefensa()
