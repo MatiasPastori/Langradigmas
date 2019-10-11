@@ -4,19 +4,12 @@ import escenario.niveles.*
 import escenario.tienda.*
 import escenario.casillas.*
 import cursor.*
+import utilidades.visuals.*
 
 object escenario {
-	const height = 17
-	const width = 31
 	var nivelActual = nivel1
 
-	method configurar() {
-		// CONFIGURACIÓN DEL JUEGO
-		game.title("Langradigmas")
-		game.height(height)
-		game.width(width)
-		game.boardGround("tienda.png")
-		
+	method iniciar() {
 		teclado.setearTeclasMovimiento(cursor)
 		teclado.setearTeclasAccion(cursor)
 		teclado.setearTeclasTienda()
@@ -25,7 +18,7 @@ object escenario {
 		mapManager.generarCasillas()
 		mapManager.generarBordes()
 		
-		game.addVisual(cursor)
+		game.addVisual(cursor)		
 	}
 	method nivelActual() = nivelActual
 	method actualizarNivel() { nivelActual = nivelActual.siguiente() }

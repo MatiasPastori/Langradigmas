@@ -1,8 +1,8 @@
-
 import wollok.game.*
-import escenario.escenario.*
+import inicio.*
 
 program Langradigmas {
-	escenario.configurar()
+	inicio.configurar()
+	inicio.mostrarInicio()
 	game.start()
 }

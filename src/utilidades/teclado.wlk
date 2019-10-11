@@ -1,4 +1,5 @@
 import wollok.game.*
+import inicio.*
 import escenario.escenario.*
 import escenario.tienda.*
 import turnos.*
@@ -28,9 +29,17 @@ object teclado {
 			} 
 		}
 	}
-	method setearTeclasTurno() {
-		keyboard.enter().onPressDo { turnoManager.finalizarTurno() }	
-	}
+	method setearTeclasTurno() {keyboard.enter().onPressDo { 
+		if (!tienda.habilitada())  
+			turnoManager.finalizarTurno()
+	}}
+	method setearTeclaInicio() {keyboard.enter().onPressDo { 
+		if (inicio.inicioHabilitado()) {
+			inicio.inicioHabilitado(false)
+			game.removeVisual(inicio.getInicioVisual())
+			escenario.iniciar()	
+		}
+	}}
 }
 
 object izquierda { method siguiente(position) = position.left(1) }
