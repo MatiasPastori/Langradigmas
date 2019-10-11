@@ -18,7 +18,7 @@ object escenario {
 		mapManager.generarCasillas()
 		mapManager.generarBordes()
 		
-		game.addVisual(cursor)		
+		nivelActual.tienda()
 	}
 	method nivelActual() = nivelActual
 	method actualizarNivel() { nivelActual = nivelActual.siguiente() }

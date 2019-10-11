@@ -1,6 +1,6 @@
 ### Langradigmas
 
-![capturaJuego](assets/inicio.png)
+![capturaJuego](assets/capturaJuego.png)
 
 #### Grupo: AlPastoElChicken
 

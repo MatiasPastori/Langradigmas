@@ -7,9 +7,14 @@ import unidades.unidad.*
 import utilidades.acciones.*
 import jugadores.*
 import turnos.*
+import cursor.*
 
 object nivel1 {
 	
+	method tienda() {
+		tienda.habilitada(true)
+		tienda.iniciar()
+	}
 	method iniciar() {
 		self.setearCasillas()
 		
@@ -68,7 +73,7 @@ object nivel1 {
 		game.addVisual(tiradorMalo4.imagenVida())
 		// End Pruebas
 		
-		
+		game.addVisual(cursor)
 		turnoManager.iniciarTurno()
 	}
 	

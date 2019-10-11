@@ -22,10 +22,30 @@ object teclado {
 		keyboard.d().onPressDo { cursor.atacarEspecial() }
 	}
 	method setearTeclasTienda() {
-		keyboard.k().onPressDo { 
+		keyboard.k().onPressDo {if(tienda.habilitada()) tienda.terminarCompra()}
+		keyboard.y().onPressDo {
 			if(tienda.habilitada()) {
-				escenario.nivelActual().iniciar()
-				tienda.habilitada(false)
+
+			} 
+		}
+		keyboard.n().onPressDo {
+			if(tienda.habilitada()) {
+
+			} 
+		}
+		keyboard.num(1).onPressDo {
+			if(tienda.habilitada()) {
+
+			} 
+		}
+		keyboard.num(2).onPressDo {
+			if(tienda.habilitada()) {
+
+			} 
+		}
+		keyboard.num(3).onPressDo {
+			if(tienda.habilitada()) {
+
 			} 
 		}
 	}
