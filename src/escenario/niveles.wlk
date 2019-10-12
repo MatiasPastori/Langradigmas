@@ -21,6 +21,8 @@ object nivel1 {
 	}
 	method iniciar() {
 		self.setearCasillas()
+
+		
 		
 		// Start Pruebas		
 		var comandanteBueno = new Comandante(position = game.at(1,8), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 50, vida = 10, nivelAtaque = 28, nivelDefensa =24 )

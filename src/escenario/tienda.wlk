@@ -1,28 +1,52 @@
 import wollok.game.*
 import utilidades.estadoTienda.*
 import utilidades.visuals.*
+import jugadores.*
 
 object tienda {
-	var property habilitada = true
+	var unidadAComprar
+	var idUnidadCompra = 1
+	var cantComprada = 0
 	const maxUnidadesPorJugador = 10
 	var property estado = jugador1Comprando
-	var idUnidadCompra = 1
-	var numJug = new Visual(position = game.at(27,10), image = "tienda_" + estado.idJugador() + ".png" )
-	var comandanteJug = new Visual(position = game.at(25,13), image = "comandante" + estado.idJugador() + "iddle1.png" )
+	var property jugadorActual = jugador1
+	var property habilitada = true
+	var numJug = new Visual(position = game.at(27,10), image = "tienda_" + jugadorActual.getId() + ".png")
+	var comandanteJug = new Visual(position = game.at(25,13), image = "comandante" + jugadorActual.getId() + "iddle1.png")
+	var guerreroJug = new Visual(position = game.at(3,10), image = "guerrero" + jugadorActual.getId() + "iddle1.png")
+	var tiradorJug = new Visual(position = game.at(3,8), image = "tirador" + jugadorActual.getId() + "gris.png")
+	var caballeroJug = new Visual(position = game.at(3,6), image = "caballeria" + jugadorActual.getId() + "gris.png")
 	
 	method getNumJug() = numJug
 	method getComandanteJug() = comandanteJug
+	method getGuerreroJug() = guerreroJug
+	method getTiradorJug() = tiradorJug
+	method getCaballeroJug() = caballeroJug
 	method setIdUnidadCompra(num) {idUnidadCompra = num}
+	method setUnidad(unidad) {unidadAComprar = unidad}
 	
 	method iniciar() {
 		game.addVisual(numJug)
 		game.addVisual(comandanteJug)
+		game.addVisual(guerreroJug)
+		game.addVisual(tiradorJug)
+		game.addVisual(caballeroJug)
 	}
-	method comprar() {estado.comprar(idUnidadCompra)}
-	method vender() = estado.vender()
-	method terminarCompra() = estado.terminarCompra()
-	
-	method verificarCantidadUnidadesCompradas(cantComprada) {
+	method comprar() {
+		self.verificarCantidadUnidadesCompradas()
+		estado.unidadComprada(idUnidadCompra)
+		jugadorActual.comprar(unidadAComprar)
+		cantComprada++
+	} 	
+	method vender() { 
+		jugadorActual.vender()
+		cantComprada--
+	}
+	method terminarCompra() { 
+		cantComprada = 0
+		estado.terminarCompra()
+	}
+	method verificarCantidadUnidadesCompradas() {
 		if (cantComprada == maxUnidadesPorJugador)
 			self.error("No puedes comprar mas de " + maxUnidadesPorJugador.toString() + " unidades")
 	} 

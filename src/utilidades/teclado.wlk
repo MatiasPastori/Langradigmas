@@ -20,22 +20,36 @@ object teclado {
 		keyboard.s().onPressDo { cursor.seleccionar() }	
 		keyboard.a().onPressDo { cursor.atacar() }	
 		keyboard.d().onPressDo { cursor.atacarEspecial() }
+		
+		keyboard.t().onPressDo { game.say(cursor,jugador1.getUnidades().last().getTipo()) }
 	}
 	method setearTeclasTienda() {
 		keyboard.k().onPressDo {if(tienda.habilitada()) tienda.terminarCompra()}
-		keyboard.y().onPressDo {
+		keyboard.y().onPressDo {if(tienda.habilitada()) tienda.comprar()}
+		keyboard.n().onPressDo {if(tienda.habilitada()) tienda.vender()} 
+		keyboard.num(1).onPressDo {
 			if(tienda.habilitada()) {
-
-			} 
-		}
-		keyboard.n().onPressDo {
+				tienda.setIdUnidadCompra(1)
+				tienda.getGuerreroJug().image("guerrero"+ tienda.jugadorActual().getId() + "iddle1.png")
+				tienda.getTiradorJug().image("tirador"+ tienda.jugadorActual().getId() + "gris.png")
+				tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "gris.png")
+		}}
+		keyboard.num(2).onPressDo {
 			if(tienda.habilitada()) {
-
-			} 
+				tienda.setIdUnidadCompra(2)
+				tienda.getGuerreroJug().image("guerrero"+ tienda.jugadorActual().getId() + "gris.png")
+				tienda.getTiradorJug().image("tirador"+ tienda.jugadorActual().getId() + "iddle1.png")
+				tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "gris.png")
+			}
 		}
-		keyboard.num(1).onPressDo {if(tienda.habilitada()) {tienda.setIdUnidadCompra(1)}}
-		keyboard.num(2).onPressDo {if(tienda.habilitada()) {tienda.setIdUnidadCompra(2)}}
-		keyboard.num(3).onPressDo {if(tienda.habilitada()) {tienda.setIdUnidadCompra(3)}}
+		keyboard.num(3).onPressDo {
+			if(tienda.habilitada()) {
+				tienda.setIdUnidadCompra(3)
+				tienda.getGuerreroJug().image("guerrero"+ tienda.jugadorActual().getId() + "gris.png")
+				tienda.getTiradorJug().image("tirador"+ tienda.jugadorActual().getId() + "gris.png")
+				tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "iddle1.png")
+			}
+		}
 	}
 	method setearTeclasTurno() {keyboard.enter().onPressDo { 
 		if (!tienda.habilitada() && cursor.unidad() == null)  

@@ -22,7 +22,7 @@ object jugador1 {
 
 object jugador2 {	
 	var unidades = []
-		var id = "J2"
+	var id = "J2"
 	
 	method cursorImage() = "cursorJ2.png"
 	
