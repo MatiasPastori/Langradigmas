@@ -7,23 +7,31 @@ import unidades.guerrero.*
 import unidades.caballeria.*
 import unidades.unidad.*
 import utilidades.acciones.*
+import utilidades.visuals.*
 import jugadores.*
 import turnos.*
 import cursor.*
 
-object nivel1 {
+object nivel1 {	
+	var tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
 	
+	method generarNivel() {
+		self.setearCasillas()
+		game.schedule(2000, {self.tienda()})
+	}
 	method tienda() {
 		var comandanteBueno = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 50, vida = 10, nivelAtaque = 28, nivelDefensa =24 )
 		var comandanteMalo = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", rangoDeAccion = 2, vida = 10, nivelAtaque = 24, nivelDefensa = 30)
+		
+		game.addVisual(tiendaImg)
+		
 		jugador1.comprar(comandanteBueno)
 		jugador2.comprar(comandanteMalo)
 		tienda.habilitada(true)
 		tienda.iniciar()
 	}
 	method iniciar() {
-		self.setearCasillas()
-
+		game.removeVisual(tiendaImg)
 		
 		
 		// Start Pruebas		
@@ -100,6 +108,16 @@ object nivel1 {
 }
 
 object nivel2 {
+	var tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
+	
+	method generarNivel() {
+		self.setearCasillas()
+		game.schedule(2000, {self.tienda()})
+	}	
+	
+	method tienda() {
+
+	}
 	
 	method iniciar() {
 	
@@ -113,7 +131,16 @@ object nivel2 {
 }
 
 object nivel3 {
+	var tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
 	
+	method generarNivel() {
+		self.setearCasillas()
+		game.schedule(2000, {self.tienda()})
+	}	
+		
+	method tienda() {
+
+	}
 	method iniciar() {
 		
 	}

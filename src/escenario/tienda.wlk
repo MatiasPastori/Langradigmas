@@ -13,9 +13,9 @@ object tienda {
 	var property habilitada = true
 	var numJug = new Visual(position = game.at(27,10), image = "tienda_" + jugadorActual.getId() + ".png")
 	var comandanteJug = new Visual(position = game.at(25,13), image = "comandante" + jugadorActual.getId() + "iddle1.png")
-	var guerreroJug = new Visual(position = game.at(3,10), image = "guerrero" + jugadorActual.getId() + "iddle1.png")
-	var tiradorJug = new Visual(position = game.at(3,8), image = "tirador" + jugadorActual.getId() + "gris.png")
-	var caballeroJug = new Visual(position = game.at(3,6), image = "caballeria" + jugadorActual.getId() + "gris.png")
+	var guerreroJug = new Visual(position = game.at(5,10), image = "guerrero" + jugadorActual.getId() + "iddle1.png")
+	var tiradorJug = new Visual(position = game.at(5,8), image = "tirador" + jugadorActual.getId() + "gris.png")
+	var caballeroJug = new Visual(position = game.at(5,6), image = "caballeria" + jugadorActual.getId() + "gris.png")
 	
 	method getNumJug() = numJug
 	method getComandanteJug() = comandanteJug
