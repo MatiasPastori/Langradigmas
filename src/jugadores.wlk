@@ -15,8 +15,6 @@ object jugador1 {
 	
 	method comprar(unidad) = unidades.add(unidad)
 	
-	method vender() = unidades.remove(unidades.last())
-	
 	method siguiente() = jugador2	
 }
 
@@ -34,8 +32,6 @@ object jugador2 {
 	}
 	
 	method comprar(unidad) = unidades.add(unidad)
-	
-	method vender() = unidades.remove(unidades.last())
 	
 	method siguiente() = jugador1
 }

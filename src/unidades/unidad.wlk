@@ -10,7 +10,7 @@ import turnos.*
 class Unidad {
 	const jugadorDuenio
 	const rangoDeAccion
-	var vida
+	var vida = 10
 	var tipo
 	
 	var property position
