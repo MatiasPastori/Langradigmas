@@ -39,11 +39,7 @@ object jugador2Comprando {
 			tienda.setUnidad(new Caballeria(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "caballeria", comandante = jugador2.getUnidades().head(), rangoDeAccion = 50, vida = 10, nivelAtaque = 24, nivelDefensa = 20))
 	}
 	method terminarCompra() {
-		game.removeVisual(tienda.getNumJug())
-		game.removeVisual(tienda.getComandanteJug())
-		game.removeVisual(tienda.getGuerreroJug())
-		game.removeVisual(tienda.getTiradorJug())
-		game.removeVisual(tienda.getCaballeroJug())
+		tienda.imagenesTienda().forEach{imagen => game.removeVisual(imagen)}
 		escenario.nivelActual().iniciar()
 		tienda.habilitada(false)
 	}
