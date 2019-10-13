@@ -16,8 +16,16 @@ object nivel1 {
 	var tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
 	
 	method generarNivel() {
+		var nivelImg = new Visual(position = game.at(0,0), image = "nivel1_C.png")
+		
 		self.setearCasillas()
-		game.schedule(2000, {self.tienda()})
+		game.schedule(500, {game.addVisual(nivelImg)})
+		game.schedule(650, {nivelImg.image("nivel1_B.png")})
+		game.schedule(800, {nivelImg.image("nivel1_A.png")})
+		game.schedule(2000, {
+			game.removeVisual(nivelImg)
+			self.tienda()
+		})
 	}
 	method tienda() {
 		var comandanteBueno = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 50, vida = 10, nivelAtaque = 28, nivelDefensa =24 )
@@ -111,16 +119,28 @@ object nivel2 {
 	var tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
 	
 	method generarNivel() {
+		var nivelImg = new Visual(position = game.at(0,0), image = "nivel2_C.png")
+		
 		self.setearCasillas()
-		game.schedule(2000, {self.tienda()})
+		game.schedule(500, {game.addVisual(nivelImg)})
+		game.schedule(650, {nivelImg.image("nivel2_B.png")})
+		game.schedule(800, {nivelImg.image("nivel2_A.png")})
+		game.schedule(2000, {
+			game.removeVisual(nivelImg)
+			self.tienda()
+		})
 	}	
 	
 	method tienda() {
-
+		game.addVisual(tiendaImg)
 	}
 	
 	method iniciar() {
-	
+		game.removeVisual(tiendaImg)
+		// TODO
+		
+		game.addVisual(cursor)
+		turnoManager.iniciarTurno()
 	}
 	
 	method setearCasillas() {
@@ -134,15 +154,28 @@ object nivel3 {
 	var tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
 	
 	method generarNivel() {
+		var nivelImg = new Visual(position = game.at(0,0), image = "nivel3_C.png")
+		
 		self.setearCasillas()
-		game.schedule(2000, {self.tienda()})
+		game.schedule(500, {game.addVisual(nivelImg)})
+		game.schedule(650, {nivelImg.image("nivel3_B.png")})
+		game.schedule(800, {nivelImg.image("nivel3_A.png")})
+		game.schedule(2000, {
+			game.removeVisual(nivelImg)
+			self.tienda()
+		})
 	}	
 		
 	method tienda() {
-
+		game.removeVisual(tiendaImg)
 	}
 	method iniciar() {
+		game.addVisual(tiendaImg)
 		
+		// TODO
+		
+		game.addVisual(cursor)
+		turnoManager.iniciarTurno()
 	}
 	
 	method setearCasillas() {
