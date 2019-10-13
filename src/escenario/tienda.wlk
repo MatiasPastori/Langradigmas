@@ -13,11 +13,11 @@ object tienda {
 	var property jugadorActual = jugador1
 	var property habilitada = true
 	var numJug = new Visual(position = game.at(27,10), image = "tienda_" + jugadorActual.getId() + ".png")
-	var cantDisp1erDigito = new Visual(position = game.at(7,13), image = "tienda_" + "num1.png") 
-	var cantDisp2doDigito = new Visual(position = game.at(8,13), image = "tienda_" + "num0.png") 
-	var compradosUnidad1 = new Visual(position = game.at(10,10), image = "tienda_" + "num0.png") 
-	var compradosUnidad2 = new Visual(position = game.at(10,8), image = "tienda_" + "num0.png") 
-	var compradosUnidad3 = new Visual(position = game.at(10,6), image = "tienda_" + "num0.png") 
+	var cantDisp1erDigito = new Visual(position = game.at(7,13), image = "tienda_num1.png") 
+	var cantDisp2doDigito = new Visual(position = game.at(8,13), image = "tienda_num0.png") 
+	var compradosUnidad1 = new Visual(position = game.at(10,10), image = "tienda_num0.png") 
+	var compradosUnidad2 = new Visual(position = game.at(10,8), image = "tienda_num0.png") 
+	var compradosUnidad3 = new Visual(position = game.at(10,6), image = "tienda_num0.png") 
 	var comandanteJug = new Visual(position = game.at(25,13), image = "comandante" + jugadorActual.getId() + "iddle1.png")
 	var guerreroJug = new Visual(position = game.at(5,10), image = "guerrero" + jugadorActual.getId() + "iddle1.png")
 	var tiradorJug = new Visual(position = game.at(5,8), image = "tirador" + jugadorActual.getId() + "gris.png")
@@ -56,10 +56,14 @@ object tienda {
 		estado.unidadComprada(idUnidadCompra)
 		jugadorActual.comprar(unidadAComprar)
 		cantComprada++
+		self.actualizarContadorPorUnidad()
+		self.actualizarContadorDisponibles()
 	} 	
 	method vender() { 
 		jugadorActual.vender()
 		cantComprada--
+		self.actualizarContadorPorUnidad()
+		self.actualizarContadorDisponibles()
 	}
 	method terminarCompra() { 
 		cantComprada = 0
@@ -68,5 +72,17 @@ object tienda {
 	method verificarCantidadUnidadesCompradas() {
 		if (cantComprada == maxUnidadesPorJugador)
 			self.error("No puedes comprar mas de " + maxUnidadesPorJugador.toString() + " unidades")
+	}
+	method actualizarContadorDisponibles() {
+		if(cantComprada == 0) {
+			cantDisp1erDigito.image("tienda_num1.png")
+			cantDisp2doDigito.image("tienda_num0.png")
+		} else {
+			cantDisp1erDigito.image("tienda_num0.png")
+			cantDisp2doDigito.image("tienda_num" + (10-cantComprada).toString() + ".png")		
+		}
+	}
+	method actualizarContadorPorUnidad() {
+		 
 	} 
 }
