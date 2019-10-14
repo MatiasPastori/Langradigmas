@@ -36,6 +36,7 @@ object tienda {
 	method getGuerreroJug() = guerreroJugImg
 	method getTiradorJug() = tiradorJugImg
 	method getCaballeroJug() = caballeroJugImg
+	method getCantComprada() = cantComprada
 	
 	method iniciar() {
 		self.restablecerTienda()
