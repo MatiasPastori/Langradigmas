@@ -57,23 +57,16 @@ object nivel1 {
 	method posicionarUnidades() {	
 		const comandanteJ1 = jugador1.getUnidades().head()
 		const comandanteJ2 = jugador2.getUnidades().head()
-		const primerPelotonUnidadesJ1 = jugador1.getUnidades()
-		const primerPelotonUnidadesJ2 = jugador2.getUnidades()
-		const segundoPelotonUnidadesJ1 = jugador1.getUnidades()
-		const segundoPelotonUnidadesJ2 = jugador2.getUnidades()
-		const tercerPelotonUnidadesJ1 = jugador1.getUnidades()
-		const tercerPelotonUnidadesJ2 = jugador2.getUnidades()
+		const primerPelotonUnidadesJ1 = jugador1.getUnidades().subList(1,4)
+		const primerPelotonUnidadesJ2 = jugador2.getUnidades().subList(1,4)
+		const segundoPelotonUnidadesJ1 = jugador1.getUnidades().subList(5,7)
+		const segundoPelotonUnidadesJ2 = jugador2.getUnidades().subList(5,7)
+		const tercerPelotonUnidadesJ1 = jugador1.getUnidades().subList(8,10)
+		const tercerPelotonUnidadesJ2 = jugador2.getUnidades().subList(8,10)
 		var _y
 
 		comandanteJ1.position(game.at(2,8))
 		comandanteJ2.position(game.at(game.width()-3,8))
-		
-		primerPelotonUnidadesJ1.subList(1,4)
-		primerPelotonUnidadesJ2.subList(1,4)
-		segundoPelotonUnidadesJ1.subList(5,7)
-		segundoPelotonUnidadesJ2.subList(5,7)
-		tercerPelotonUnidadesJ1.subList(8,10)
-		tercerPelotonUnidadesJ2.subList(8,10)		
 
 	// Pelotones J1	
 		_y = comandanteJ1.position().y() + 2
@@ -115,16 +108,7 @@ object nivel1 {
 			unidad =>
 			unidad.position(game.at(comandanteJ2.position().x()-1, _y))
 			_y--
-		}
-		
-//		unidadesJ1.forEach{
-//			unidad => unidad.position(game.at(3, contA))
-//			contA++
-//		}
-//		unidadesJ2.forEach{
-//			unidad => unidad.position(game.at(game.width()-4, contB))
-//			contB++
-//		}		
+		}	
 				
 		jugador1.getUnidades().forEach{unidad => 
 			game.addVisual(unidad)
