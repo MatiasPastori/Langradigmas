@@ -44,7 +44,13 @@ object nivel1 {
 		self.posicionarUnidades()
 		
 		game.addVisual(cursor)
+		turnoManager.habilitado(true)
 		turnoManager.iniciarTurno()
+	}
+	method terminarNivel() {
+		//TODO
+		turnoManager.habilitado(false)
+		escenario.actualizarNivel()
 	}
 	
 	method posicionarUnidades() {	
@@ -106,6 +112,12 @@ object nivel2 {
 		turnoManager.iniciarTurno()
 	}
 	
+	method terminarNivel() {
+		//TODO
+		turnoManager.habilitado(false)
+		escenario.actualizarNivel()
+	}
+	
 	method setearCasillas() {
 
 	}
@@ -139,6 +151,12 @@ object nivel3 {
 		
 		game.addVisual(cursor)
 		turnoManager.iniciarTurno()
+	}
+	
+	method terminarNivel() {
+		//TODO
+		turnoManager.habilitado(false)
+		escenario.actualizarNivel()
 	}
 	
 	method setearCasillas() {

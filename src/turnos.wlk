@@ -3,6 +3,7 @@ import cursor.*
 import utilidades.estado.*
 
 object turnoManager {
+	var property habilitado = false
 	var jugadorActual = jugador1
 	var unidadesLibres = []
 	var unidadesMovidas = []
