@@ -5,7 +5,7 @@ import unidades.guerrero.*
 import jugadores.*
 
 object tienda {
-	var property habilitada = true
+	var property habilitada = false
 	var property estado = jugador1Comprando
 	var property jugadorActual = jugador1
 	
@@ -42,8 +42,9 @@ object tienda {
 		self.agregarVisuales()
 	}
 	method restablecerTienda() {
-		self.imagenesTienda().clear()
-		self.carritoDeCompras().clear()
+		imagenesTienda.forEach{imagen => game.removeVisual(imagen)}
+		imagenesTienda.clear()
+		carritoDeCompras.clear()
 		
 		unidadAComprar = new Guerrero(position = game.center(), image = "transparente.png", jugadorDuenio = jugadorActual, tipo = "guerrero", comandante = jugadorActual.getUnidades().head(), rangoDeAccion = 50, nivelAtaque = 24, nivelDefensa = 20)
 		numJug = new Visual(position = game.at(27,10), image = "tienda_" + jugadorActual.getId() + ".png")
@@ -101,9 +102,9 @@ object tienda {
 		}
 	}
 	method actualizarContadoresPorUnidad() {
-		var guerrerosComprados = carritoDeCompras.filter{unidad => unidad.getTipo() == "guerrero"}.size()
-		var tiradoresComprados = carritoDeCompras.filter{unidad => unidad.getTipo() == "tirador"}.size()
-		var caballeriaComprados = carritoDeCompras.filter{unidad => unidad.getTipo() == "caballeria"}.size()
+		var guerrerosComprados = carritoDeCompras.count{unidad => unidad.getTipo() == "guerrero"}
+		var tiradoresComprados = carritoDeCompras.count{unidad => unidad.getTipo() == "tirador"}
+		var caballeriaComprados = carritoDeCompras.count{unidad => unidad.getTipo() == "caballeria"}
 		
 		contadorGuerrerosComprados.image("tienda_num" + guerrerosComprados.toString() + ".png")
 		contadorTiradoresComprados.image("tienda_num" + tiradoresComprados.toString() + ".png")

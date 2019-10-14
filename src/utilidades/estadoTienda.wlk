@@ -9,21 +9,27 @@ import jugadores.*
 
 object jugador1Comprando {
 	method terminarCompra() {
-		tienda.carritoDeCompras().forEach{unidad => jugador1.comprar(unidad)}
+		tienda.carritoDeCompras().forEach{unidad => 
+			jugador1.comprar(unidad)
+			jugador1.getUnidades().head().reclutar(unidad)
+		}
+
 		
 		tienda.jugadorActual(jugador2)
-		tienda.imagenesTienda().forEach{imagen => game.removeVisual(imagen)}
-		tienda.iniciar()
 		tienda.estado(jugador2Comprando)
+		tienda.iniciar()
 	}	
 }
 
 object jugador2Comprando {
 	method terminarCompra() {
-		tienda.carritoDeCompras().forEach{unidad => jugador2.comprar(unidad)}
+		tienda.carritoDeCompras().forEach{unidad => 
+			jugador2.comprar(unidad)
+			jugador2.getUnidades().head().reclutar(unidad)
+		}
 		
 		tienda.imagenesTienda().forEach{imagen => game.removeVisual(imagen)}
-		escenario.nivelActual().iniciar()
 		tienda.habilitada(false)
+		escenario.nivelActual().iniciar()
 	}
 }

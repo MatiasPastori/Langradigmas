@@ -21,5 +21,8 @@ class Subordinado inherits Unidad {
 		return if (distanciaAlComandante.distanciaA(comandante.position())<3) bloque.apply() else 0
 	}
 	
-	method serReclutado(unComandante) { comandante = unComandante }
+	override method morir() {
+		comandante.subordinados().remove(self)
+		super()
+	}
 }

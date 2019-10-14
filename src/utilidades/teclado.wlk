@@ -55,8 +55,10 @@ object teclado {
 		}
 	}
 	method setearTeclasTurno() {keyboard.enter().onPressDo { 
-		if (!tienda.habilitada() && cursor.unidad() == null)  
+		if (!tienda.habilitada() and !inicio.inicioHabilitado()) {
+			if(cursor.unidad() != null) {cursor.error("Tienes una unidad seleccionada!")}
 			turnoManager.finalizarTurno()
+		}
 	}}
 	method setearTeclaInicio() {keyboard.enter().onPressDo { 
 		if (inicio.inicioHabilitado()) {
