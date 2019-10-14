@@ -43,7 +43,9 @@ object cursor {
 	
 	method captarEnemigosCercanos() {
 		var posicionesCerca = [position.right(1),position.left(1),position.up(1),position.down(1)]
-		posicionesAtacables = posicionesCerca.filter{pos => self.unidadEn(pos) != null}
+		posicionesAtacables = posicionesCerca.filter{pos => 
+			self.unidadEn(pos) != null and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
+		}
 		posicionesAtacables.forEach{pos => game.addVisual(new Visual(image="atacable.png", position = pos))}
 	}
 	

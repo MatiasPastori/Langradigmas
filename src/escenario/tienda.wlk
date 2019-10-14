@@ -2,6 +2,8 @@ import wollok.game.*
 import utilidades.estadoTienda.*
 import utilidades.visuals.*
 import unidades.guerrero.*
+import unidades.tirador.*
+import unidades.caballeria.*
 import jugadores.*
 
 object tienda {
@@ -47,7 +49,6 @@ object tienda {
 		imagenesTienda.clear()
 		carritoDeCompras.clear()
 		
-		unidadAComprar = new Guerrero(position = game.at(1,1), image = "transparente.png", jugadorDuenio = jugadorActual, tipo = "guerrero", comandante = jugadorActual.getUnidades().head(), rangoDeAccion = 50, nivelAtaque = 24, nivelDefensa = 20)
 		numJug = new Visual(position = game.at(27,10), image = "tienda_" + jugadorActual.getId() + ".png")
 		cantDisp1erDigito = new Visual(position = game.at(7,13), image = "tienda_num1.png") 
 		cantDisp2doDigito = new Visual(position = game.at(8,13), image = "tienda_num0.png") 
@@ -55,9 +56,11 @@ object tienda {
 		contadorTiradoresComprados = new Visual(position = game.at(10,8), image = "tienda_num0.png") 
 		contadorCaballeriaComprada = new Visual(position = game.at(10,6), image = "tienda_num0.png") 
 	 	comandanteJugImg = new Visual(position = game.at(25,13), image = "comandante" + jugadorActual.getId() + "iddle1.png")
-	 	guerreroJugImg = new Visual(position = game.at(5,10), image = "guerrero" + jugadorActual.getId() + "iddle1.png")
-	 	tiradorJugImg = new Visual(position = game.at(5,8), image = "tirador" + jugadorActual.getId() + "gris.png")
-		caballeroJugImg = new Visual(position = game.at(5,6), image = "caballeria" + jugadorActual.getId() + "gris.png")	
+		guerreroJugImg = new Visual(position = game.at(5,10), image = "transparente.png")
+		tiradorJugImg = new Visual(position = game.at(5,8), image = "transparente.png")
+		caballeroJugImg = new Visual(position = game.at(5,6), image = "transparente.png")	
+		
+		self.reservar(guerrero)
 	}
 	method agregarVisuales() {
 		imagenesTienda.add(numJug)
@@ -83,6 +86,8 @@ object tienda {
 		self.todosAGris()
 		unidadAComprar = null
 	} 	
+	method reservar(tipo) {tipo.reservarUnidad()}
+	
 	method vender() { 
 		self.verificarQueHayaUnidadesCompradas()
 		carritoDeCompras.remove(carritoDeCompras.last())
@@ -132,5 +137,30 @@ object tienda {
 	method verificarQueHayaUnidadesCompradas() {
 		if (cantComprada == 0)
 			self.error("No puedes vender unidades que todavía no compraste")
+	}
+}
+
+object guerrero {
+	method reservarUnidad() {
+		tienda.unidadAComprar(new Guerrero(position = game.at(1,1), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "guerrero", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 4, nivelAtaque = 24, nivelDefensa = 20))
+		tienda.getGuerreroJug().image("guerrero"+ tienda.jugadorActual().getId() + "iddle1.png")
+		tienda.getTiradorJug().image("tirador"+ tienda.jugadorActual().getId() + "gris.png")
+		tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "gris.png")
+	}
+}
+object tirador {
+	method reservarUnidad() {
+		tienda.unidadAComprar(new Tirador(position = game.at(2,2), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "tirador", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 5, nivelAtaque = 24, nivelDefensa = 20))
+		tienda.getGuerreroJug().image("guerrero"+ tienda.jugadorActual().getId() + "gris.png")
+		tienda.getTiradorJug().image("tirador"+ tienda.jugadorActual().getId() + "iddle1.png")
+		tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "gris.png")	
+	}
+}
+object caballeria {
+	method reservarUnidad() {
+		tienda.unidadAComprar(new Caballeria(position = game.at(3,3), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "caballeria", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 6, nivelAtaque = 24, nivelDefensa = 20))
+		tienda.getGuerreroJug().image("guerrero"+ tienda.jugadorActual().getId() + "gris.png")
+		tienda.getTiradorJug().image("tirador"+ tienda.jugadorActual().getId() + "gris.png")
+		tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "iddle1.png")	
 	}
 }

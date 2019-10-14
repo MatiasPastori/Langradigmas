@@ -60,7 +60,9 @@ class Unidad {
 		game.removeVisual(self)
 	}
 	
-	method cambiarSprite(accion) {accion.cambiarSprite(self, tipo + jugadorDuenio.getId())}
+	method cambiarSprite(accion) {accion.cambiarSprite(self, tipo + self.idJugador())}
+	
+	method idJugador() = jugadorDuenio.getId()
 }
 
 																				
