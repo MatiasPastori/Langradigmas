@@ -24,7 +24,7 @@ object teclado {
 		keyboard.a().onPressDo { cursor.atacar() }	
 		keyboard.d().onPressDo { cursor.atacarEspecial() }
 		
-		//keyboard.t().onPressDo { game.say(cursor,jugador1.getUnidades().last().getTipo()) }
+		keyboard.t().onPressDo { game.say(cursor,jugador1.getUnidades().size().toString()) }
 	}
 	method setearTeclasTienda() {
 		keyboard.k().onPressDo {if(tienda.habilitada()) tienda.terminarCompra()}
@@ -32,14 +32,14 @@ object teclado {
 		keyboard.n().onPressDo {if(tienda.habilitada()) tienda.vender()} 
 		keyboard.num(1).onPressDo {
 			if(tienda.habilitada()) {
-				tienda.unidadAComprar(new Guerrero(position = game.center(), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "guerrero", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 50, nivelAtaque = 24, nivelDefensa = 20))
+				tienda.unidadAComprar(new Guerrero(position = game.at(1,1), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "guerrero", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 50, nivelAtaque = 24, nivelDefensa = 20))
 				tienda.getGuerreroJug().image("guerrero"+ tienda.jugadorActual().getId() + "iddle1.png")
 				tienda.getTiradorJug().image("tirador"+ tienda.jugadorActual().getId() + "gris.png")
 				tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "gris.png")
 		}}
 		keyboard.num(2).onPressDo {
 			if(tienda.habilitada()) {
-				tienda.unidadAComprar(new Tirador(position = game.center(), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "tirador", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 50, nivelAtaque = 24, nivelDefensa = 20))
+				tienda.unidadAComprar(new Tirador(position = game.at(2,2), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "tirador", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 50, nivelAtaque = 24, nivelDefensa = 20))
 				tienda.getGuerreroJug().image("guerrero"+ tienda.jugadorActual().getId() + "gris.png")
 				tienda.getTiradorJug().image("tirador"+ tienda.jugadorActual().getId() + "iddle1.png")
 				tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "gris.png")
@@ -47,7 +47,7 @@ object teclado {
 		}
 		keyboard.num(3).onPressDo {
 			if(tienda.habilitada()) {
-				tienda.unidadAComprar(new Caballeria(position = game.center(), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "caballeria", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 50, nivelAtaque = 24, nivelDefensa = 20))
+				tienda.unidadAComprar(new Caballeria(position = game.at(3,3), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "caballeria", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 50, nivelAtaque = 24, nivelDefensa = 20))
 				tienda.getGuerreroJug().image("guerrero"+ tienda.jugadorActual().getId() + "gris.png")
 				tienda.getTiradorJug().image("tirador"+ tienda.jugadorActual().getId() + "gris.png")
 				tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "iddle1.png")

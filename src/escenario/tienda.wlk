@@ -21,10 +21,10 @@ object tienda {
 	var contadorGuerrerosComprados
 	var contadorTiradoresComprados
 	var contadorCaballeriaComprada
-	var comandanteJug
-	var guerreroJug
-	var tiradorJug
-	var caballeroJug
+	var comandanteJugImg
+	var guerreroJugImg
+	var tiradorJugImg
+	var caballeroJugImg
 	
 	method getNumJug() = numJug
 	method getcantDisp1erDigito() = cantDisp1erDigito
@@ -32,10 +32,10 @@ object tienda {
 	method getcantcompradosUnidadGuerrero() = contadorGuerrerosComprados
 	method getcantcompradosUnidadTirador() = contadorTiradoresComprados
 	method getcantcompradosUnidadCaballeria() = contadorCaballeriaComprada
-	method getComandanteJug() = comandanteJug
-	method getGuerreroJug() = guerreroJug
-	method getTiradorJug() = tiradorJug
-	method getCaballeroJug() = caballeroJug
+	method getComandanteJug() = comandanteJugImg
+	method getGuerreroJug() = guerreroJugImg
+	method getTiradorJug() = tiradorJugImg
+	method getCaballeroJug() = caballeroJugImg
 	
 	method iniciar() {
 		self.restablecerTienda()
@@ -46,17 +46,17 @@ object tienda {
 		imagenesTienda.clear()
 		carritoDeCompras.clear()
 		
-		unidadAComprar = new Guerrero(position = game.center(), image = "transparente.png", jugadorDuenio = jugadorActual, tipo = "guerrero", comandante = jugadorActual.getUnidades().head(), rangoDeAccion = 50, nivelAtaque = 24, nivelDefensa = 20)
+		unidadAComprar = new Guerrero(position = game.at(1,1), image = "transparente.png", jugadorDuenio = jugadorActual, tipo = "guerrero", comandante = jugadorActual.getUnidades().head(), rangoDeAccion = 50, nivelAtaque = 24, nivelDefensa = 20)
 		numJug = new Visual(position = game.at(27,10), image = "tienda_" + jugadorActual.getId() + ".png")
 		cantDisp1erDigito = new Visual(position = game.at(7,13), image = "tienda_num1.png") 
 		cantDisp2doDigito = new Visual(position = game.at(8,13), image = "tienda_num0.png") 
 		contadorGuerrerosComprados = new Visual(position = game.at(10,10), image = "tienda_num0.png") 
 		contadorTiradoresComprados = new Visual(position = game.at(10,8), image = "tienda_num0.png") 
 		contadorCaballeriaComprada = new Visual(position = game.at(10,6), image = "tienda_num0.png") 
-	 	comandanteJug = new Visual(position = game.at(25,13), image = "comandante" + jugadorActual.getId() + "iddle1.png")
-	 	guerreroJug = new Visual(position = game.at(5,10), image = "guerrero" + jugadorActual.getId() + "iddle1.png")
-	 	tiradorJug = new Visual(position = game.at(5,8), image = "tirador" + jugadorActual.getId() + "gris.png")
-		caballeroJug = new Visual(position = game.at(5,6), image = "caballeria" + jugadorActual.getId() + "gris.png")	
+	 	comandanteJugImg = new Visual(position = game.at(25,13), image = "comandante" + jugadorActual.getId() + "iddle1.png")
+	 	guerreroJugImg = new Visual(position = game.at(5,10), image = "guerrero" + jugadorActual.getId() + "iddle1.png")
+	 	tiradorJugImg = new Visual(position = game.at(5,8), image = "tirador" + jugadorActual.getId() + "gris.png")
+		caballeroJugImg = new Visual(position = game.at(5,6), image = "caballeria" + jugadorActual.getId() + "gris.png")	
 	}
 	method agregarVisuales() {
 		imagenesTienda.add(numJug)
@@ -65,19 +65,22 @@ object tienda {
 		imagenesTienda.add(contadorGuerrerosComprados)
 		imagenesTienda.add(contadorTiradoresComprados)
 		imagenesTienda.add(contadorCaballeriaComprada)
-		imagenesTienda.add(comandanteJug)
-		imagenesTienda.add(guerreroJug)
-		imagenesTienda.add(tiradorJug)
-		imagenesTienda.add(caballeroJug)
+		imagenesTienda.add(comandanteJugImg)
+		imagenesTienda.add(guerreroJugImg)
+		imagenesTienda.add(tiradorJugImg)
+		imagenesTienda.add(caballeroJugImg)
 		imagenesTienda.forEach{imagen => game.addVisual(imagen)}
 	}
 	
 	method comprar() {
 		self.verificarCantidadUnidadesCompradas()
+		self.verificarQueHayaUnidadSeleccionada()
 		carritoDeCompras.add(unidadAComprar)
 		cantComprada++
 		self.actualizarContadoresPorUnidad()
 		self.actualizarContadorDisponibles()
+		self.todosAGris()
+		unidadAComprar = null
 	} 	
 	method vender() { 
 		self.verificarQueHayaUnidadesCompradas()
@@ -111,9 +114,19 @@ object tienda {
 		contadorCaballeriaComprada.image("tienda_num" + caballeriaComprados.toString() + ".png")
 	} 
 	
+	method todosAGris() {
+		guerreroJugImg.image("guerrero" + jugadorActual.getId() + "gris.png")
+		tiradorJugImg.image("tirador" + jugadorActual.getId() + "gris.png")
+		caballeroJugImg.image("caballeria" + jugadorActual.getId() + "gris.png")
+	}
+	
 	method verificarCantidadUnidadesCompradas() {
 		if (cantComprada == maxUnidadesPorJugador)
 			self.error("No puedes comprar mas de " + maxUnidadesPorJugador.toString() + " unidades")
+	}
+	method verificarQueHayaUnidadSeleccionada() {
+		if (unidadAComprar == null) 
+			self.error("Debes seleccionar una unidad para comprar!") 
 	}
 	method verificarQueHayaUnidadesCompradas() {
 		if (cantComprada == 0)
