@@ -112,10 +112,12 @@ object nivel1 {
 				
 		jugador1.getUnidades().forEach{unidad => 
 			game.addVisual(unidad)
+			game.addVisual(unidad.imagenVida())
 			unidad.cambiarSprite(iddle)
 		}
 		jugador2.getUnidades().forEach{unidad => 
 			game.addVisual(unidad)
+			game.addVisual(unidad.imagenVida())
 			unidad.cambiarSprite(iddle)
 		}
 	}
