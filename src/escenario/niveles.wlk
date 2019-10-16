@@ -9,6 +9,7 @@ import unidades.caballeria.*
 import unidades.unidad.*
 import utilidades.acciones.*
 import utilidades.visuals.*
+import utilidades.comentarios.*
 import jugadores.*
 import turnos.*
 import cursor.*
@@ -40,10 +41,19 @@ object nivel1 {
 		tienda.iniciar()
 	}
 	method iniciar() {
+		var comandanteJ1 = jugador1.getUnidades().head()
+		var comandanteJ2 = jugador2.getUnidades().head()
+		var subordinadosJ1 = jugador1.getUnidades().subList(1,10)
+		var subordinadosJ2 = jugador2.getUnidades().subList(1,10)
+		
 		game.removeVisual(tiendaImg)
 		
 		self.posicionarUnidades()
-		
+		game.say(comandanteJ1, comentario.msgInicioNivelJ1comandante())
+		game.say(comandanteJ2, comentario.msgInicioNivelJ2comandante())
+		game.say(subordinadosJ1.anyOne(), comentario.msgInicioNivelJ1subordinados())
+		game.say(subordinadosJ2.anyOne(), comentario.msgInicioNivelJ2subordinados())	
+			
 		game.addVisual(cursor)
 		turnoManager.habilitado(true)
 		turnoManager.iniciarTurno()
