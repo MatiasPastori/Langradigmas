@@ -19,6 +19,7 @@ class Unidad {
 	
 	const property nivelAtaque
 	const property nivelDefensa
+	var property habilidadEspecialDisponible = true
 	
 	method esSeleccionable() = true
 	

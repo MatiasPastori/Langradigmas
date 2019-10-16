@@ -1,6 +1,7 @@
 import wollok.game.*
 import utilidades.estadoTienda.*
 import utilidades.visuals.*
+import utilidades.comentarios.*
 import unidades.guerrero.*
 import unidades.tirador.*
 import unidades.caballeria.*
@@ -128,15 +129,15 @@ object tienda {
 	
 	method verificarCantidadUnidadesCompradas() {
 		if (cantComprada == maxUnidadesPorJugador)
-			self.error("No puedes comprar mas de " + maxUnidadesPorJugador.toString() + " unidades")
+			self.error(error.msgCarritoLleno(maxUnidadesPorJugador))
 	}
 	method verificarQueHayaUnidadSeleccionada() {
 		if (unidadAComprar == null) 
-			self.error("Debes seleccionar una unidad para comprar!") 
+			self.error(error.msgSeleccionarDespuesComprar()) 
 	}
 	method verificarQueHayaUnidadesCompradas() {
 		if (cantComprada == 0)
-			self.error("No puedes vender unidades que todavía no compraste")
+			self.error(error.msgCarritoVacio())
 	}
 }
 

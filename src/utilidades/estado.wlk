@@ -1,6 +1,7 @@
 import wollok.game.*
 import utilidades.distancia.*
 import utilidades.acciones.*
+import utilidades.comentarios.*
 import unidades.unidad.*
 import turnos.*
 
@@ -12,15 +13,16 @@ class EstadoAgarrado {
 		if (cursor.esCasillaOcupable() && unidad.puedeLlegar(distanciaEnMovimientos.distanciaA(cursor.position()))) {
 			cursor.descaptarEnemigosCercanos()
 			unidad.mover(cursor.position())
-			cursor.captarEnemigosCercanos()
+			cursor.captarEnemigosCercanos(1)
 			unidad.cambiarSprite(deseleccion)
 		} else if (unidad.position() == cursor.position()) { 
 			cursor.descaptarEnemigosCercanos()
 			cursor.unidad(null)
 			cursor.estado(estadoVacio)
 			unidad.cambiarSprite(deseleccion)
-		} else { game.say(unidad,"No puedo llegar allí :(") }
+		} else { game.say(unidad,error.msgmovimientoInvalido()) }
 	}
+
 }
 
 object estadoVacio {
@@ -29,7 +31,7 @@ object estadoVacio {
 	method accion(cursor) {
 		unidad = cursor.unidadEn(cursor.position())
 		if (unidad != null && turnoManager.puedeAtacar(unidad) && turnoManager.esDelJugadorActual(unidad)) {
-			cursor.captarEnemigosCercanos()
+			cursor.captarEnemigosCercanos(1)
 			cursor.unidad(unidad)
 			cursor.estado(new EstadoAgarrado(unidad = unidad))
 			unidad.cambiarSprite(seleccion)

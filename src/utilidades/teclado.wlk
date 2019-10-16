@@ -2,6 +2,7 @@ import wollok.game.*
 import inicio.*
 import escenario.escenario.*
 import escenario.tienda.*
+import utilidades.comentarios.*
 import turnos.*
 
 import escenario.casillas.*
@@ -19,14 +20,14 @@ object teclado {
 	method setearTeclasAccion(cursor) {
 		keyboard.s().onPressDo { cursor.seleccionar() }	
 		keyboard.a().onPressDo { cursor.atacar() }	
-		keyboard.d().onPressDo { cursor.atacarEspecial() }
+		keyboard.d().onPressDo { cursor.usarHabilidadEspecial() }
 		
 		keyboard.num(9).onPressDo { game.say(cursor,jugador1.getUnidades().size().toString()) }
 	}
 	method setearTeclasTienda() {
 		keyboard.t().onPressDo {if(tienda.habilitada()) 
 			if (tienda.getCantComprada() != 10) {
-				self.error("Aun puedes comprar mas unidades!")
+				self.error(error.msgCarritoSinLlenar())
 			}
 			tienda.terminarCompra()
 		}
@@ -39,7 +40,7 @@ object teclado {
 	method setearTeclasTurno() {keyboard.enter().onPressDo { 
 		if (turnoManager.habilitado()) {
 			if(cursor.unidad() != null) {
-				cursor.error("Tienes una unidad seleccionada!")
+				cursor.error(error.msgConUnidadSeleccionada())
 			}
 			turnoManager.finalizarTurno()
 		}

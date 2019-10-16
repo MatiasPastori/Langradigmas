@@ -3,6 +3,7 @@ import utilidades.distancia.*
 import utilidades.visuals.*
 import utilidades.estado.*
 import utilidades.acciones.*
+import utilidades.comentarios.*
 import jugadores.*
 import unidades.unidad.*
 import unidades.void.*
@@ -34,15 +35,22 @@ object cursor {
 	
 	method verificarLaUnidadPuedaAtacar() {
 		if ( unidad == null ) 
-			self.error("No puedo hacer eso")
+			self.error(error.msgSinUnidadSeleccionada())
 		if ( !posicionesAtacables.contains(position) || !turnoManager.puedeAtacar(unidad) )
-			unidad.error("No puedo hacer eso")
+			unidad.error(error.msgAtaqueInvalido())
 	}
 	
-	method atacarEspecial() {}
+	method usarHabilidadEspecial() {
+		self.verificarHabilidadEspecialDisponible()
+		//unidad.habilidadEspecial()
+	}
 	
-	method captarEnemigosCercanos() {
-		var posicionesCerca = [position.right(1),position.left(1),position.up(1),position.down(1)]
+	method verificarHabilidadEspecialDisponible() {
+		if (!unidad.habilidadEspecialDisponible())
+			unidad.error(error.msgEspecialEnCooldown())
+	}
+	method captarEnemigosCercanos(dist) {
+		var posicionesCerca = [position.right(dist),position.left(dist),position.up(dist),position.down(dist)]
 		posicionesAtacables = posicionesCerca.filter{pos => 
 			self.unidadEn(pos) != null and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
 		}

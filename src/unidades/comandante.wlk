@@ -16,4 +16,8 @@ class Comandante inherits Unidad {
 		super()
 		escenario.nivelActual().terminarNivel()
 	}
+	
+	method habilidadEspecial() {
+		
+	}
 }
