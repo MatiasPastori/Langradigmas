@@ -1,5 +1,44 @@
 import wollok.game.*
-import utilidades.distancia.* 
+import utilidades.distancia.*
+import jugadores.*
+import unidades.unidad.*
+import escenario.niveles.*
+import unidades.comandante.*
+import unidades.guerrero.*
+import unidades.subordinado.*
+import escenario.tienda.*
+import cursor.*
+import turnos.*
+
+//describe "funciones del juego" {
+//	
+//	const comandanteJ1 = new Comandante(jugadorDuenio=jugador1,position=(3,5),nivelAtaque,nivelDefensa)
+//	const comandanteJ2 = new Comandante(jugadorDuenio=jugador2,position=(11,5),nivelAtaque,nivelDefensa)
+//	const unidad1 = new Guerrero(comandante=comandanteJ1,position=(3,4),nivelAtaque,nivelDefensa)
+//	const unidad2 = new Guerrero(comandante=comandanteJ1,position=(11,4),nivelAtaque,nivelDefensa)
+//	const unidad3 = new Guerrero(comandante=comandanteJ1,position=(3,6),nivelAtaque,nivelDefensa)
+//	const unidad4 = new Guerrero(comandante=comandanteJ1,position=(11,6),nivelAtaque,nivelDefensa)
+//	
+//	fixture  {
+//	jugador1.comprar(unidad1)
+//	jugador1.comprar(unidad2)
+//	jugador2.comprar(unidad3)
+//	jugador2.comprar(unidad4)
+//	}
+//
+//test “disminuye la vida después del combate”{
+//	unidad1.combatir(unidad2)
+//    assert.that(unidad6.getVida()<10)
+//    assert.that(unidad2.getVida()<10)
+//    }
+//
+//test “funciona el cálculo de movimiento”{
+//	assert.that(Unidad3.puedeLlegar(5,8))
+//	assert.that(Unidad8.puedeLlegar(6,8))
+//}
+//
+//
+//}
 
 test "Moverse de (2,2) a (4,4) consume 4 movimientos" {
 	var distancia = new Distancia()

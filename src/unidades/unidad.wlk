@@ -5,6 +5,7 @@ import utilidades.visuals.*
 import utilidades.acciones.*
 import jugadores.*
 import turnos.*
+import utilidades.distancia.*
 
 // Superclase
 class Unidad {
@@ -60,6 +61,12 @@ class Unidad {
 		game.removeVisual(imagenVida)
 		game.removeVisual(self)
 	}
+	
+	method codoACodo() {
+		var cercania = new Distancia(position = position)
+		return cercania.distanciaA(jugadorDuenio.getUnidades().head().position()) <= 2
+	}
+	method curar() = if(self.codoACodo() and self.getVida() <10) 3.min(10) else 0
 	
 	method cambiarSprite(accion) {accion.cambiarSprite(self, tipo + self.idJugador())}
 	
