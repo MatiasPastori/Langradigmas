@@ -1,3 +1,4 @@
+import wollok.game.*
 import jugadores.*
 import cursor.*
 import utilidades.estado.*
@@ -14,6 +15,7 @@ object turnoManager {
 	method iniciarTurno() {
 		cursor.estado(estadoVacio)
 		cursor.image(jugadorActual.cursorImage())
+		cursor.position(game.center())
 		unidadesLibres = jugadorActual.getUnidades().copy()
 	}
 	
