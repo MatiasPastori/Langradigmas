@@ -1,7 +1,6 @@
-import wollok.game.*
 import jugadores.*
 import cursor.*
-import utilidades.estado.*
+import utilidades.estadoSeleccionCursor.*
 
 object turnoManager {
 	var property habilitado = false
@@ -13,9 +12,8 @@ object turnoManager {
 	method getJugadorActual() = jugadorActual
 	
 	method iniciarTurno() {
-		cursor.estado(estadoVacio)
+		cursor.estadoSeleccion(estadoVacio)
 		cursor.image(jugadorActual.cursorImage())
-		cursor.position(game.center())
 		unidadesLibres = jugadorActual.getUnidades().copy()
 	}
 	

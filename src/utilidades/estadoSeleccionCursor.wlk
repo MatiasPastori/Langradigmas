@@ -18,7 +18,7 @@ class EstadoAgarrado {
 		} else if (unidad.position() == cursor.position()) { 
 			cursor.descaptarEnemigosCercanos()
 			cursor.unidad(null)
-			cursor.estado(estadoVacio)
+			cursor.estadoSeleccion(estadoVacio)
 			unidad.cambiarSprite(deseleccion)
 		} else { game.say(unidad,error.msgmovimientoInvalido()) }
 	}
@@ -33,7 +33,7 @@ object estadoVacio {
 		if (unidad != null && turnoManager.puedeAtacar(unidad) && turnoManager.esDelJugadorActual(unidad)) {
 			cursor.captarEnemigosCercanos(1)
 			cursor.unidad(unidad)
-			cursor.estado(new EstadoAgarrado(unidad = unidad))
+			cursor.estadoSeleccion(new EstadoAgarrado(unidad = unidad))
 			unidad.cambiarSprite(seleccion)
 		} else {
 			cursor.unidad(null)

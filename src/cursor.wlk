@@ -1,7 +1,7 @@
 import wollok.game.*
 import utilidades.distancia.*
 import utilidades.visuals.*
-import utilidades.estado.*
+import utilidades.estadoSeleccionCursor.*
 import utilidades.acciones.*
 import utilidades.comentarios.*
 import jugadores.*
@@ -14,10 +14,10 @@ object cursor {
 	var property position = game.center()
 	var property image = turnoManager.getJugadorActual().cursorImage()
 	var posicionesAtacables = []
-	var property estado = estadoVacio
+	var property estadoSeleccion = estadoVacio
 
 	method seleccionar() {
-		estado.accion(self)
+		estadoSeleccion.accion(self)
 	}
 	
 	method atacar(){
@@ -27,27 +27,15 @@ object cursor {
 		unidadAtacada.combatir(unidad)
 		unidad.cambiarSprite(deseleccion)
 		turnoManager.yaAtaco(unidad)
-		estado = estadoVacio
-		unidad.image(unidad.getTipo() + unidad.idJugador() + "gris.png")
+		estadoSeleccion = estadoVacio
+		//unidad.image(unidad.getTipo() + unidad.idJugador() + "gris.png")
 		self.descaptarEnemigosCercanos()
 		unidad = null		
-	}
-	
-	method verificarLaUnidadPuedaAtacar() {
-		if ( unidad == null ) 
-			self.error(error.msgSinUnidadSeleccionada())
-		if ( !posicionesAtacables.contains(position) || !turnoManager.puedeAtacar(unidad) )
-			unidad.error(error.msgAtaqueInvalido())
 	}
 	
 	method usarHabilidadEspecial() {
 		self.verificarHabilidadEspecialDisponible()
 		//unidad.habilidadEspecial()
-	}
-	
-	method verificarHabilidadEspecialDisponible() {
-		if (!unidad.habilidadEspecialDisponible())
-			unidad.error(error.msgEspecialEnCooldown())
 	}
 	method captarEnemigosCercanos(dist) {
 		var posicionesCerca = [position.right(dist),position.left(dist),position.up(dist),position.down(dist)]
@@ -77,5 +65,18 @@ object cursor {
 
 
 	method esSeleccionable() = false
+	
+	// Chequeo de errores
+	method verificarLaUnidadPuedaAtacar() {
+		if ( unidad == null ) 
+			self.error(error.msgSinUnidadSeleccionada())
+		if ( !posicionesAtacables.contains(position) || !turnoManager.puedeAtacar(unidad) )
+			unidad.error(error.msgAtaqueInvalido())
+	}
+	
+	method verificarHabilidadEspecialDisponible() {
+		if (!unidad.habilidadEspecialDisponible())
+			unidad.error(error.msgEspecialEnCooldown())
+	}
 }
 

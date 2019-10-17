@@ -25,11 +25,13 @@ object teclado {
 		keyboard.num(9).onPressDo { game.say(cursor,jugador1.getUnidades().size().toString()) }
 	}
 	method setearTeclasTienda() {
-		keyboard.t().onPressDo {if(tienda.habilitada()) 
-			if (tienda.getCantComprada() != 10) {
-				self.error(error.msgCarritoSinLlenar())
+		keyboard.t().onPressDo {
+			if(tienda.habilitada()) {
+				if (tienda.getCantComprada() != 10) {
+					self.error(error.msgCarritoSinLlenar())
+				}
+				tienda.terminarCompra()
 			}
-			tienda.terminarCompra()
 		}
 		keyboard.q().onPressDo {if(tienda.habilitada()) tienda.comprar()}
 		keyboard.e().onPressDo {if(tienda.habilitada()) tienda.vender()} 
