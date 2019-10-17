@@ -16,6 +16,8 @@ object jugador1 {
 	method comprar(unidad) = unidades.add(unidad)
 	
 	method siguiente() = jugador2	
+	
+	method curarUnidades() { unidades.forEach({unidad => unidad.curar()})}
 }
 
 object jugador2 {	
@@ -34,4 +36,6 @@ object jugador2 {
 	method comprar(unidad) = unidades.add(unidad)
 	
 	method siguiente() = jugador1
+	
+	method curarUnidades() { unidades.forEach({unidad => unidad.curar()})}
 }

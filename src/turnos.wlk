@@ -23,6 +23,7 @@ object turnoManager {
 		unidadesMovidas.clear()
 		unidadesUsadas.clear()
 		self.cambiarJugador()
+		jugadorActual.curarUnidades()
 		self.iniciarTurno()
 	}
 	
