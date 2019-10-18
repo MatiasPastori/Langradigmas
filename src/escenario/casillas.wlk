@@ -30,6 +30,11 @@ object mapManager {
 		})
 	}
 	method accessInternas(_x, _y) = eje_x.get(_x).get(_y) 
+	method esPosicionInterna(pos) =
+		self.accessInternas(pos.x(),pos.y()).position().x() == pos.x() and
+		self.accessInternas(pos.x(),pos.y()).position().y() == pos.y()
+	
+	
 
 	method generarBordes() {
 		var posCasillas = []

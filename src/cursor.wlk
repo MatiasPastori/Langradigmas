@@ -5,8 +5,9 @@ import utilidades.estadoSeleccionCursor.*
 import utilidades.estadoEspecialCursor.*
 import utilidades.acciones.*
 import utilidades.comentarios.*
-import jugadores.*
 import unidades.unidad.*
+import escenario.casillas.*
+import jugadores.*
 import turnos.*
 
 object cursor {
@@ -62,7 +63,7 @@ object cursor {
 		return if(lista.size() > 0) lista.head() else null
 	}
 	
-	method esCasillaOcupable() = self.unidadEn(position) == null //Acá poner los limites del mapa tmb
+	method esCasillaOcupable() = self.unidadEn(position) == null and mapManager.esPosicionInterna(position)
 
 
 	method esSeleccionable() = false

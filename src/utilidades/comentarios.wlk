@@ -1,6 +1,6 @@
 object error {
 	const movimientoInvalido = [
-		"Prudencia! hay enemigos por doquier",
+		"¡Prudencia!",
 		"¿En serio quieres que me mueva allí?",
 		"No creo que sea una buena idea",
 		"¿Acaso me consideras desechable?"
