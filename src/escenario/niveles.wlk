@@ -14,27 +14,17 @@ import jugadores.*
 import turnos.*
 import cursor.*
 
-object nivel1 {	
-	var tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
+class Nivel {
+	const tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
 	
-	method generarNivel() {
-		var nivelImg = new Visual(position = game.at(0,0), image = "nivel1_C.png")
-		
-		self.setearCasillas()
-		game.schedule(500, {game.addVisual(nivelImg)})
-		game.schedule(650, {nivelImg.image("nivel1_B.png")})
-		game.schedule(800, {nivelImg.image("nivel1_A.png")})
-		game.schedule(2000, {
-			game.removeVisual(nivelImg)
-			self.tienda()
-		})
-	}
+	method generarNivel()
 	method tienda() {
-		var comandanteJ1 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 5, vida = 10, nivelAtaque = 28, nivelDefensa = 24 )
-		var comandanteJ2 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", rangoDeAccion = 5, vida = 10, nivelAtaque = 28, nivelDefensa = 24)
+		var comandanteJ1 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 5, rangoEspecial = 4,vida = 10, nivelAtaque = 28, nivelDefensa = 24 )
+		var comandanteJ2 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", rangoDeAccion = 5, rangoEspecial = 4,vida = 10, nivelAtaque = 28, nivelDefensa = 24)
 		
 		game.addVisual(tiendaImg)
-		
+		jugador1.getUnidades().clear()
+		jugador2.getUnidades().clear()
 		jugador1.comprar(comandanteJ1)
 		jugador2.comprar(comandanteJ2)
 		tienda.habilitada(true)
@@ -49,21 +39,19 @@ object nivel1 {
 		game.removeVisual(tiendaImg)
 		
 		self.posicionarUnidades()
-		game.say(comandanteJ1, comentario.msgInicioNivelJ1comandante())
-		game.say(comandanteJ2, comentario.msgInicioNivelJ2comandante())
-		game.say(subordinadosJ1.anyOne(), comentario.msgInicioNivelJ1subordinados())
-		game.say(subordinadosJ2.anyOne(), comentario.msgInicioNivelJ2subordinados())	
+		game.schedule(1000, {
+			game.say(comandanteJ1, comentario.msgInicioNivelJ1comandante())
+			game.say(comandanteJ2, comentario.msgInicioNivelJ2comandante())		
+		})
+		game.schedule(2000, {
+			game.say(subordinadosJ1.anyOne(), comentario.msgInicioNivelJ1subordinados())
+			game.say(subordinadosJ2.anyOne(), comentario.msgInicioNivelJ2subordinados())				
+		})
 			
 		game.addVisual(cursor)
 		turnoManager.habilitado(true)
 		turnoManager.iniciarTurno()
 	}
-	method terminarNivel() {
-		//TODO
-		turnoManager.habilitado(false)
-		escenario.actualizarNivel()
-	}
-	
 	method posicionarUnidades() {	
 		const comandanteJ1 = jugador1.getUnidades().head()
 		const comandanteJ2 = jugador2.getUnidades().head()
@@ -133,6 +121,27 @@ object nivel1 {
 			unidad.cambiarSprite(iddle)
 		}
 	}
+	method terminarNivel() {
+		//TODO
+		turnoManager.habilitado(false)
+		escenario.actualizarNivel()
+	}
+}
+
+object nivel1 inherits Nivel{	
+	override method generarNivel() {
+		var nivelImg = new Visual(position = game.at(0,0), image = "nivel1_C.png")
+		
+		self.setearCasillas()
+		game.schedule(500, {game.addVisual(nivelImg)})
+		game.schedule(650, {nivelImg.image("nivel1_B.png")})
+		game.schedule(800, {nivelImg.image("nivel1_A.png")})
+		game.schedule(2000, {
+			game.removeVisual(nivelImg)
+			self.tienda()
+		})
+	}
+	
 	method setearCasillas() {
 		mapManager.getEjeX().forEach{
 			ejeY => ejeY.forEach{
@@ -147,10 +156,8 @@ object nivel1 {
 	method siguiente() = nivel2
 }
 
-object nivel2 {
-	var tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
-	
-	method generarNivel() {
+object nivel2 inherits Nivel{	
+	override method generarNivel() {
 		var nivelImg = new Visual(position = game.at(0,0), image = "nivel2_C.png")
 		
 		self.setearCasillas()
@@ -161,37 +168,24 @@ object nivel2 {
 			game.removeVisual(nivelImg)
 			self.tienda()
 		})
-	}	
-	
-	method tienda() {
-		game.addVisual(tiendaImg)
-	}
-	
-	method iniciar() {
-		game.removeVisual(tiendaImg)
-		// TODO
-		
-		game.addVisual(cursor)
-		turnoManager.iniciarTurno()
-	}
-	
-	method terminarNivel() {
-		//TODO
-		turnoManager.habilitado(false)
-		escenario.actualizarNivel()
 	}
 	
 	method setearCasillas() {
-
+		mapManager.getEjeX().forEach{
+			ejeY => ejeY.forEach{
+				casilla => casilla.image("casillaPasto.png")
+			}
+		}
+		mapManager.getBorde().forEach{
+			casilla => casilla.image("casillaMontana.png")
+		}
 	}
 	
 	method siguiente() = nivel3
 }
 
-object nivel3 {
-	var tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
-	
-	method generarNivel() {
+object nivel3 inherits Nivel{	
+	override method generarNivel() {
 		var nivelImg = new Visual(position = game.at(0,0), image = "nivel3_C.png")
 		
 		self.setearCasillas()
@@ -202,28 +196,17 @@ object nivel3 {
 			game.removeVisual(nivelImg)
 			self.tienda()
 		})
-	}	
-		
-	method tienda() {
-		game.removeVisual(tiendaImg)
-	}
-	method iniciar() {
-		game.addVisual(tiendaImg)
-		
-		// TODO
-		
-		game.addVisual(cursor)
-		turnoManager.iniciarTurno()
-	}
-	
-	method terminarNivel() {
-		//TODO
-		turnoManager.habilitado(false)
-		escenario.actualizarNivel()
 	}
 	
 	method setearCasillas() {
-
+		mapManager.getEjeX().forEach{
+			ejeY => ejeY.forEach{
+				casilla => casilla.image("casillaPasto.png")
+			}
+		}
+		mapManager.getBorde().forEach{
+			casilla => casilla.image("casillaMontana.png")
+		}
 	}
 	
 	method siguiente() = null

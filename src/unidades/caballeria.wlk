@@ -1,8 +1,6 @@
 import subordinado.*
 
-class Caballeria inherits Subordinado {
-	const property rangoEspecial = 1
-	
+class Caballeria inherits Subordinado {	
 	method habilidadEspecial() {
 		
 	}

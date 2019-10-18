@@ -14,7 +14,7 @@ class Jugador {
 			unidad => 
 			unidad.cooldown(0.max(unidad.cooldown()-1))
 			if (unidad.habilidadEspecialDisponible()) {
-				unidad.imageCD("especial_ready.png")
+				unidad.imagenCD().image("especial_ready.png")
 			}
 		}
 	}

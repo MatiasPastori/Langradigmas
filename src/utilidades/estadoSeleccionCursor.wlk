@@ -13,7 +13,7 @@ class EstadoAgarrado {
 		if (cursor.esCasillaOcupable() && unidad.puedeLlegar(distanciaEnMovimientos.distanciaA(cursor.position()))) {
 			cursor.descaptarEnemigosCercanos()
 			unidad.mover(cursor.position())
-			cursor.captarEnemigosCercanos(1)
+			cursor.captarEnemigosCercanos(1,"atacable.png")
 			unidad.cambiarSprite(deseleccion)
 		} else if (unidad.position() == cursor.position()) { 
 			cursor.descaptarEnemigosCercanos()
@@ -31,7 +31,7 @@ object estadoVacio {
 	method accion(cursor) {
 		unidad = cursor.unidadEn(cursor.position())
 		if (unidad != null && turnoManager.puedeAtacar(unidad) && turnoManager.esDelJugadorActual(unidad)) {
-			cursor.captarEnemigosCercanos(1)
+			cursor.captarEnemigosCercanos(1,"atacable.png")
 			cursor.unidad(unidad)
 			cursor.estadoSeleccion(new EstadoAgarrado(unidad = unidad))
 			unidad.cambiarSprite(seleccion)

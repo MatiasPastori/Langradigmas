@@ -64,7 +64,7 @@ object error {
 object comentario {
 	const inicioNivelJ1comandante = [
 		"Un clan está unido por el acero, no por la sangre.",
-		"Los que gobiernan mediante el miedo sólo conservan el poder si a sus súbditos les falta valor.",
+		"A sus súbditos les falta valor",
 		"Ataquen, ¡ATAQUEN!",
 		"El Sol Eterno nos guía."
 	]
@@ -82,7 +82,7 @@ object comentario {
 		"¡AAAAAAAAH!"
 	]
 	const inicioNivelJ2subordinados = [
-		"Tu corazón... Su constante palpitar, ¡me da asco! Lo acallaré, como hice con el mío.",
+		"Tu corazón ¡me da asco! Lo acallaré.",
 		"¡Por la oscuridad!",
 		"Esperé tanto tiempo este momento",
 		"Conviértete a la oscuridad.",
@@ -92,16 +92,16 @@ object comentario {
 		"¡Un trabajo excelente! Emm, ¿puedo escaparme ya?",
 		"La muerte se acerca...",
 		"La oscuridad se acabará.",
-		"Buscaré a mis enemigos... ¡Y pobre de aquellos que se me opongan!"
+		"Buscaré a mis enemigos..."
 	]
 	const inicioTurnoJ2 = [
 		"El asesinato nunca pasa de moda.",
-		"Si he de morir, os llevaré a todos conmigo, ¡MI DESTINO ES MIO!",
+		"Si he de morir, os llevaré a todos conmigo.",
 		"La clemencia es para los débiles...",
 		"Me vendría bien un corazón... Digamos... ¿el tuyo?"
 	]
 	const victoriaJ1 = [
-		"Por fin, ha pagado por las atrocidades cometidas contra mi pueblo.",
+		"Ha pagado por las atrocidades cometidas contra mi pueblo.",
 		"victoria, ¡VICTORIA!",
 		"Podré volver a mi pueblo, con mi familia.",
 		"¡Jugaste... y perdiste!"

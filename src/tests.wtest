@@ -41,8 +41,8 @@ import turnos.*
 //}
 
 describe "metodos de unidades" {
-	var comandanteJ1 = new Comandante(position = game.at(1,2), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 5, vida = 10, nivelAtaque = 28, nivelDefensa =24 )
-	var guerreroJ1 = new Guerrero(position = game.at(1,1), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = jugador1.getUnidades().head(), rangoDeAccion = 4, nivelAtaque = 24, nivelDefensa = 20)
+	var comandanteJ1 = new Comandante(position = game.at(1,2), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 5, rangoEspecial = 4, vida = 10, nivelAtaque = 28, nivelDefensa =24 )
+	var guerreroJ1 = new Guerrero(position = game.at(1,1), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = jugador1.getUnidades().head(), rangoDeAccion = 4, rangoEspecial = 1, nivelAtaque = 24, nivelDefensa = 20)
 
 	fixture {
 		jugador1.comprar(comandanteJ1)

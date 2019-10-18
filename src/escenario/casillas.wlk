@@ -29,7 +29,7 @@ object mapManager {
 			eje_x.add(eje_y)
 		})
 	}
-	method access(_x, _y) = eje_x.get(_x).get(_y) 
+	method accessInternas(_x, _y) = eje_x.get(_x).get(_y) 
 
 	method generarBordes() {
 		var posCasillas = []

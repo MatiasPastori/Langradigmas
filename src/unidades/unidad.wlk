@@ -11,6 +11,7 @@ import utilidades.distancia.*
 class Unidad {
 	const jugadorDuenio
 	const rangoDeAccion
+	const property rangoEspecial
 	var vida = 10
 	var tipo
 	

@@ -7,7 +7,6 @@ import utilidades.acciones.*
 import utilidades.comentarios.*
 import jugadores.*
 import unidades.unidad.*
-import unidades.void.*
 import turnos.*
 
 object cursor {
@@ -39,12 +38,12 @@ object cursor {
 		self.verificarHabilidadEspecialDisponible()
 		estadoEspecial.accion(self)
 	}
-	method captarEnemigosCercanos(dist) {
+	method captarEnemigosCercanos(dist, marca) {
 		var posicionesCerca = [position.right(dist),position.left(dist),position.up(dist),position.down(dist)]
 		posicionesAtacables = posicionesCerca.filter{pos => 
 			self.unidadEn(pos) != null and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
 		}
-		posicionesAtacables.forEach{pos => game.addVisual(new Visual(image="atacable.png", position = pos))}
+		posicionesAtacables.forEach{pos => game.addVisual(new Visual(image=marca, position = pos))}
 	}
 	
 	method descaptarEnemigosCercanos() {
