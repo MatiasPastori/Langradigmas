@@ -63,7 +63,7 @@ object cursor {
 		return if(lista.size() > 0) lista.head() else null
 	}
 	
-	method esCasillaOcupable() = self.unidadEn(position) == null and mapManager.esPosicionInterna(position)
+	method esCasillaOcupable() = self.unidadEn(position) == null and mapManager.estaEnInternas(position) != null
 
 
 	method esSeleccionable() = false

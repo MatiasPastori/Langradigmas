@@ -143,11 +143,9 @@ object nivel1 inherits Nivel{
 	}
 	
 	method setearCasillas() {
-		mapManager.getEjeX().forEach{
-			ejeY => ejeY.forEach{
-				casilla => casilla.image("casillaPasto.png")
-			}
-		}
+
+		mapManager.getInternas().forEach{casilla => casilla.image("casillaPasto.png")}
+
 		mapManager.getBorde().forEach{
 			casilla => casilla.image("casillaMontana.png")
 		}
@@ -171,11 +169,9 @@ object nivel2 inherits Nivel{
 	}
 	
 	method setearCasillas() {
-		mapManager.getEjeX().forEach{
-			ejeY => ejeY.forEach{
-				casilla => casilla.image("casillaPasto.png")
-			}
-		}
+
+		mapManager.getInternas().forEach{casilla => casilla.image("casillaPasto.png")}
+
 		mapManager.getBorde().forEach{
 			casilla => casilla.image("casillaMontana.png")
 		}
@@ -199,15 +195,13 @@ object nivel3 inherits Nivel{
 	}
 	
 	method setearCasillas() {
-		mapManager.getEjeX().forEach{
-			ejeY => ejeY.forEach{
-				casilla => casilla.image("casillaPasto.png")
-			}
-		}
+		mapManager.getInternas().forEach{casilla => casilla.image("casillaPasto.png")}
+
 		mapManager.getBorde().forEach{
 			casilla => casilla.image("casillaMontana.png")
 		}
 	}
+	
 	
 	method siguiente() = null
 }

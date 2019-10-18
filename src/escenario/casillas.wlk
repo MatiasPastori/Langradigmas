@@ -10,13 +10,16 @@ class MyPosition {
 object mapManager {
 	const ancho = game.width()
     const alto = game.height()
-	var eje_x = [] // casillas internas
+	var internas = []
 	var borde = []
 	
-	method getEjeX() = eje_x
+	// method getEjeX() = eje_x
 	method getBorde() = borde
 	
+	method getInternas() = internas
+	
 	method generarCasillas() {
+		var eje_x = [] // casillas internas
 		(ancho-2).times({ 
 			i =>
 			var eje_y = []
@@ -28,12 +31,14 @@ object mapManager {
 			})
 			eje_x.add(eje_y)
 		})
+		internas = eje_x.flatten()
 	}
-	method accessInternas(_x, _y) = eje_x.get(_x).get(_y) 
-	method esPosicionInterna(pos) =
-		self.accessInternas(pos.x(),pos.y()).position().x() == pos.x() and
-		self.accessInternas(pos.x(),pos.y()).position().y() == pos.y()
 	
+	
+	method accederAInterna(_x, _y) = internas.find{casilla => casilla.position() == game.at(_x,_y)}
+	
+	method estaEnInternas(posicionCursor) = internas.findOrDefault({myPos => myPos.position() == posicionCursor},null)
+
 	
 
 	method generarBordes() {
