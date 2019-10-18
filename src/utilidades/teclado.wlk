@@ -42,7 +42,7 @@ object teclado {
 	method setearTeclasTurno() {keyboard.enter().onPressDo { 
 		if (turnoManager.habilitado()) {
 			if(cursor.unidad() != null) {
-				cursor.error(error.msgConUnidadSeleccionada())
+				cursor.unidad().error(error.msgConUnidadSeleccionada())
 			}
 			turnoManager.finalizarTurno()
 		}

@@ -15,8 +15,8 @@ object error {
 		"No he seleccionado a nadie."
 	]
 	const conUnidadSeleccionada = [
-		"Tienes una unidad seleccionada",
-		"Pss, creo que estoy agarrando a alguien"
+		"Deberías soltarme para pasar de turno",
+		"Pss, creo que me estás agarrando"
 	]
 	const especialEnCooldown = [
 		"¡Aún no es el momento!",

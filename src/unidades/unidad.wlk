@@ -17,10 +17,11 @@ class Unidad {
 	var property position
 	var property image
 	var property imagenVida = new Visual(image = "10.png", position = game.center())
+	var property imagenCD = new Visual(image = "especial_ready.png", position = game.center())
 	
 	const property nivelAtaque
 	const property nivelDefensa
-	var property habilidadEspecialDisponible = true
+	var property cooldown = 0
 	
 	method esSeleccionable() = true
 	
@@ -29,6 +30,8 @@ class Unidad {
 	
 	method getVida() = vida
 	method getTipo() = tipo
+	
+	method habilidadEspecialDisponible() = cooldown == 0
 	
 	method mover(nuevaPos) {
 		position = game.at(nuevaPos.x(), nuevaPos.y())
@@ -42,16 +45,14 @@ class Unidad {
 		var danioBruto = self.potencialDeDanio(enemigo).limitBetween(0,10)
 		var danioNeto = danioBruto.randomUpTo(10).truncate(0)
 		enemigo.recibirDanio(danioNeto)
-		self.cambiarSprite(ataque)
-		//self.imagenVida().image(self.getVida().toString() + ".png")
+		//self.cambiarSprite(ataque)
 	}
 	
 	method potencialDeDanio(enemigo) = self.nivelAtaque() + self.buffAtaque() - enemigo.nivelDefensa() - enemigo.buffDefensa()
 
 	method recibirDanio(danio) {
-		vida -= danio
+		self.modificarVida(vida - danio)
 		self.chequearMuerte()
-
 	}
 		
 	method chequearMuerte() {if(self.getVida() < 1) self.morir()}
@@ -59,14 +60,25 @@ class Unidad {
 	method morir() {
 		jugadorDuenio.getUnidades().remove(self)
 		game.removeVisual(imagenVida)
+		game.removeVisual(imagenCD)
 		game.removeVisual(self)
 	}
 	
 	method codoACodo() {
 		var cercania = new Distancia(position = position)
-		return cercania.distanciaA(jugadorDuenio.getUnidades().head().position()) <= 2
+		return cercania.distanciaA(jugadorDuenio.getUnidades().head().position()) == 1
 	}
-	method curar() = if(self.codoACodo() and self.getVida() <10) 3.min(10) else 0
+	method curar() { 
+		if(self.codoACodo()) {
+			self.modificarVida(10.min(vida + 3))
+			self.imagenVida().image(self.getVida().toString() + ".png")
+		}
+	}
+	
+	method modificarVida(nuevaVida) {
+		vida = nuevaVida
+		self.imagenVida().image(self.getVida().toString() + ".png")
+	}
 	
 	method cambiarSprite(accion) {accion.cambiarSprite(self, tipo + self.idJugador())}
 	

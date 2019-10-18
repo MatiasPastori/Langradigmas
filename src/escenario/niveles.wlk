@@ -30,13 +30,13 @@ object nivel1 {
 		})
 	}
 	method tienda() {
-		var comandanteBueno = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 50, vida = 10, nivelAtaque = 28, nivelDefensa =24 )
-		var comandanteMalo = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", rangoDeAccion = 2, vida = 10, nivelAtaque = 24, nivelDefensa = 30)
+		var comandanteJ1 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 5, vida = 10, nivelAtaque = 28, nivelDefensa = 24 )
+		var comandanteJ2 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", rangoDeAccion = 5, vida = 10, nivelAtaque = 28, nivelDefensa = 24)
 		
 		game.addVisual(tiendaImg)
 		
-		jugador1.comprar(comandanteBueno)
-		jugador2.comprar(comandanteMalo)
+		jugador1.comprar(comandanteJ1)
+		jugador2.comprar(comandanteJ2)
 		tienda.habilitada(true)
 		tienda.iniciar()
 	}
@@ -123,11 +123,13 @@ object nivel1 {
 		jugador1.getUnidades().forEach{unidad => 
 			game.addVisual(unidad)
 			game.addVisual(unidad.imagenVida())
+			game.addVisual(unidad.imagenCD())
 			unidad.cambiarSprite(iddle)
 		}
 		jugador2.getUnidades().forEach{unidad => 
 			game.addVisual(unidad)
 			game.addVisual(unidad.imagenVida())
+			game.addVisual(unidad.imagenCD())
 			unidad.cambiarSprite(iddle)
 		}
 	}

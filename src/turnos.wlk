@@ -14,6 +14,8 @@ object turnoManager {
 	method iniciarTurno() {
 		cursor.estadoSeleccion(estadoVacio)
 		cursor.image(jugadorActual.cursorImage())
+		jugadorActual.curarUnidades()
+		jugadorActual.reducirCooldowns()
 		unidadesLibres = jugadorActual.getUnidades().copy()
 	}
 	
@@ -21,7 +23,6 @@ object turnoManager {
 		unidadesMovidas.clear()
 		unidadesUsadas.clear()
 		self.cambiarJugador()
-		jugadorActual.curarUnidades()
 		self.iniciarTurno()
 	}
 	

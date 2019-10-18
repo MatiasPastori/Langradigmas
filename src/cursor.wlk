@@ -2,6 +2,7 @@ import wollok.game.*
 import utilidades.distancia.*
 import utilidades.visuals.*
 import utilidades.estadoSeleccionCursor.*
+import utilidades.estadoEspecialCursor.*
 import utilidades.acciones.*
 import utilidades.comentarios.*
 import jugadores.*
@@ -15,6 +16,7 @@ object cursor {
 	var property image = turnoManager.getJugadorActual().cursorImage()
 	var posicionesAtacables = []
 	var property estadoSeleccion = estadoVacio
+	var property estadoEspecial = estadoNoEspecial
 
 	method seleccionar() {
 		estadoSeleccion.accion(self)
@@ -35,7 +37,7 @@ object cursor {
 	
 	method usarHabilidadEspecial() {
 		self.verificarHabilidadEspecialDisponible()
-		//unidad.habilidadEspecial()
+		estadoEspecial.accion(self)
 	}
 	method captarEnemigosCercanos(dist) {
 		var posicionesCerca = [position.right(dist),position.left(dist),position.up(dist),position.down(dist)]

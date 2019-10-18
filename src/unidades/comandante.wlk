@@ -1,9 +1,12 @@
+import wollok.game.*
 import unidad.*
 import subordinado.*
 import escenario.escenario.*
+import utilidades.visuals.*
 
 class Comandante inherits Unidad {
 	const property subordinados = []
+	const property rangoEspecial = 4
 	
 	method buffAtaqueQueOtorga() = 0
 	method buffDefensaQueOtorga() = 0

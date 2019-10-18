@@ -1,6 +1,8 @@
+import wollok.game.*
 import unidad.*
 import comandante.*
 import utilidades.distancia.*
+import utilidades.visuals.*
 
 class Subordinado inherits Unidad {
 	var comandante

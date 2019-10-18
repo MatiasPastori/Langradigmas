@@ -1,41 +1,31 @@
 import unidades.unidad.*
 
-object jugador1 {
+class Jugador {
 	var unidades = []
-	var id = "J1"
-	
-	method cursorImage() = "cursorJ1.png"
+	var id
 	
 	method getUnidades() = unidades
 	method getId() = id
-	
-	method terminarTurno() {
-		 
-	}
-	
 	method comprar(unidad) = unidades.add(unidad)
-	
-	method siguiente() = jugador2	
-	
 	method curarUnidades() { unidades.forEach({unidad => unidad.curar()})}
+	
+	method reducirCooldowns() { 
+		unidades.forEach{
+			unidad => 
+			unidad.cooldown(0.max(unidad.cooldown()-1))
+			if (unidad.habilidadEspecialDisponible()) {
+				unidad.imageCD("especial_ready.png")
+			}
+		}
+	}
 }
 
-object jugador2 {	
-	var unidades = []
-	var id = "J2"
-	
+object jugador1 inherits Jugador(id = "J1"){
+	method cursorImage() = "cursorJ1.png"	
+	method siguiente() = jugador2	
+}
+
+object jugador2 inherits Jugador(id = "J2"){
 	method cursorImage() = "cursorJ2.png"
-	
-	method getUnidades() = unidades
-	method getId() = id
-	
-	method terminarTurno(){
-		
-	}
-	
-	method comprar(unidad) = unidades.add(unidad)
-	
-	method siguiente() = jugador1
-	
-	method curarUnidades() { unidades.forEach({unidad => unidad.curar()})}
+	method siguiente() = jugador1		
 }
