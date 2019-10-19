@@ -36,8 +36,8 @@ object estadoVacio {
 		unidad = cursor.unidadEn(cursor.position())
 		if (unidad != null && turnoManager.esDelJugadorActual(unidad)) {
 			self.verificarSiSeMovioEnEsteTurno()
-			cursor.captarEnemigosCercanos()
 			cursor.unidad(unidad)
+			cursor.captarEnemigosCercanos()
 		 	cursor.mostrarRango(unidad.rangoDeAccion(), "rango_transitable.png")
 			cursor.estadoSeleccion(new EstadoAgarrado(unidad = unidad))
 			unidad.cambiarSprite(seleccion)

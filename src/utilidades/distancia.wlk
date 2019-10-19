@@ -3,9 +3,8 @@
 // necesita para ir de una a otra en valor absoluto
 
 object distancia {
-	method distanciaEntre(posInicial, posFinal) {
-		var distX = posFinal.x() - posInicial.x()
-		var distY = posFinal.y() - posInicial.y()
-		return distX.abs() + distY.abs()
-	}
+	method diferenciaEntre(x1,x2) = (x1 - x2)
+	
+	method distanciaEntre(posInicial, posFinal) = 
+		self.diferenciaEntre(posInicial.x(),posFinal.x()).abs() + self.diferenciaEntre(posInicial.y(),posFinal.y()).abs()		
 }

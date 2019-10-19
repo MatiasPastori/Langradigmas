@@ -42,7 +42,7 @@ object cursor {
 	}
 	
 	method captarEnemigosCercanos() {
-		enemigosAtacables = self.posicionesAmenazantes()
+		enemigosAtacables = self.enemigosAmenazantes(unidad.position())
 		enemigosAtacables.forEach{enemigo => game.addVisual(new Visual(image="atacable.png", position = enemigo.position()))}
 	}
 	method descaptarEnemigosCercanos() {
@@ -55,8 +55,9 @@ object cursor {
 		enemigosAtacables.clear()
 		espadasDeAtaque.forEach{espada => game.removeVisual(espada)}
 	}
-	method posicionesAmenazantes() {
-		var posicionesCerca = [position.right(1),position.left(1),position.up(1),position.down(1)]
+	method enemigosAmenazantes(posicion) {
+		var posUnidad = posicion
+		var posicionesCerca = [posUnidad.right(1),posUnidad.left(1),posUnidad.up(1),posUnidad.down(1)]
 		var enemigos = []
 		posicionesCerca.filter{pos => self.hayEnemigoEn(pos)}.forEach{
 			pos =>
@@ -64,7 +65,8 @@ object cursor {
 		}
 		return enemigos
 	}
-	method hayEnemigoEn(pos) = self.unidadEn(pos) != null and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
+	method hayEnemigoEn(pos) = self.hayUnidadEn(pos) and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
+	method hayUnidadEn(pos) = self.unidadEn(pos) != null
 	method noHayEnemigosCerca() = enemigosAtacables.isEmpty()
 	
 	method mostrarRango(rango, marca){
