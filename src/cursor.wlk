@@ -14,7 +14,7 @@ object cursor {
 	var property unidad = null
 	var property position = game.center()
 	var property image = turnoManager.getJugadorActual().cursorImage()
-	var posicionesAtacables = []
+	var enemigosAtacables = []
 	var rangoMarcadoPorUnidad = []
 	var property estadoSeleccion = estadoVacio
 	var property estadoEspecial = estadoNoEspecial
@@ -42,21 +42,30 @@ object cursor {
 	}
 	
 	method captarEnemigosCercanos() {
-		posicionesAtacables = self.posicionesAmenazantes()
-		posicionesAtacables.forEach{pos => game.addVisual(new Visual(image="atacable.png", position = pos))}
+		enemigosAtacables = self.posicionesAmenazantes()
+		enemigosAtacables.forEach{enemigo => game.addVisual(new Visual(image="atacable.png", position = enemigo.position()))}
 	}
 	method descaptarEnemigosCercanos() {
 		var espadasDeAtaque = []
-		posicionesAtacables.forEach({pos => espadasDeAtaque.add(game.getObjectsIn(pos).filter({objeto => objeto.image() == "atacable.png"}).head())})
-		posicionesAtacables.clear()
-		espadasDeAtaque.forEach({espada => game.removeVisual(espada)})
+		enemigosAtacables.forEach{
+			enemigo => espadasDeAtaque.add(
+				game.getObjectsIn(enemigo.position()).filter{obj => obj.image() == "atacable.png"}.head()
+			)
+		}
+		enemigosAtacables.clear()
+		espadasDeAtaque.forEach{espada => game.removeVisual(espada)}
 	}
 	method posicionesAmenazantes() {
 		var posicionesCerca = [position.right(1),position.left(1),position.up(1),position.down(1)]
-		return posicionesCerca.filter{pos => self.hayEnemigoEn(pos)}
+		var enemigos = []
+		posicionesCerca.filter{pos => self.hayEnemigoEn(pos)}.forEach{
+			pos =>
+			enemigos.add(self.unidadEn(pos))
+		}
+		return enemigos
 	}
 	method hayEnemigoEn(pos) = self.unidadEn(pos) != null and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
-	method noHayEnemigosCerca() = posicionesAtacables.isEmpty()
+	method noHayEnemigosCerca() = enemigosAtacables.isEmpty()
 	
 	method mostrarRango(rango, marca){
 		var casillasAMarcar = mapManager.getInternas().filter { 
@@ -69,12 +78,11 @@ object cursor {
 			game.addVisual(visual)
 		}
 	}
-	
 	method borrarRango() = rangoMarcadoPorUnidad.forEach { visual => 
 		game.removeVisual(visual)
 		rangoMarcadoPorUnidad.remove(visual)
 	}
-	method enRangoEspecial() = !rangoMarcadoPorUnidad.filter{visual => visual.position() == cursor.position()}.isEmpty()
+	method enRangoEspecial() = !rangoMarcadoPorUnidad.filter{visual => visual.position() == self.position()}.isEmpty()
 	
 	method unidadEn(posicion) { 
 		var lista = game.getObjectsIn(posicion).filter({objeto => objeto.esSeleccionable()})
@@ -90,7 +98,7 @@ object cursor {
 	method verificarLaUnidadPuedaAtacar() {
 		if ( unidad == null ) 
 			self.error(error.msgSinUnidadSeleccionada())
-		if ( !posicionesAtacables.contains(position) || !turnoManager.puedeAtacar(unidad) )
+		if ( !enemigosAtacables.map{enemigo => enemigo.position()}.contains(position) or !turnoManager.puedeAtacar(unidad) )
 			unidad.error(error.msgAtaqueInvalido())
 	}
 	
