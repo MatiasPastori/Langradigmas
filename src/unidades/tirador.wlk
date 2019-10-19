@@ -2,9 +2,9 @@ import subordinado.*
 import cursor.*
 
 class Tirador inherits Subordinado { 
-	method habilidadEspecial() {
-		cursor.unidadEn(cursor.position())
-		//self.combatir()
+	method habilidadEspecial(cursor) {
+		cooldown = 3
+		if(cursor.hayEnemigoEn(cursor.position()) and cursor.enRangoEspecial()) 
+			cursor.unidadEn(cursor.position()).recibirDanio(3)
 	}
-
 }

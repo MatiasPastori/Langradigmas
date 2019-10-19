@@ -32,7 +32,7 @@ object mapManager {
 		internas = eje_x.flatten()
 	}
 	method accederAInterna(_x, _y) = internas.find{casilla => casilla.position() == game.at(_x,_y)}
-	method estaEnInternas(posicionCursor) = internas.findOrDefault({myPos => myPos.position() == posicionCursor},null)
+	method estaEnInternas(posicionCursor) = !internas.filter{myPos => myPos.position() == posicionCursor}.isEmpty()
 
 	method generarBordes() {
 		var posCasillas = []

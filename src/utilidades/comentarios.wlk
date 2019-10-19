@@ -28,9 +28,9 @@ object error {
 	const especialEnCooldown = [
 		"¡Aún no es el momento!",
 		"No puedo aún, ¿Podrías tranquilizarte?",
-		"¿Quién programo mi habilidad especial? ¡LE PUSO COOLDOWN!",
+		"TENGO COOLDOWN!",
 		"Yep, sigo con cooldown.",
-		"Piensalo: si no tuviese cooldown, sería fácil, ¿verdad?"
+		"Si no tuviese cooldown, sería fácil, ¿verdad?"
 	]
 	const carritoVacio = [
 		"No puedes vender unidades que todavía no compraste.",

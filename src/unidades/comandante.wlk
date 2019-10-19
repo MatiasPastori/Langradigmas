@@ -19,7 +19,9 @@ class Comandante inherits Unidad {
 		escenario.nivelActual().terminarNivel()
 	}
 	
-	method habilidadEspecial() {
-		
+	method habilidadEspecial(cursor) {
+		cooldown = 3
+		if(cursor.hayEnemigoEn(cursor.position()) and cursor.enRangoEspecial()) 
+			cursor.unidadEn(cursor.position()).recibirDanio(3)
 	}
 }
