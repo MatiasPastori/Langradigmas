@@ -10,7 +10,7 @@ import utilidades.distancia.*
 // Superclase
 class Unidad {
 	const jugadorDuenio
-	const rangoDeAccion
+	const property rangoDeAccion
 	const property rangoEspecial
 	var vida = 10
 	var tipo
@@ -65,8 +65,7 @@ class Unidad {
 	}
 	
 	method codoACodo() {
-		var cercania = new Distancia(position = position)
-		return cercania.distanciaA(jugadorDuenio.getUnidades().head().position()) == 1
+		return distancia.distanciaEntre(position, jugadorDuenio.getUnidades().head().position()) == 1
 	}
 	method curar() { 
 		if(self.codoACodo()) {

@@ -19,8 +19,7 @@ class Subordinado inherits Unidad {
 	}
 	
 	method buff(bloque) {
-		var distanciaAlComandante = new Distancia(position = self.position() )
-		return if (distanciaAlComandante.distanciaA(comandante.position())<3) bloque.apply() else 0
+		return if (distancia.distanciaEntre(position, comandante.position()) < 3) bloque.apply() else 0
 	}
 	
 	override method morir() {

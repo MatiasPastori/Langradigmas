@@ -15,6 +15,7 @@ object cursor {
 	var property position = game.center()
 	var property image = turnoManager.getJugadorActual().cursorImage()
 	var posicionesAtacables = []
+	var rangoMarcadoPorUnidad = []
 	var property estadoSeleccion = estadoVacio
 	var property estadoEspecial = estadoNoEspecial
 
@@ -53,14 +54,25 @@ object cursor {
 		espadasDeAtaque.forEach({espada => game.removeVisual(espada)})
 	}
 	
+	method noHayEnemigosCerca() = posicionesAtacables.isEmpty()
+	
 	method mostrarRango(rango, marca){
-		(1 .. rango).forEach{ num =>
-			game.addVisual(new Visual(image=marca, position = position.right(num)))
-			game.addVisual(new Visual(image=marca, position = position.left(num)))
-			game.addVisual(new Visual(image=marca, position = position.up(num)))
-			game.addVisual(new Visual(image=marca, position = position.down(num)))
+		var casillasAMarcar = mapManager.getInternas().filter { 
+			casilla =>
+			distancia.distanciaEntre(casilla.position(), unidad.position()) <= rango
+		}
+		casillasAMarcar.forEach { casilla =>
+			var visual = new Visual(image = marca, position = casilla.position())
+			rangoMarcadoPorUnidad.add(visual)
+			game.addVisual(visual)
 		}
 	}
+	
+	method borrarRango() = rangoMarcadoPorUnidad.forEach { visual => 
+		game.removeVisual(visual)
+		rangoMarcadoPorUnidad.remove(visual)
+	}
+	
 	
 	method unidadEn(posicion) { 
 		var lista = game.getObjectsIn(posicion).filter({objeto => objeto.esSeleccionable()})
