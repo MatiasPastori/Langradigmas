@@ -39,12 +39,10 @@ class Nivel {
 		game.removeVisual(tiendaImg)
 		
 		self.posicionarUnidades()
-		game.schedule(1000, {
-			game.say(comandanteJ1, comentario.msgInicioNivelJ1comandante())
-			game.say(comandanteJ2, comentario.msgInicioNivelJ2comandante())		
-		})
 		game.schedule(2000, {
 			game.say(subordinadosJ1.anyOne(), comentario.msgInicioNivelJ1subordinados())
+			game.say(subordinadosJ1.anyOne(), comentario.msgInicioNivelJ1subordinados())
+			game.say(subordinadosJ2.anyOne(), comentario.msgInicioNivelJ2subordinados())
 			game.say(subordinadosJ2.anyOne(), comentario.msgInicioNivelJ2subordinados())				
 		})
 			

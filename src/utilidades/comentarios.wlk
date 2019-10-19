@@ -1,9 +1,16 @@
 object error {
 	const movimientoInvalido = [
 		"¡Prudencia!",
+		"No puedo treparme sobre otra unidad",
 		"¿En serio quieres que me mueva allí?",
 		"No creo que sea una buena idea",
 		"¿Acaso me consideras desechable?"
+	]
+	const movimientoUsado = [
+		"Estoy cansado",
+		"Ya me moví antes",
+		"Dejame descansar un turno",
+		"No creo que sea una buena idea"
 	]
 	const ataqueInvalido = [
 		"No puedo hacer eso",
@@ -51,6 +58,7 @@ object error {
 	]
 	
 	method msgmovimientoInvalido() = movimientoInvalido.anyOne()
+	method msgmovimientoUsado() = movimientoUsado.anyOne()
 	method msgAtaqueInvalido() = ataqueInvalido.anyOne()
 	method msgSinUnidadSeleccionada() = sinUnidadSeleccionada.anyOne()
 	method msgConUnidadSeleccionada() = conUnidadSeleccionada.anyOne()

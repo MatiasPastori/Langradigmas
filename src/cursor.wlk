@@ -30,7 +30,6 @@ object cursor {
 		unidad.cambiarSprite(deseleccion)
 		turnoManager.yaAtaco(unidad)
 		estadoSeleccion = estadoVacio
-		//unidad.image(unidad.getTipo() + unidad.idJugador() + "gris.png")
 		self.descaptarEnemigosCercanos()
 		unidad = null		
 	}
@@ -39,12 +38,12 @@ object cursor {
 		self.verificarHabilidadEspecialDisponible()
 		estadoEspecial.accion(self)
 	}
-	method captarEnemigosCercanos(dist, marca) {
-		var posicionesCerca = [position.right(dist),position.left(dist),position.up(dist),position.down(dist)]
+	method captarEnemigosCercanos() {
+		var posicionesCerca = [position.right(1),position.left(1),position.up(1),position.down(1)]
 		posicionesAtacables = posicionesCerca.filter{pos => 
 			self.unidadEn(pos) != null and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
 		}
-		posicionesAtacables.forEach{pos => game.addVisual(new Visual(image=marca, position = pos))}
+		posicionesAtacables.forEach{pos => game.addVisual(new Visual(image="atacable.png", position = pos))}
 	}
 	
 	method descaptarEnemigosCercanos() {
@@ -54,8 +53,13 @@ object cursor {
 		espadasDeAtaque.forEach({espada => game.removeVisual(espada)})
 	}
 	
-	method mostrarRangoTransitable(){
-		
+	method mostrarRango(rango, marca){
+		(1 .. rango).forEach{ num =>
+			game.addVisual(new Visual(image=marca, position = position.right(num)))
+			game.addVisual(new Visual(image=marca, position = position.left(num)))
+			game.addVisual(new Visual(image=marca, position = position.up(num)))
+			game.addVisual(new Visual(image=marca, position = position.down(num)))
+		}
 	}
 	
 	method unidadEn(posicion) { 

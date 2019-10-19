@@ -46,7 +46,6 @@ class Unidad {
 		var danioBruto = self.potencialDeDanio(enemigo).limitBetween(0,10)
 		var danioNeto = danioBruto.randomUpTo(10).truncate(0)
 		enemigo.recibirDanio(danioNeto)
-		//self.cambiarSprite(ataque)
 	}
 	
 	method potencialDeDanio(enemigo) = self.nivelAtaque() + self.buffAtaque() - enemigo.nivelDefensa() - enemigo.buffDefensa()

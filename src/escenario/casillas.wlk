@@ -13,9 +13,7 @@ object mapManager {
 	var internas = []
 	var borde = []
 	
-	// method getEjeX() = eje_x
-	method getBorde() = borde
-	
+	method getBorde() = borde	
 	method getInternas() = internas
 	
 	method generarCasillas() {
@@ -33,13 +31,8 @@ object mapManager {
 		})
 		internas = eje_x.flatten()
 	}
-	
-	
 	method accederAInterna(_x, _y) = internas.find{casilla => casilla.position() == game.at(_x,_y)}
-	
 	method estaEnInternas(posicionCursor) = internas.findOrDefault({myPos => myPos.position() == posicionCursor},null)
-
-	
 
 	method generarBordes() {
 		var posCasillas = []
