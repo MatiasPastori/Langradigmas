@@ -18,9 +18,7 @@ class Subordinado inherits Unidad {
 		return self.buff({comandante.buffDefensaQueOtorga()})
 	}
 	
-	method buff(bloque) {
-		return if (distancia.distanciaEntre(position, comandante.position()) < 3) bloque.apply() else 0
-	}
+	method buff(bloque) = if (distancia.distanciaEntre(position, comandante.position()) < 3) bloque.apply() else 0
 	
 	override method morir() {
 		comandante.subordinados().remove(self)
