@@ -17,8 +17,6 @@ object iddle {
 }
 object seleccion {
 	method cambiarSprite(unidad, id_xjug) {
-		game.removeTickEvent("iddle1")
-		game.removeTickEvent("iddle2")
 		unidad.imagenVida().image("transparente.png")
 		unidad.imagenCD().image("transparente.png")	
 		unidad.image("transparente.png")

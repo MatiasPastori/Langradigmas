@@ -15,8 +15,10 @@ class EstadoAgarrado {
 			cursor.borrarRango()
 			cursor.captarEnemigosCercanos()
 			unidad.cambiarSprite(deseleccion)
-			if (cursor.noHayEnemigosCerca()) 
+			if (cursor.noHayEnemigosCerca()) {
 				cursor.unidad(null)
+				cursor.estadoSeleccion(estadoVacio)				
+			}
 		} else if (unidad.position() == cursor.position()) { 
 			cursor.descaptarEnemigosCercanos()
 			cursor.borrarRango()
