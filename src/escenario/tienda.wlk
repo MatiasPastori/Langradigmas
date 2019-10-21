@@ -1,5 +1,5 @@
 import wollok.game.*
-import utilidades.estadoTienda.*
+import estados.estadoTienda.*
 import utilidades.visuals.*
 import utilidades.comentarios.*
 import unidades.guerrero.*

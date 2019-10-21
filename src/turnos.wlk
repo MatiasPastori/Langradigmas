@@ -1,7 +1,9 @@
 import wollok.game.*
 import jugadores.*
 import cursor.*
-import utilidades.estadoSeleccionCursor.*
+import estados.estadoSeleccionCursor.*
+import utilidades.visuals.*
+import escenario.escenario.*
 
 object turnoManager {
 	var property habilitado = false
@@ -43,4 +45,14 @@ object turnoManager {
 	method cambiarJugador() {jugadorActual = jugadorActual.siguiente()}
 	
 	method esDelJugadorActual(messi) = jugadorActual.getUnidades().contains(messi)
+	
+	method comandanteMuerto(comandante) {
+		if (habilitado) {
+			habilitado = false
+			escenario.nivelActual().terminarNivel(self.ganador(comandante))
+		}
+	}
+	
+	method ganador(comandantePerdedor) = if(self.esDelJugadorActual(comandantePerdedor)) jugadorActual.siguiente() 
+											else jugadorActual
 }

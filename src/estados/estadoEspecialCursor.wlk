@@ -1,4 +1,4 @@
-import utilidades.estadoSeleccionCursor.*
+import estados.estadoSeleccionCursor.*
 import utilidades.acciones.*
 import turnos.*
 

@@ -1,7 +1,7 @@
 import wollok.game.*
 import unidad.*
 import subordinado.*
-import escenario.escenario.*
+import turnos.*
 import utilidades.visuals.*
 import utilidades.distancia.*
 
@@ -15,11 +15,11 @@ class Comandante inherits Unidad {
 
 	override method morir() {
 		super()
-		escenario.nivelActual().terminarNivel()
+		turnoManager.comandanteMuerto(self)
 	}
 	
 	method habilidadEspecial(cursor) {
-		cooldown = 6
+		cooldown = 0//6
 		if(cursor.hayEnemigoEn(cursor.position()) and cursor.enRangoEspecial()) {
 			var enemigos = cursor.enemigosAmenazantes(cursor.position())
 			enemigos.forEach { enemigo => enemigo.recibirDanio(2)}		

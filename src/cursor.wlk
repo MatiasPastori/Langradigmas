@@ -1,8 +1,8 @@
 import wollok.game.*
 import utilidades.distancia.*
 import utilidades.visuals.*
-import utilidades.estadoSeleccionCursor.*
-import utilidades.estadoEspecialCursor.*
+import estados.estadoSeleccionCursor.*
+import estados.estadoEspecialCursor.*
 import utilidades.acciones.*
 import utilidades.comentarios.*
 import unidades.unidad.*
@@ -67,6 +67,10 @@ object cursor {
 	}
 	method hayEnemigoEn(pos) = self.hayUnidadEn(pos) and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
 	method hayUnidadEn(pos) = self.unidadEn(pos) != null
+	method unidadEn(posicion) { 
+		var lista = game.getObjectsIn(posicion).filter({objeto => objeto.esSeleccionable()})
+		return if(lista.size() > 0) lista.head() else null
+	}
 	method noHayEnemigosCerca() = enemigosAtacables.isEmpty()
 	
 	method mostrarRango(rango, marca){
@@ -86,21 +90,21 @@ object cursor {
 	}
 	method enRangoEspecial() = !rangoMarcadoPorUnidad.filter{visual => visual.position() == self.position()}.isEmpty()
 	
-	method unidadEn(posicion) { 
-		var lista = game.getObjectsIn(posicion).filter({objeto => objeto.esSeleccionable()})
-		return if(lista.size() > 0) lista.head() else null
-	}
-	
 	method esCasillaOcupable() = self.unidadEn(position) == null and mapManager.estaEnInternas(position)
 
-
+	method atacableEn(posicion) {
+		var lista = game.getObjectsIn(posicion).filter({objeto => objeto.esAtacable()})
+		return if(lista.size() > 0) lista.head() else null		
+	}
+	
 	method esSeleccionable() = false
+	method esAtacable() = false
 	
 	// Chequeo de errores
 	method verificarLaUnidadPuedaAtacar() {
 		if ( unidad == null ) 
 			self.error(error.msgSinUnidadSeleccionada())
-		if ( !enemigosAtacables.map{enemigo => enemigo.position()}.contains(position) or !turnoManager.puedeAtacar(unidad) )
+		if ( !self.hayEnemigoEn(position) or !turnoManager.puedeAtacar(unidad) or self.atacableEn(position) == null )
 			unidad.error(error.msgAtaqueInvalido())
 	}
 	

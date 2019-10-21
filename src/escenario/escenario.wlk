@@ -18,8 +18,10 @@ object escenario {
 		mapManager.generarCasillas()
 		mapManager.generarBordes()
 		
-		nivelActual.generarNivel()
+		self.iniciarNivel()
+		return 0
 	}
+	method iniciarNivel() = nivelActual.generarNivel() 
 	method nivelActual() = nivelActual
 	method actualizarNivel() { nivelActual = nivelActual.siguiente() }
 	method twilightZone(character) {

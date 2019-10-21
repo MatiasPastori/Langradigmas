@@ -23,6 +23,7 @@ class Unidad {
 	var property cooldown = 0
 	
 	method esSeleccionable() = true
+	method esAtacable() = true
 	
 	method buffAtaque() = 0 // depende de casillas
 	method buffDefensa() = 0 // depende de casillas

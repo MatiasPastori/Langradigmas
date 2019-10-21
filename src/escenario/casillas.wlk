@@ -4,6 +4,8 @@ class MyPosition {
 	var property position
 	var property image = "transparente.png"
 	
+	var property esAtacable = false
+	
 	method esSeleccionable() = false
 }
 

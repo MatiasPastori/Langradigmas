@@ -13,7 +13,6 @@ object inicio {
 		game.title("Langradigmas")
 		game.height(height)
 		game.width(width)
-		//game.boardGround("tienda.png")
 		
 		teclado.setearTeclaInicio()
 	}

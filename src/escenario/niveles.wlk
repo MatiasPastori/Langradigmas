@@ -16,6 +16,12 @@ import cursor.*
 
 class Nivel {
 	const tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
+	const unidadesPorJugador = 11
+	var ganador
+	var cantUnidadesMuertas = 0
+	
+	method getGanador() = ganador
+	method getCantUnidadesMuertas() = cantUnidadesMuertas
 	
 	method generarNivel()
 	method tienda() {
@@ -66,61 +72,87 @@ class Nivel {
 
 	// Pelotones J1	 - Logica fea pero funcional
 	// Agrega los pelotones de unidades alrededor del comandante correspondiente
+	// ver imagen en assets explicacion_seteo_unidades
 		coordY = comandanteJ1.position().y() + 2
-		primerPelotonUnidadesJ1.forEach{
-			unidad => unidad.position(game.at(comandanteJ1.position().x(), coordY))
+		primerPelotonUnidadesJ1.forEach{ unidad => 
+			unidad.position(game.at(comandanteJ1.position().x(), coordY))
 			coordY--
 			if (coordY == comandanteJ1.position().y() ) { coordY-- }
 		}
 		coordY = comandanteJ1.position().y() + 1
-		segundoPelotonUnidadesJ1.forEach{
-			unidad => unidad.position(game.at(comandanteJ1.position().x()+1, coordY))
+		segundoPelotonUnidadesJ1.forEach{ unidad => 
+			unidad.position(game.at(comandanteJ1.position().x()+1, coordY))
 			coordY--
 		}
 		coordY = comandanteJ1.position().y() + 1
-		tercerPelotonUnidadesJ1.forEach{
-			unidad => unidad.position(game.at(comandanteJ1.position().x()-1, coordY))
+		tercerPelotonUnidadesJ1.forEach{ unidad => 
+			unidad.position(game.at(comandanteJ1.position().x()-1, coordY))
 			coordY--
 		}
 
 	// Pelotones J2
 		coordY = comandanteJ2.position().y() + 2
-		primerPelotonUnidadesJ2.forEach{
-			unidad => unidad.position(game.at(comandanteJ2.position().x(), coordY))
+		primerPelotonUnidadesJ2.forEach{ unidad => 
+			unidad.position(game.at(comandanteJ2.position().x(), coordY))
 			coordY--
 			if (coordY == comandanteJ2.position().y() ) { coordY-- }
 		}
 		coordY = comandanteJ2.position().y() + 1
-		segundoPelotonUnidadesJ2.forEach{
-			unidad => unidad.position(game.at(comandanteJ2.position().x()+1, coordY))
+		segundoPelotonUnidadesJ2.forEach{ unidad => 
+			unidad.position(game.at(comandanteJ2.position().x()+1, coordY))
 			coordY--
 		}
 		coordY = comandanteJ2.position().y() + 1
-		tercerPelotonUnidadesJ2.forEach{
-			unidad => unidad.position(game.at(comandanteJ2.position().x()-1, coordY))
+		tercerPelotonUnidadesJ2.forEach{ unidad => 
+			unidad.position(game.at(comandanteJ2.position().x()-1, coordY))
 			coordY--
 		}	
 				
-		jugador1.getUnidades().forEach{unidad => 
+		jugador1.getUnidades().forEach{ unidad => 
 			game.addVisual(unidad)
 			game.addVisual(unidad.imagenVida())
 			game.addVisual(unidad.imagenCD())
 			unidad.cambiarSprite(iddle)
 		}
-		jugador2.getUnidades().forEach{unidad => 
+		jugador2.getUnidades().forEach{ unidad => 
 			game.addVisual(unidad)
 			game.addVisual(unidad.imagenVida())
 			game.addVisual(unidad.imagenCD())
 			unidad.cambiarSprite(iddle)
 		}
 	}
-	method terminarNivel() {
-		//TODO
-		jugador1.getUnidades().clear()
-		jugador2.getUnidades().clear()
-		turnoManager.habilitado(false)
+	method terminarNivel(jGanador) {
+		var victoria = new Visual(position=game.at(0,0), image="victoria_" + jGanador.getId() + ".png")
+		ganador = jGanador
+		game.addVisual(victoria)
+		cantUnidadesMuertas = self.calcularUnidadesCaidas()
+		game.schedule(2000, {
+			game.removeVisual(victoria)
+			jugador1.getUnidades().forEach{unidad =>
+				game.removeVisual(unidad)
+				game.removeVisual(unidad.imagenVida())
+				game.removeVisual(unidad.imagenCD())
+			}
+			jugador2.getUnidades().forEach{unidad =>
+				game.removeVisual(unidad)
+				game.removeVisual(unidad.imagenVida())
+				game.removeVisual(unidad.imagenCD())
+			}
+			game.removeVisual(cursor)
+			jugador1.getUnidades().clear()
+			jugador2.getUnidades().clear()
+			
+			self.siguientePantalla()		
+		} )
+	}
+	
+	method siguientePantalla() {
 		escenario.actualizarNivel()
+		escenario.iniciarNivel()	
+		return 0	
 	}
+	method calcularUnidadesCaidas() = 
+		unidadesPorJugador - jugador1.getUnidades().size() + unidadesPorJugador - jugador2.getUnidades().size()
 }
 
 object nivel1 inherits Nivel{	
@@ -168,7 +200,7 @@ object nivel2 inherits Nivel{
 		mapManager.getInternas().forEach{casilla => casilla.image("casillaPasto.png")}
 
 		mapManager.getBorde().forEach{
-			casilla => casilla.image("casillaMontana.png")
+			casilla => casilla.image("casillaTorre.png")
 		}
 	}
 	
@@ -190,13 +222,36 @@ object nivel3 inherits Nivel{
 	}
 	
 	method setearCasillas() {
-		mapManager.getInternas().forEach{casilla => casilla.image("casillaPasto.png")}
+		mapManager.getInternas().forEach{casilla => casilla.image("casillaTorre.png")}
 
 		mapManager.getBorde().forEach{
 			casilla => casilla.image("casillaMontana.png")
 		}
 	}
-	
+
+	override method siguientePantalla() {
+		var pantallaFinal = new Visual(position=game.at(0,0),image="transparente.png")
+		var cantUnidadesCaidasD1 = new Visual(position=game.at(8,8),image="transparente.png")
+		var cantUnidadesCaidasD2 = new Visual(position=game.at(9,8),image="transparente.png")
+		var ganadoresId = [ ganador, nivel1.getGanador(), nivel2.getGanador() ]
+		var cantJ1Victorias = ganadoresId.filter{ganador => ganador.getId() == "J1"}.size()
+		var cantJ2Victorias = ganadoresId.filter{ganador => ganador.getId() == "J2"}.size()
+		var cantidadMuertos = cantUnidadesMuertas + nivel1.getCantUnidadesMuertas() + nivel2.getCantUnidadesMuertas()
+		var digito1UnidadesMuertas = cantidadMuertos.div(10).toString()
+		var digito2UnidadesMuertas = (cantidadMuertos % 10).toString()
+				
+		if(cantJ1Victorias > cantJ2Victorias) {pantallaFinal.image("langradigmas_gana.png")}
+		else {pantallaFinal.image("duloc_gana.png")}
+		
+		cantUnidadesCaidasD1.image("caidas_" + digito1UnidadesMuertas + ".png")
+		cantUnidadesCaidasD2.image("caidas_" + digito2UnidadesMuertas + ".png")
+			
+		game.addVisual(pantallaFinal)
+		game.addVisual(cantUnidadesCaidasD1)
+		game.addVisual(cantUnidadesCaidasD2)
+		
+		return 0
+	}
 	
 	method siguiente() = null
 }
