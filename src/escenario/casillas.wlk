@@ -1,12 +1,15 @@
 import wollok.game.*
+import utilidades.visuals.*
 
-class MyPosition {
+class Casilla {
 	var property position
 	var property image = "transparente.png"
 	
+	var property objeto = null
 	var property esAtacable = false
 	
 	method esSeleccionable() = false
+	method ponerObjetoVacio() { objeto = new Visual(position = game.center(), image="transparente.png") }
 }
 
 object mapManager {
@@ -25,7 +28,7 @@ object mapManager {
 			var eje_y = []
 			(alto-2).times({ 
 				j =>
-				var casilla = new MyPosition(position = game.at(i, j))
+				var casilla = new Casilla(position = game.at(i, j))
 				game.addVisual(casilla)
 				eje_y.add(casilla)
 			})
@@ -44,7 +47,7 @@ object mapManager {
 			(1 .. alto-2).forEach{ i => posCasillas.add(new Position(x=ancho-1, y=i)) } // borde derecho
 			
 			posCasillas.forEach { posicion => 
-				var casilla = new MyPosition(position = posicion)
+				var casilla = new Casilla(position = posicion)
 				game.addVisual(casilla)
 				borde.add(casilla)	
 			}
