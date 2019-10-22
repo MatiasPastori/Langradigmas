@@ -19,14 +19,13 @@ class Nivel {
 	const unidadesPorJugador = 11
 	var ganador
 	var cantUnidadesMuertas = 0
-	var objetosVisuales = []
 	
 	method getGanador() = ganador
 	method getCantUnidadesMuertas() = cantUnidadesMuertas
 	
 	method generarNivel()
 	method tienda() {
-		var comandanteJ1 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 3, rangoEspecial = 8,vida = 10, nivelAtaque = 28, nivelDefensa = 24 )
+		var comandanteJ1 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 50, rangoEspecial = 50,vida = 10, nivelAtaque = 28, nivelDefensa = 24 )
 		var comandanteJ2 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", rangoDeAccion = 3, rangoEspecial = 8,vida = 10, nivelAtaque = 28, nivelDefensa = 24)
 		
 		game.addVisual(tiendaImg)
@@ -129,25 +128,11 @@ class Nivel {
 		game.addVisual(victoria)
 		cantUnidadesMuertas = self.calcularUnidadesCaidas()
 		game.schedule(2000, {
-			game.removeVisual(victoria)
-			jugador1.getUnidades().forEach{unidad =>
-				game.removeVisual(unidad)
-				game.removeVisual(unidad.imagenVida())
-				game.removeVisual(unidad.imagenCD())
+			game.allVisuals().filter{visual => !visual.esCasillaFija()}.forEach{ visual =>
+				game.removeVisual(visual)
 			}
-			jugador2.getUnidades().forEach{unidad =>
-				game.removeVisual(unidad)
-				game.removeVisual(unidad.imagenVida())
-				game.removeVisual(unidad.imagenCD())
-			}
-			objetosVisuales.forEach{objeto =>
-				game.removeVisual(objeto)
-				game.removeVisual(objeto.imagenVida())
-			}
-			game.removeVisual(cursor)
 			jugador1.getUnidades().clear()
 			jugador2.getUnidades().clear()
-			objetosVisuales.clear()
 			
 			self.siguientePantalla()		
 		} )
@@ -167,7 +152,6 @@ class Nivel {
 			var objeto = new Visual(image=objetoImg, position=pos, esAtacable=true, imagenVida=vida)
 			game.addVisual(objeto)
 			game.addVisual(vida)
-			objetosVisuales.add(objeto)
 		}
 	}
 }
@@ -179,7 +163,9 @@ object nivel1 inherits Nivel{
 		
 		self.setearCasillas()
 		self.setearObjetos(posMurallasRompibles, "casillaMurallaMaderaVer.png")
-		game.schedule(500, {game.addVisual(nivelImg)})
+		game.schedule(500, {
+			game.addVisual(nivelImg)
+		})
 		game.schedule(650, {nivelImg.image("nivel1_B.png")})
 		game.schedule(800, {nivelImg.image("nivel1_A.png")})
 		game.schedule(2000, {

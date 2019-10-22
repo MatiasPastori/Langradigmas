@@ -75,16 +75,10 @@ object cursor {
 		var lista = game.getObjectsIn(pos).filter({objeto => objeto.esAtacable() and !objeto.esSeleccionable()})
 		return if(lista.size() > 0) lista.head() else null		
 	}
-	method unidadEn(pos) { 
-		var lista = game.getObjectsIn(pos).filter({objeto => objeto.esSeleccionable()})
-		return if(lista.size() > 0) lista.head() else null
-	}
-	method atacableEn(pos) {
-		var lista = game.getObjectsIn(pos).filter({objeto => objeto.esAtacable()})
-		return if(lista.size() > 0) lista.head() else null		
-	}
+	method unidadEn(pos) = self.getObjeto({game.getObjectsIn(pos).filter{objeto => objeto.esSeleccionable()}}, pos)
+	method atacableEn(pos) = self.getObjeto({game.getObjectsIn(pos).filter{objeto => objeto.esAtacable()}}, pos)	
 	method getObjeto(bloque, pos) {
-		var lista = game.getObjectsIn(pos).filter(bloque.apply())
+		var lista = bloque.apply()
 		return if(lista.size() > 0) lista.head() else null
 	}
 	method noHayEnemigosCerca() = objetosAtacables.isEmpty()
@@ -112,6 +106,7 @@ object cursor {
 	
 	method esSeleccionable() = false
 	method esAtacable() = false
+	method esCasillaFija() = false
 	
 	// Chequeo de errores
 	method verificarLaUnidadPuedaAtacar() {

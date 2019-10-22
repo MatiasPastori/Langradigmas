@@ -21,8 +21,6 @@ object teclado {
 		keyboard.s().onPressDo { cursor.seleccionar() }	
 		keyboard.a().onPressDo { cursor.atacar() }	
 		keyboard.d().onPressDo { cursor.usarHabilidadEspecial() }
-		
-		keyboard.num(9).onPressDo { game.say(cursor.objetosAtacables().head(), "HOLA MANOLA") }
 	}
 	method setearTeclasTienda() {
 		keyboard.t().onPressDo {
@@ -49,6 +47,7 @@ object teclado {
 	}}
 	method setearTeclaInicio() {keyboard.enter().onPressDo { 
 		if (inicio.inicioHabilitado()) {
+			//game.sound("mainMenu.mp3")
 			inicio.inicioHabilitado(false)
 			game.removeVisual(inicio.getInicioVisual())
 			escenario.iniciar()	

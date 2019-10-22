@@ -14,11 +14,10 @@ object inicio {
 		game.height(height)
 		game.width(width)
 		
+		keyboard.num(9).onPressDo { game.sound("nivel_fin.mp3") }
+		
 		teclado.setearTeclaInicio()
 	}
-	method mostrarInicio() {
-		game.addVisual(inicio)
-		keyboard.enter().onPressDo{	game.sound("mainMenu.mp3")}
-	}
+	method mostrarInicio() = game.addVisual(inicio)
 	method getInicioVisual() = inicio
 }

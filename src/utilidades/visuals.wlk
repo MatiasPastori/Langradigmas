@@ -12,6 +12,7 @@ class Visual {
 	var property esAtacable = false	
 	
 	method esSeleccionable() = false
+	method esCasillaFija() = false
 	
 	method combatir(unidad) {} // para ser polimórfico con las unidades que usan combatir para romper el objeto de la casilla
 	method recibirDanio(danio) {

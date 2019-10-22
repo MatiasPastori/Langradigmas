@@ -9,6 +9,7 @@ class Casilla {
 	var property esAtacable = false
 	
 	method esSeleccionable() = false
+	method esCasillaFija() = true
 	method ponerObjetoVacio() { objeto = new Visual(position = game.center(), image="transparente.png") }
 }
 
