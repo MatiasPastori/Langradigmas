@@ -250,7 +250,7 @@ object nivel3 inherits Nivel{
 	override method siguientePantalla() {
 		var pantallaFinal = new Visual(position=game.at(0,0),image="transparente.png")
 		var cantUnidadesCaidasD1 = new Visual(position=game.at(24,8),image="transparente.png")
-		var cantUnidadesCaidasD2 = new Visual(position=game.at(24,8),image="transparente.png")
+		var cantUnidadesCaidasD2 = new Visual(position=game.at(25,8),image="transparente.png")
 		var ganadoresId = [ ganador, nivel1.getGanador(), nivel2.getGanador() ]
 		var cantJ1Victorias = ganadoresId.filter{ganador => ganador.getId() == "J1"}.size()
 		var cantJ2Victorias = ganadoresId.filter{ganador => ganador.getId() == "J2"}.size()
