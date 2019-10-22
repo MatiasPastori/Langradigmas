@@ -22,7 +22,7 @@ object teclado {
 		keyboard.a().onPressDo { cursor.atacar() }	
 		keyboard.d().onPressDo { cursor.usarHabilidadEspecial() }
 		
-		keyboard.num(9).onPressDo { game.say(cursor,jugador1.getUnidades().size().toString()) }
+		keyboard.num(9).onPressDo { game.say(cursor.objetosAtacables().head(), "HOLA MANOLA") }
 	}
 	method setearTeclasTienda() {
 		keyboard.t().onPressDo {

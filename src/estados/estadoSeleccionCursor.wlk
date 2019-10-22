@@ -9,7 +9,7 @@ class EstadoAgarrado {
 	var unidad
 	
 	method accion(cursor) {
-		if (cursor.esCasillaOcupable() && unidad.puedeLlegar(distancia.distanciaEntre(unidad.position(),cursor.position()))) {
+		if (cursor.esCasillaOcupable(cursor.position()) && unidad.puedeLlegar(distancia.distanciaEntre(unidad.position(),cursor.position()))) {
 			cursor.descaptarEnemigosCercanos()
 			unidad.mover(cursor.position())
 			cursor.borrarRango()

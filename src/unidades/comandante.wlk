@@ -19,9 +19,9 @@ class Comandante inherits Unidad {
 	}
 	
 	method habilidadEspecial(cursor) {
-		cooldown = 0//6
-		if(cursor.hayEnemigoEn(cursor.position()) and cursor.enRangoEspecial()) {
-			var enemigos = cursor.enemigosAmenazantes(cursor.position())
+		cooldown = 6
+		if(cursor.hayAtacableEn(cursor.position()) and cursor.enRangoEspecial()) {
+			var enemigos = cursor.objetosAmenazantes(cursor.position())
 			enemigos.forEach { enemigo => enemigo.recibirDanio(2)}		
 			cursor.unidadEn(cursor.position()).recibirDanio(6)
 		}

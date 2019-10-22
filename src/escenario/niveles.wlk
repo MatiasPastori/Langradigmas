@@ -19,6 +19,7 @@ class Nivel {
 	const unidadesPorJugador = 11
 	var ganador
 	var cantUnidadesMuertas = 0
+	var objetosVisuales = []
 	
 	method getGanador() = ganador
 	method getCantUnidadesMuertas() = cantUnidadesMuertas
@@ -138,9 +139,14 @@ class Nivel {
 				game.removeVisual(unidad.imagenVida())
 				game.removeVisual(unidad.imagenCD())
 			}
+			objetosVisuales.forEach{objeto =>
+				game.removeVisual(objeto)
+				game.removeVisual(objeto.imagenVida())
+			}
 			game.removeVisual(cursor)
 			jugador1.getUnidades().clear()
 			jugador2.getUnidades().clear()
+			objetosVisuales.clear()
 			
 			self.siguientePantalla()		
 		} )
@@ -153,13 +159,25 @@ class Nivel {
 	}
 	method calcularUnidadesCaidas() = 
 		unidadesPorJugador - jugador1.getUnidades().size() + unidadesPorJugador - jugador2.getUnidades().size()
+		
+	method setearObjetos(posiciones, objetoImg) {
+		posiciones.forEach{ pos =>
+			var vida = new Visual(image="vidaObj_10.png", position=pos, esAtacable=true)
+			var objeto = new Visual(image=objetoImg, position=pos, esAtacable=true, imagenVida=vida)
+			game.addVisual(objeto)
+			game.addVisual(vida)
+			objetosVisuales.add(objeto)
+		}
+	}
 }
 
 object nivel1 inherits Nivel{	
 	override method generarNivel() {
 		var nivelImg = new Visual(position = game.at(0,0), image = "nivel1_C.png")
+		var posMurallasRompibles = [game.at(game.width()-6,8)]
 		
 		self.setearCasillas()
+		self.setearObjetos(posMurallasRompibles, "casillaMurallaMaderaVer.png")
 		game.schedule(500, {game.addVisual(nivelImg)})
 		game.schedule(650, {nivelImg.image("nivel1_B.png")})
 		game.schedule(800, {nivelImg.image("nivel1_A.png")})
@@ -231,8 +249,8 @@ object nivel3 inherits Nivel{
 
 	override method siguientePantalla() {
 		var pantallaFinal = new Visual(position=game.at(0,0),image="transparente.png")
-		var cantUnidadesCaidasD1 = new Visual(position=game.at(8,8),image="transparente.png")
-		var cantUnidadesCaidasD2 = new Visual(position=game.at(9,8),image="transparente.png")
+		var cantUnidadesCaidasD1 = new Visual(position=game.at(24,8),image="transparente.png")
+		var cantUnidadesCaidasD2 = new Visual(position=game.at(24,8),image="transparente.png")
 		var ganadoresId = [ ganador, nivel1.getGanador(), nivel2.getGanador() ]
 		var cantJ1Victorias = ganadoresId.filter{ganador => ganador.getId() == "J1"}.size()
 		var cantJ2Victorias = ganadoresId.filter{ganador => ganador.getId() == "J2"}.size()

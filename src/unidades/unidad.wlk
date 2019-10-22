@@ -53,6 +53,11 @@ class Unidad {
 		self.modificarVida(vida - danio)
 		self.chequearMuerte()
 	}
+	
+	method modificarVida(nuevaVida) {
+		vida = nuevaVida
+		self.imagenVida().image(self.getVida().toString() + ".png")
+	}
 		
 	method chequearMuerte() {if(self.getVida() < 1) self.morir()}
 		
@@ -73,10 +78,6 @@ class Unidad {
 		}
 	}
 	
-	method modificarVida(nuevaVida) {
-		vida = nuevaVida
-		self.imagenVida().image(self.getVida().toString() + ".png")
-	}
 	
 	method cambiarSprite(accion) {accion.cambiarSprite(self, tipo + self.idJugador())}
 	
