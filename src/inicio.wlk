@@ -16,6 +16,9 @@ object inicio {
 		
 		teclado.setearTeclaInicio()
 	}
-	method mostrarInicio() {game.addVisual(inicio)}
+	method mostrarInicio() {
+		game.addVisual(inicio)
+		keyboard.enter().onPressDo{	game.sound("mainMenu.mp3")}
+	}
 	method getInicioVisual() = inicio
 }

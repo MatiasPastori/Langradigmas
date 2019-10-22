@@ -44,6 +44,7 @@ class Nivel {
 		
 		game.removeVisual(tiendaImg)
 		
+		
 		self.posicionarUnidades()
 		game.schedule(2000, {
 			game.say(subordinadosJ1.anyOne(), comentario.msgInicioNivelJ1subordinados())
