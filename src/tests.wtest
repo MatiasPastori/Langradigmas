@@ -148,3 +148,17 @@ describe "metodos de unidades" {
 //	}
 //}
 
+//describe "turnos"{
+//var comandanteJ1 = new Comandante(position = game.at(3,5), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 8, rangoEspecial = 6, vida = 10, nivelAtaque = 20, nivelDefensa =16 )
+//var comandanteJ2 = new Comandante(position = game.at(11,5), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", rangoDeAccion = 8, rangoEspecial = 6, vida = 10, nivelAtaque = 20, nivelDefensa =16 )
+//var unidad1 = new Guerrero(position = game.at(3,4), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = comandanteJ1, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
+//var unidad2 =new Guerrero(position = game.at(11,4), image = "transparente.png", jugadorDuenio = jugador2, tipo = "guerrero", comandante = comandanteJ2, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
+//test "evaluar si una unidad puede moverse"{
+//	turnoManager.iniciarTurno()
+//	assert.that(turnoManager.puedeMoverse(unidad1))
+//}
+//test "evaluar si una unidad puede atacar"{
+//	turnoManager.iniciarTurno()
+//	assert.that(turnoManager.puedeAtacar(unidad1))	
+//}
+//}
