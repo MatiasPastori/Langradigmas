@@ -17,9 +17,12 @@ object mapManager {
 	const ancho = game.width()
     const alto = game.height()
 	var internas = []
-	var borde = []
+	var bordeLateral = []
+	var bordeCentral = []
 	
-	method getBorde() = borde	
+	method getBorde() = bordeLateral + bordeCentral
+	method getBordeLateral() = bordeLateral
+	method getBordeCentral() = bordeCentral
 	method getInternas() = internas
 	
 	method generarCasillas() {
@@ -41,19 +44,25 @@ object mapManager {
 	method estaEnInternas(posicionCursor) = !internas.filter{myPos => myPos.position() == posicionCursor}.isEmpty()
 
 	method generarBordes() {
-		var posCasillas = []
-			(0 .. ancho-1).forEach{ i => posCasillas.add(new Position(x=i, y=0)) } // borde abajo
-			(0 .. ancho-1).forEach{ i => posCasillas.add(new Position(x=i, y=alto-1)) } // borde arriba
-			(1 .. alto-2).forEach{ i => posCasillas.add(new Position(x=0, y=i)) } // borde izquierdo
-			(1 .. alto-2).forEach{ i => posCasillas.add(new Position(x=ancho-1, y=i)) } // borde derecho
+		var posCasillasLaterales = []
+		var posCasillasCentrales = []
+			(0 .. ancho-1).forEach{ i => posCasillasCentrales.add(new Position(x=i, y=0)) } // borde abajo
+			(0 .. ancho-1).forEach{ i => posCasillasCentrales.add(new Position(x=i, y=alto-1)) } // borde arriba
+			(1 .. alto-2).forEach{ i => posCasillasLaterales.add(new Position(x=0, y=i)) } // borde izquierdo
+			(1 .. alto-2).forEach{ i => posCasillasLaterales.add(new Position(x=ancho-1, y=i)) } // borde derecho
 			
-			posCasillas.forEach { posicion => 
+			posCasillasLaterales.forEach { posicion => 
 				var casilla = new Casilla(position = posicion)
 				game.addVisual(casilla)
-				borde.add(casilla)	
+				bordeLateral.add(casilla)	
+			}
+			posCasillasCentrales.forEach { posicion => 
+				var casilla = new Casilla(position = posicion)
+				game.addVisual(casilla)
+				bordeCentral.add(casilla)	
 			}
 		}
-	method accessBorde(_x,_y) = borde.find{casilla => casilla.position() == game.at(_x,_y)}	
+	method accederABordes(_x,_y) = self.getBorde().find{casilla => casilla.position() == game.at(_x,_y)}	
 }
 
 

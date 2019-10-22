@@ -145,7 +145,16 @@ class Nivel {
 	}
 	method calcularUnidadesCaidas() = 
 		unidadesPorJugador - jugador1.getUnidades().size() + unidadesPorJugador - jugador2.getUnidades().size()
-		
+	
+	method setearCasillasBase(internas, borde) {
+		mapManager.getInternas().forEach{casilla => casilla.image(internas)}
+		mapManager.getBordeLateral().forEach{
+			casilla => casilla.image(internas)
+		}	
+		mapManager.getBordeCentral().forEach{
+			casilla => casilla.image(borde)
+		}			
+	}
 	method setearObjetos(posiciones, objetoImg) {
 		posiciones.forEach{ pos =>
 			var vida = new Visual(image="vidaObj_10.png", position=pos, esAtacable=true)
@@ -154,14 +163,22 @@ class Nivel {
 			game.addVisual(vida)
 		}
 	}
+	method setearCasillas(posiciones, objetoImg) { 
+		posiciones.forEach{pos => 
+			mapManager.accederAInterna(pos.x(),pos.y()).image(objetoImg)
+		}
+	}
 }
 
 object nivel1 inherits Nivel{	
 	override method generarNivel() {
 		var nivelImg = new Visual(position = game.at(0,0), image = "nivel1_C.png")
-		var posMurallasRompibles = [game.at(game.width()-6,8)]
+		var posTorresRompibles = [game.at(23,1),game.at(23,7),game.at(23,9),game.at(23,15)]
+		var posMurallasRompibles = [game.at(23,2),game.at(23,3),game.at(23,4),game.at(23,5),game.at(23,6),game.at(23,8),game.at(23,10),game.at(23,11),game.at(23,12),game.at(23,13),game.at(23,14)]
 		
+		self.setearCasillasBase("casillaPasto.png","casillaMontana.png")
 		self.setearCasillas()
+		self.setearObjetos(posTorresRompibles, "casillaTorreMadera.png")
 		self.setearObjetos(posMurallasRompibles, "casillaMurallaMaderaVer.png")
 		game.schedule(500, {
 			game.addVisual(nivelImg)
@@ -175,12 +192,15 @@ object nivel1 inherits Nivel{
 	}
 	
 	method setearCasillas() {
-
-		mapManager.getInternas().forEach{casilla => casilla.image("casillaPasto.png")}
-
-		mapManager.getBorde().forEach{
-			casilla => casilla.image("casillaMontana.png")
-		}
+		var posMurallasHor = [game.at(1,4),game.at(2,4),game.at(3,4),game.at(4,4),game.at(5,4),game.at(1,12),game.at(2,12),game.at(3,12),game.at(4,12),game.at(5,12)]
+		var posMurallasVer = [game.at(6,5),game.at(6,11)]
+		var posTorres = [game.at(6,4),game.at(6,6),game.at(6,12),game.at(6,10)]
+		
+		self.setearCasillas(posMurallasVer, "casillaMurallaVer.png")
+		self.setearCasillas(posMurallasHor, "casillaMurallaHor.png")
+		self.setearCasillas(posTorres, "casillaTorre.png")
+		mapManager.accederABordes(0,4).image("casillaMurallaHor.png")
+		mapManager.accederABordes(0,12).image("casillaMurallaHor.png")
 	}
 	
 	method siguiente() = nivel2
@@ -190,6 +210,7 @@ object nivel2 inherits Nivel{
 	override method generarNivel() {
 		var nivelImg = new Visual(position = game.at(0,0), image = "nivel2_C.png")
 		
+		self.setearCasillasBase("casillaPasto.png","casillaTorre.png")
 		self.setearCasillas()
 		game.schedule(500, {game.addVisual(nivelImg)})
 		game.schedule(650, {nivelImg.image("nivel2_B.png")})
@@ -202,11 +223,7 @@ object nivel2 inherits Nivel{
 	
 	method setearCasillas() {
 
-		mapManager.getInternas().forEach{casilla => casilla.image("casillaPasto.png")}
 
-		mapManager.getBorde().forEach{
-			casilla => casilla.image("casillaTorre.png")
-		}
 	}
 	
 	method siguiente() = nivel3
@@ -216,6 +233,7 @@ object nivel3 inherits Nivel{
 	override method generarNivel() {
 		var nivelImg = new Visual(position = game.at(0,0), image = "nivel3_C.png")
 		
+		self.setearCasillasBase("casillaTorre.png","casillaTorre.png")
 		self.setearCasillas()
 		game.schedule(500, {game.addVisual(nivelImg)})
 		game.schedule(650, {nivelImg.image("nivel3_B.png")})
@@ -227,11 +245,7 @@ object nivel3 inherits Nivel{
 	}
 	
 	method setearCasillas() {
-		mapManager.getInternas().forEach{casilla => casilla.image("casillaTorre.png")}
 
-		mapManager.getBorde().forEach{
-			casilla => casilla.image("casillaMontana.png")
-		}
 	}
 
 	override method siguientePantalla() {

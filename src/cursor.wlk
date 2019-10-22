@@ -69,12 +69,9 @@ object cursor {
 	}
 	method hayObjetoRompibleEn(pos) = self.rompibleEn(pos) != null
 	method hayUnidadEn(pos) = self.unidadEn(pos) != null
-	method hayEnemigoEn(pos) = self.hayUnidadEn(pos) and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
 	method hayAtacableEn(pos) = self.atacableEn(pos) != null
-	method rompibleEn(pos) {
-		var lista = game.getObjectsIn(pos).filter({objeto => objeto.esAtacable() and !objeto.esSeleccionable()})
-		return if(lista.size() > 0) lista.head() else null		
-	}
+	method hayEnemigoEn(pos) = self.hayUnidadEn(pos) and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
+	method rompibleEn(pos) = self.getObjeto({game.getObjectsIn(pos).filter{objeto => objeto.esAtacable() and !objeto.esSeleccionable()}}, pos)
 	method unidadEn(pos) = self.getObjeto({game.getObjectsIn(pos).filter{objeto => objeto.esSeleccionable()}}, pos)
 	method atacableEn(pos) = self.getObjeto({game.getObjectsIn(pos).filter{objeto => objeto.esAtacable()}}, pos)	
 	method getObjeto(bloque, pos) {
