@@ -9,11 +9,11 @@ class Caballeria inherits Subordinado {
 		var nuevaPos = game.at(cursor.position().x() + difX, cursor.position().y() + difY)
 		cooldown = 2	
 		
-		if (cursor.hayEnemigoEn(cursor.position()) and cursor.enRangoEspecial()) {
+		if (cursor.hayAtacableEn(cursor.position()) and cursor.enRangoEspecial()) {
 			cursor.unidadEn(cursor.position()).recibirDanio(3)
-			if (cursor.hayUnidadEn(nuevaPos))  {
+			if (!cursor.esCasillaOcupable(nuevaPos))  {
 				self.recibirDanio(1.randomUpTo(3).truncate(0))
-				game.say(self, "Alguien detrás me hizo daño")			
+				game.say(self, "Hay alguien detrás y recibí daño al volver")			
 			}
 			else 
 				self.position(nuevaPos)
