@@ -15,7 +15,7 @@ object turnoManager {
 	method getJugadorActual() = jugadorActual
 	
 	method iniciarTurno() {
-		game.sound(jugadorActual.musica())
+		//game.sound(jugadorActual.musica())
 		cursor.estadoSeleccion(estadoVacio)
 		cursor.image(jugadorActual.cursorImage())
 		cursor.position(game.center())
