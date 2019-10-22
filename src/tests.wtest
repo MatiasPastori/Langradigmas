@@ -118,7 +118,7 @@ test "Hay unidades en una posición"{
 }
 test "No es casilla ocupable porque hay una unidad"{
 	cursor.position(game.at(4,4))
-	assert.that(!cursor.esCasillaOcupable())
+	assert.that(!cursor.esCasillaOcupable(cursor.position()))
 }
 }
 
