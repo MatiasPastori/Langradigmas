@@ -161,4 +161,11 @@ describe "metodos de unidades" {
 //	turnoManager.iniciarTurno()
 //	assert.that(turnoManager.puedeAtacar(unidad1))	
 //}
+//test "Cambia de turno cuando muere el comandante"{
+//	comandanteJ1.morir()
+//	assert.equals(jugador1,turnoManager.getJugadorActual())	
+//}
+//test "Es una unidad del jugador actual"{
+//	assert.that(turnoManager.esDelJugadorActual(unidad1))	
+//}
 //}
