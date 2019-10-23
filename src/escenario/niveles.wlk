@@ -1,6 +1,7 @@
 import wollok.game.*
 import escenario.escenario.*
 import escenario.casillas.*
+import escenario.objetosEnCasillas.*
 import escenario.tienda.*
 import unidades.comandante.*
 import unidades.tirador.*
@@ -155,18 +156,11 @@ class Nivel {
 			casilla => casilla.image(borde)
 		}			
 	}
-	method setearObjetos(posiciones, objetoImg) {
-		posiciones.forEach{ pos =>
-			var vida = new Visual(image="vidaObj_10.png", position=pos, esAtacable=true)
-			var objeto = new Visual(image=objetoImg, position=pos, esAtacable=true, imagenVida=vida)
-			mapManager.accederAInterna(pos).objeto(objeto)
-			game.addVisual(objeto)
-			game.addVisual(vida)
-		}
-	}
-	method setearCasillas(posiciones, objetoImg) { 
+	method setearObjetosDeCasillas(posiciones, objeto) { 
 		posiciones.forEach{pos => 
-			mapManager.accederAInterna(pos).image(objetoImg)
+			var casilla = mapManager.accederAInterna(pos)
+			casilla.objeto(new ObjetoCasilla(tipo=objeto, position=pos))
+			game.addVisual(casilla.objeto())
 		}
 	}
 }
@@ -192,12 +186,17 @@ object nivel1 inherits Nivel{
 		var posMurallasHor = [game.at(1,4),game.at(2,4),game.at(3,4),game.at(4,4),game.at(5,4),game.at(1,12),game.at(2,12),game.at(3,12),game.at(4,12),game.at(5,12)]
 		var posMurallasVer = [game.at(6,5),game.at(6,11)]
 		var posTorres = [game.at(6,4),game.at(6,6),game.at(6,12),game.at(6,10)]
+		var borde1 = mapManager.accederABordes(0,4)
+		var borde2 = mapManager.accederABordes(0,12)
 		
-		self.setearCasillas(posMurallasVer, "casillaMurallaVer.png")
-		self.setearCasillas(posMurallasHor, "casillaMurallaHor.png")
-		self.setearCasillas(posTorres, "casillaTorre.png")
-		mapManager.accederABordes(0,4).image("casillaMurallaHor.png")
-		mapManager.accederABordes(0,12).image("casillaMurallaHor.png")
+		self.setearObjetosDeCasillas(posMurallasVer, murallaVertical)
+		self.setearObjetosDeCasillas(posMurallasHor, murallaHorizontal)
+		self.setearObjetosDeCasillas(posTorres, torre)
+		// Setear dos objetos en bordes, no puedo usar el método de arriba
+		borde1.objeto(new ObjetoCasilla(tipo=murallaHorizontal, position=borde1.position()))
+		borde2.objeto(new ObjetoCasilla(tipo=murallaHorizontal, position=borde2.position()))
+		game.addVisual(borde1.objeto())
+		game.addVisual(borde2.objeto())
 	}
 	
 	method siguiente() = nivel2
@@ -245,12 +244,17 @@ object nivel3 inherits Nivel{
 		var posMurallasHor = [game.at(game.width()-2,4),game.at(game.width()-3,4),game.at(game.width()-4,4),game.at(game.width()-5,4),game.at(game.width()-6,4),game.at(game.width()-2,12),game.at(game.width()-3,12),game.at(game.width()-4,12),game.at(game.width()-5,12),game.at(game.width()-6,12)]
 		var posMurallasVer = [game.at(game.width()-7,5),game.at(game.width()-7,11)]
 		var posTorres = [game.at(game.width()-7,4),game.at(game.width()-7,6),game.at(game.width()-7,12),game.at(game.width()-7,10)]
-		
-		self.setearCasillas(posMurallasVer, "casillaMurallaVer.png")
-		self.setearCasillas(posMurallasHor, "casillaMurallaHor.png")
-		self.setearCasillas(posTorres, "casillaTorre.png")
-		mapManager.accederABordes(game.width()-1,4).image("casillaMurallaHor.png")
-		mapManager.accederABordes(game.width()-1,12).image("casillaMurallaHor.png")
+		var borde1 = mapManager.accederABordes(game.width()-1,4)
+		var borde2 = mapManager.accederABordes(game.width()-1,12)
+				
+		self.setearObjetosDeCasillas(posMurallasVer, murallaVertical)
+		self.setearObjetosDeCasillas(posMurallasHor, murallaHorizontal)
+		self.setearObjetosDeCasillas(posTorres, torre)
+		// Setear dos objetos en bordes, no puedo usar el método de arriba
+		borde1.objeto(new ObjetoCasilla(tipo=murallaHorizontal, position=borde1.position()))
+		borde2.objeto(new ObjetoCasilla(tipo=murallaHorizontal, position=borde2.position()))
+		game.addVisual(borde1.objeto())
+		game.addVisual(borde2.objeto())
 	}
 
 	override method siguientePantalla() {

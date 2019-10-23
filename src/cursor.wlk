@@ -19,6 +19,10 @@ object cursor {
 	var property estadoSeleccion = estadoVacio
 	var property estadoEspecial = estadoNoEspecial
 
+	method esSeleccionable() = false
+	method esAtacable() = false
+	method esCasillaFija() = false
+
 	method seleccionar() {
 		estadoSeleccion.accion(self)
 	}
@@ -71,11 +75,12 @@ object cursor {
 	method hayUnidadEn(pos) = self.unidadEn(pos) != null
 	method hayAtacableEn(pos) = self.atacableEn(pos) != null
 	method hayEnemigoEn(pos) = self.hayUnidadEn(pos) and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
+	method noHayEnemigosCerca() = objetosAtacables.isEmpty()
+	
 	method rompibleEn(pos) = self.getObjeto(game.getObjectsIn(pos).filter{objeto => objeto.esAtacable() and !objeto.esSeleccionable()})
 	method unidadEn(pos) = self.getObjeto(game.getObjectsIn(pos).filter{objeto => objeto.esSeleccionable()})
 	method atacableEn(pos) = self.getObjeto(game.getObjectsIn(pos).filter{objeto => objeto.esAtacable()})	
 	method getObjeto(lista) = if(lista.size() > 0) lista.head() else null
-	method noHayEnemigosCerca() = objetosAtacables.isEmpty()
 	
 	// Métodos para mostrar o borrar rangos de movimientos
 	method mostrarRango(rango, marca){
@@ -97,10 +102,6 @@ object cursor {
 	
 	// Otros
 	method esCasillaOcupable(pos) = !self.hayAtacableEn(pos) and mapManager.estaEnInternas(pos)
-	
-	method esSeleccionable() = false
-	method esAtacable() = false
-	method esCasillaFija() = false
 	
 	// Chequeo de errores
 	method verificarLaUnidadPuedaAtacar() {
