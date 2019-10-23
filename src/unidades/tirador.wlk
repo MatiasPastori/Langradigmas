@@ -5,6 +5,6 @@ class Tirador inherits Subordinado {
 	method habilidadEspecial(cursor) {
 		cooldown = 3
 		if(cursor.hayAtacableEn(cursor.position()) and cursor.enRangoEspecial() and !cursor.unidadEn(cursor.position()).equals(self)) 
-			cursor.unidadEn(cursor.position()).recibirDanio(3)
+			cursor.unidadEn(cursor.position()).recibirDanio(2.randomUpTo(3).truncate(0))
 	}
 }

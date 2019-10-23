@@ -151,7 +151,7 @@ object tirador {
 		tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "gris.png")	
 		tienda.unidadReservada(self)
 	}
-	method tomarUna() = new Tirador(position = game.at(2,2), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "tirador", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 4, rangoEspecial = 2,nivelAtaque = 24, nivelDefensa = 20)
+	method tomarUna() = new Tirador(position = game.at(2,2), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "tirador", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 4, rangoEspecial = 2,nivelAtaque = 22, nivelDefensa = 18)
 }
 object caballeria {
 	method reservarUnidad() {
@@ -160,5 +160,5 @@ object caballeria {
 		tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "iddle1.png")	
 		tienda.unidadReservada(self)
 	}
-	method tomarUna() = new Caballeria(position = game.at(3,3), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "caballeria", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 5, rangoEspecial = 1,nivelAtaque = 24, nivelDefensa = 20) 
+	method tomarUna() = new Caballeria(position = game.at(3,3), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "caballeria", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 5, rangoEspecial = 1,nivelAtaque = 25, nivelDefensa = 17) 
 }

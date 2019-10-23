@@ -87,7 +87,6 @@ class Unidad {
 		}
 	}
 	
-	
 	method cambiarSprite(accion) {accion.cambiarSprite(self, tipo + self.idJugador())}
 	
 	method idJugador() = jugadorDuenio.getId()

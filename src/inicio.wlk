@@ -1,6 +1,7 @@
 import wollok.game.*
 import utilidades.visuals.*
 import utilidades.teclado.*
+import cursor.*
 
 object inicio {
 	const height = 17
@@ -14,7 +15,7 @@ object inicio {
 		game.height(height)
 		game.width(width)
 		
-		keyboard.num(9).onPressDo { game.sound("nivel_fin.mp3") }
+		keyboard.num(9).onPressDo { game.say(cursor,cursor.casillaEn(cursor.position()).position().toString()) }
 		
 		teclado.setearTeclaInicio()
 	}

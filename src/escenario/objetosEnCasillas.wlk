@@ -31,9 +31,9 @@ class ObjetoCasilla {
 
 class Muralla {
 	method esAtacable() = false
-	method esObjetoGrande() = true
-	method buffAtaque() = 0
-	method buffDefensa() = 0
+	method esObjetoGrande() = false
+	method buffAtaque() = 5
+	method buffDefensa() = 2
 }
 class Rio {
 	method esAtacable() = false	
@@ -47,6 +47,18 @@ class Casa {
 	method buffAtaque() = -1
 	method buffDefensa() = 3	
 }
+class Arbol {
+	method esAtacable() = false	
+	method esObjetoGrande() = false
+	method buffAtaque() = 3
+	method buffDefensa() = -1
+}
+class Montana {
+	method esAtacable() = false	
+	method esObjetoGrande() = true
+	method buffAtaque() = 0
+	method buffDefensa() = 0
+}
 
 object torre inherits Muralla{
 	method image() = "casillaTorre.png"
@@ -58,6 +70,18 @@ object murallaVertical inherits Muralla{
 
 object murallaHorizontal inherits Muralla{
 	method image() = "casillaMurallaHor.png"
+}
+
+object torre2 inherits Muralla{
+	method image() = "casillaTorreMadera.png"
+}
+
+object murallaVertical2 inherits Muralla{
+	method image() = "casillaMurallaMaderaVer.png"
+}
+
+object murallaHorizontal2 inherits Muralla{
+	method image() = "casillaMurallaMaderaHor.png"
 }
 
 object rioVertical inherits Rio{
@@ -88,10 +112,15 @@ object casas2 inherits Casa{
 	method image() = "casillaCasitas2.png"
 }
 
-object arboles {
+object arboles inherits Arbol{
 	method image() = "casillaArboles.png"
-	method esAtacable() = false	
-	method esObjetoGrande() = false
-	method buffAtaque() = 5
-	method buffDefensa() = -1
+}
+object arboles2 inherits Arbol{
+	method image() = "casillaArboles2.png"
+}
+object montania inherits Montana{
+	method image() = "casillaMontana3.png"
+}
+object montania2 inherits Montana{
+	method image() = "casillaMontana2.png"	
 }
