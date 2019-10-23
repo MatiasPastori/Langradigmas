@@ -15,6 +15,7 @@ import jugadores.*
 import turnos.*
 import cursor.*
 
+// Clase abstracta, es utilizada por los objetos niveles
 class Nivel {
 	const tiendaImg = new Visual(position = game.at(0,0), image = "tienda.png")
 	const unidadesPorJugador = 11
@@ -109,19 +110,16 @@ class Nivel {
 			unidad.position(game.at(comandanteJ2.position().x()-1, coordY))
 			coordY--
 		}	
-				
-		jugador1.getUnidades().forEach{ unidad => 
+		self.agregarUnidadesEnCampo(jugador1)
+		self.agregarUnidadesEnCampo(jugador2)			
+	}
+	method agregarUnidadesEnCampo(jugador) {
+		jugador.getUnidades().forEach{ unidad => 
 			game.addVisual(unidad)
 			game.addVisual(unidad.imagenVida())
 			game.addVisual(unidad.imagenCD())
 			unidad.cambiarSprite(iddle)
-		}
-		jugador2.getUnidades().forEach{ unidad => 
-			game.addVisual(unidad)
-			game.addVisual(unidad.imagenVida())
-			game.addVisual(unidad.imagenCD())
-			unidad.cambiarSprite(iddle)
-		}
+		}		
 	}
 	method terminarNivel(jGanador) {
 		var victoria = new Visual(position=game.at(0,0), image="victoria_" + jGanador.getId() + ".png")

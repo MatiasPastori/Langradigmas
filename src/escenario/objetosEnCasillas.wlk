@@ -14,6 +14,7 @@ class ObjetoCasilla {
 	
 	method esSeleccionable() = false
 	method esCasillaFija() = false
+	method esObjetoGrande() = tipo.esObjetoGrande()
 	method esAtacable() = tipo.esAtacable() // Para futura implementación
 	
 	// Se piensa implementar un sistema de ataque a los objetos de casillas para obtener bonificaciones
@@ -31,6 +32,7 @@ class ObjetoCasilla {
 object torre {
 	method image() = "casillaTorre.png"
 	method esAtacable() = false
+	method esObjetoGrande() = true
 	method buffAtaque() = 0
 	method buffDefensa() = 0
 }
@@ -38,6 +40,7 @@ object torre {
 object murallaVertical {
 	method image() = "casillaMurallaVer.png"
 	method esAtacable() = false	
+	method esObjetoGrande() = true
 	method buffAtaque() = 0
 	method buffDefensa() = 0
 }
@@ -45,6 +48,7 @@ object murallaVertical {
 object murallaHorizontal {
 	method image() = "casillaMurallaHor.png"
 	method esAtacable() = false	
+	method esObjetoGrande() = true
 	method buffAtaque() = 0
 	method buffDefensa() = 0
 }

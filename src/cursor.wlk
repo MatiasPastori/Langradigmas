@@ -22,6 +22,7 @@ object cursor {
 	method esSeleccionable() = false
 	method esAtacable() = false
 	method esCasillaFija() = false
+	method esObjetoGrande() = false
 
 	method seleccionar() {
 		estadoSeleccion.accion(self)
@@ -75,12 +76,27 @@ object cursor {
 	method hayUnidadEn(pos) = self.unidadEn(pos) != null
 	method hayAtacableEn(pos) = self.atacableEn(pos) != null
 	method hayEnemigoEn(pos) = self.hayUnidadEn(pos) and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
+	method hayObjetoGrandeEn(pos) = self.objetoGrandeEn(pos) != null
 	method noHayEnemigosCerca() = objetosAtacables.isEmpty()
 	
-	method rompibleEn(pos) = self.getObjeto(game.getObjectsIn(pos).filter{objeto => objeto.esAtacable() and !objeto.esSeleccionable()})
-	method unidadEn(pos) = self.getObjeto(game.getObjectsIn(pos).filter{objeto => objeto.esSeleccionable()})
-	method atacableEn(pos) = self.getObjeto(game.getObjectsIn(pos).filter{objeto => objeto.esAtacable()})	
-	method getObjeto(lista) = if(lista.size() > 0) lista.head() else null
+	
+	method rompibleEn(pos) = self.getObjeto({obj => obj.esAtacable() and !obj.esSeleccionable()}, pos)
+	method unidadEn(pos) = self.getObjeto({obj => obj.esSeleccionable()}, pos)
+	method atacableEn(pos) = self.getObjeto({obj => obj.esAtacable()}, pos) 
+	method objetoGrandeEn(pos) {
+		var objetoDeCasilla = self.getObjeto({obj => obj.esCasillaFija()},pos).objeto()
+		if (objetoDeCasilla != null) {
+			if (objetoDeCasilla.esObjetoGrande()){
+				return objetoDeCasilla
+			} 
+		}
+		return null
+	}
+	//self.getObjeto({obj => obj.objeto().esObjetoGrande()}, pos) 	
+	method getObjeto(condicion,pos) { 
+		var lista = game.getObjectsIn(pos).filter({obj => condicion.apply(obj)})
+		return if(lista.size() > 0) lista.head() else null
+	}
 	
 	// Métodos para mostrar o borrar rangos de movimientos
 	method mostrarRango(rango, marca){
@@ -101,7 +117,7 @@ object cursor {
 	method enRangoEspecial() = !rangoMarcadoPorUnidad.filter{visual => visual.position() == self.position()}.isEmpty()
 	
 	// Otros
-	method esCasillaOcupable(pos) = !self.hayAtacableEn(pos) and mapManager.estaEnInternas(pos)
+	method esCasillaOcupable(pos) = !self.hayAtacableEn(pos) and mapManager.estaEnInternas(pos) and !self.hayObjetoGrandeEn(pos)
 	
 	// Chequeo de errores
 	method verificarLaUnidadPuedaAtacar() {

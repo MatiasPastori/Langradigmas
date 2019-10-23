@@ -10,6 +10,7 @@ class Casilla {
 	
 	method esSeleccionable() = false
 	method esCasillaFija() = true
+	method esObjetoGrande() = false
 }
 
 object mapManager {

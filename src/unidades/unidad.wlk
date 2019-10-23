@@ -25,6 +25,7 @@ class Unidad {
 	method esSeleccionable() = true
 	method esAtacable() = true
 	method esCasillaFija() = false
+	method esObjetoGrande() = false
 	
 	method buffAtaque() = 0 // depende de casillas
 	method buffDefensa() = 0 // depende de casillas
