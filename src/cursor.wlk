@@ -71,13 +71,10 @@ object cursor {
 	method hayUnidadEn(pos) = self.unidadEn(pos) != null
 	method hayAtacableEn(pos) = self.atacableEn(pos) != null
 	method hayEnemigoEn(pos) = self.hayUnidadEn(pos) and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
-	method rompibleEn(pos) = self.getObjeto({game.getObjectsIn(pos).filter{objeto => objeto.esAtacable() and !objeto.esSeleccionable()}}, pos)
-	method unidadEn(pos) = self.getObjeto({game.getObjectsIn(pos).filter{objeto => objeto.esSeleccionable()}}, pos)
-	method atacableEn(pos) = self.getObjeto({game.getObjectsIn(pos).filter{objeto => objeto.esAtacable()}}, pos)	
-	method getObjeto(bloque, pos) {
-		var lista = bloque.apply()
-		return if(lista.size() > 0) lista.head() else null
-	}
+	method rompibleEn(pos) = self.getObjeto(game.getObjectsIn(pos).filter{objeto => objeto.esAtacable() and !objeto.esSeleccionable()})
+	method unidadEn(pos) = self.getObjeto(game.getObjectsIn(pos).filter{objeto => objeto.esSeleccionable()})
+	method atacableEn(pos) = self.getObjeto(game.getObjectsIn(pos).filter{objeto => objeto.esAtacable()})	
+	method getObjeto(lista) = if(lista.size() > 0) lista.head() else null
 	method noHayEnemigosCerca() = objetosAtacables.isEmpty()
 	
 	// Métodos para mostrar o borrar rangos de movimientos

@@ -7,7 +7,7 @@ import cursor.*
 import utilidades.visuals.*
 
 object escenario {
-	var nivelActual = nivel1
+	var nivelActual = nivel3
 
 	method iniciar() {
 		teclado.setearTeclasMovimiento(cursor)

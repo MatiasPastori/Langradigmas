@@ -44,7 +44,7 @@ test "Funciona el cálculo de distancia"{
 	
 test "Una unidad puede morir?"{
 	unidad1.morir()
-	assert.equals(false,(jugador1.getUnidades()).contais(unidad1))
+	assert.that(!jugador1.getUnidades().contais(unidad1))
 }
 
 test "Se cura cuando esta cerca del comandante"{

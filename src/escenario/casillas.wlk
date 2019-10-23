@@ -10,7 +10,6 @@ class Casilla {
 	
 	method esSeleccionable() = false
 	method esCasillaFija() = true
-	method ponerObjetoVacio() { objeto = new Visual(position = game.center(), image="transparente.png") }
 }
 
 object mapManager {
@@ -40,7 +39,9 @@ object mapManager {
 		})
 		internas = eje_x.flatten()
 	}
-	method accederAInterna(_x, _y) = internas.find{casilla => casilla.position() == game.at(_x,_y)}
+	//method accederAInterna(pos) = internas.find{casilla => casilla.position() == pos}
+	// Esto es claramente mejor pero genera muchísmo lag y a veces crashea por el find
+	method accederAInterna(pos) = game.getObjectsIn(pos).filter{obj => obj.esCasillaFija()}.head()
 	method estaEnInternas(posicionCursor) = !internas.filter{myPos => myPos.position() == posicionCursor}.isEmpty()
 
 	method generarBordes() {
@@ -62,7 +63,7 @@ object mapManager {
 				bordeCentral.add(casilla)	
 			}
 		}
-	method accederABordes(_x,_y) = self.getBorde().find{casilla => casilla.position() == game.at(_x,_y)}	
+	method accederABordes(_x,_y) = game.getObjectsIn(game.at(_x,_y)).filter{obj => obj.esCasillaFija()}.head()
 }
 
 
