@@ -7,8 +7,8 @@ import utilidades.visuals.*
 class Subordinado inherits Unidad {
 	var comandante
 	
-	override method buffAtaque() = super() + self.buffAtaquePorComandanteCerca()
-	override method buffDefensa() = super() + self.buffDefensaPorComandanteCerca()
+	override method buffAtaque(casilla) = super(casilla) + self.buffAtaquePorComandanteCerca()
+	override method buffDefensa(casilla) = super(casilla) + self.buffDefensaPorComandanteCerca()
 	
 	method buffAtaquePorComandanteCerca() {
 		return self.buff({comandante.buffAtaqueQueOtorga()})

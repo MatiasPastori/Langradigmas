@@ -19,7 +19,7 @@ class ObjetoCasilla {
 	
 	// Se piensa implementar un sistema de ataque a los objetos de casillas para obtener bonificaciones
 	// Parte de esta lógica posiblemente pase a los objetos de abajo dependiendo del tipo
-	method combatir(unidad) {}
+	method combatir(unidad,cursor) {}
 	method recibirDanio(danio) {
 		vidaObjeto -= danio
 		self.imagenVida().image("vidaObj_" + vidaObjeto.toString() + ".png")
@@ -29,26 +29,69 @@ class ObjetoCasilla {
 	method destruir() = game.removeVisual(self)	
 }
 
-object torre {
-	method image() = "casillaTorre.png"
+class Muralla {
 	method esAtacable() = false
 	method esObjetoGrande() = true
 	method buffAtaque() = 0
 	method buffDefensa() = 0
 }
-
-object murallaVertical {
-	method image() = "casillaMurallaVer.png"
+class Rio {
 	method esAtacable() = false	
-	method esObjetoGrande() = true
-	method buffAtaque() = 0
-	method buffDefensa() = 0
+	method esObjetoGrande() = false
+	method buffAtaque() = -3
+	method buffDefensa() = -3
+}
+class Casa {
+	method esAtacable() = false	
+	method esObjetoGrande() = false
+	method buffAtaque() = -1
+	method buffDefensa() = 3	
 }
 
-object murallaHorizontal {
+object torre inherits Muralla{
+	method image() = "casillaTorre.png"
+}
+
+object murallaVertical inherits Muralla{
+	method image() = "casillaMurallaVer.png"
+}
+
+object murallaHorizontal inherits Muralla{
 	method image() = "casillaMurallaHor.png"
+}
+
+object rioVertical inherits Rio{
+	method image() = "casillaRioVer.png"
+}
+
+object rioHorizontal inherits Rio{
+	method image() = "casillaRioHor.png"
+}
+
+object rioUnion inherits Rio{
+	method image() = "casillaRioUnion.png"
+}
+
+object rioGiro1 inherits Rio{
+	method image() = "casillaRioGiro1.png"
+}
+
+object rioGiro3 inherits Rio{
+	method image() = "casillaRioGiro3.png"
+}
+
+object casas inherits Casa{
+	method image() = "casillaCasitas.png"
+}
+
+object casas2 inherits Casa{
+	method image() = "casillaCasitas2.png"
+}
+
+object arboles {
+	method image() = "casillaArboles.png"
 	method esAtacable() = false	
-	method esObjetoGrande() = true
-	method buffAtaque() = 0
-	method buffDefensa() = 0
+	method esObjetoGrande() = false
+	method buffAtaque() = 5
+	method buffDefensa() = -1
 }

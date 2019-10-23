@@ -27,8 +27,15 @@ class Unidad {
 	method esCasillaFija() = false
 	method esObjetoGrande() = false
 	
-	method buffAtaque() = 0 // depende de casillas
-	method buffDefensa() = 0 // depende de casillas
+	method buffAtaque(casilla) = self.buffCasilla(casilla, {objeto => objeto.buffAtaqueQueOtorga()})
+	method buffDefensa(casilla) = self.buffCasilla(casilla, {objeto => objeto.buffDefensaQueOtorga()})
+	
+	method buffCasilla(casilla, bloque) {
+		if (casilla.objeto() != null) {
+			return bloque.apply(casilla.objeto())
+		}
+		return 0
+	} 
 	
 	method getVida() = vida
 	method getTipo() = tipo
@@ -43,13 +50,13 @@ class Unidad {
 	
 	method puedeLlegar(rangoNecesario) = rangoNecesario <= rangoDeAccion && turnoManager.puedeMoverse(self)
 	
-	method combatir(enemigo) {
-		var danioBruto = self.potencialDeDanio(enemigo).limitBetween(0,10)
+	method combatir(enemigo, casilla) {
+		var danioBruto = self.potencialDeDanio(enemigo, casilla).limitBetween(0,10)
 		var danioNeto = danioBruto.randomUpTo(10).truncate(0)
 		enemigo.recibirDanio(danioNeto)
 	}
 	
-	method potencialDeDanio(enemigo) = self.nivelAtaque() + self.buffAtaque() - enemigo.nivelDefensa() - enemigo.buffDefensa()
+	method potencialDeDanio(enemigo, casilla) = self.nivelAtaque() + self.buffAtaque(casilla) - enemigo.nivelDefensa() - enemigo.buffDefensa(casilla)
 
 	method recibirDanio(danio) {
 		self.modificarVida(vida - danio)

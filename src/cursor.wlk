@@ -31,8 +31,8 @@ object cursor {
 	method atacar(){
 		self.verificarLaUnidadPuedaAtacar()
 		var atacado = self.atacableEn(position)
-		unidad.combatir(atacado)
-		atacado.combatir(unidad)
+		unidad.combatir(atacado,self.casillaEn(position))
+		atacado.combatir(unidad,self.casillaEn(position))
 		unidad.cambiarSprite(deseleccion)
 		turnoManager.yaAtaco(unidad)
 		estadoSeleccion = estadoVacio
@@ -82,6 +82,7 @@ object cursor {
 	
 	method rompibleEn(pos) = self.getObjeto({obj => obj.esAtacable() and !obj.esSeleccionable()}, pos)
 	method unidadEn(pos) = self.getObjeto({obj => obj.esSeleccionable()}, pos)
+	method casillaEn(pos) = self.getObjeto({obj => obj.esCasillaFija()}, pos)
 	method atacableEn(pos) = self.getObjeto({obj => obj.esAtacable()}, pos) 
 	method objetoGrandeEn(pos) {
 		var objetoDeCasilla = self.getObjeto({obj => obj.esCasillaFija()},pos).objeto()
@@ -92,7 +93,6 @@ object cursor {
 		}
 		return null
 	}
-	//self.getObjeto({obj => obj.objeto().esObjetoGrande()}, pos) 	
 	method getObjeto(condicion,pos) { 
 		var lista = game.getObjectsIn(pos).filter({obj => condicion.apply(obj)})
 		return if(lista.size() > 0) lista.head() else null

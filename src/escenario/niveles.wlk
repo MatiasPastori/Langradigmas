@@ -204,7 +204,7 @@ object nivel2 inherits Nivel{
 	override method generarNivel() {
 		var nivelImg = new Visual(position = game.at(0,0), image = "nivel2_C.png")
 		
-		self.setearCasillasBase("casillaPasto.png","casillaTorre.png")
+		self.setearCasillasBase("casillaPiedritas.png","casillaBosqueDenso.png")
 		self.setearCasillas()
 		game.schedule(500, {game.addVisual(nivelImg)})
 		game.schedule(650, {nivelImg.image("nivel2_B.png")})
@@ -216,8 +216,15 @@ object nivel2 inherits Nivel{
 	}
 	
 	method setearCasillas() {
-
-
+		var posRioVertical = [game.at(18,1),game.at(18,2),game.at(15,4),game.at(15,5),game.at(15,6),game.at(15,7),game.at(15,8),game.at(15,9),game.at(15,10),game.at(15,11),game.at(13,13),game.at(13,14),game.at(13,15)]
+		var posRioHorizontal = [game.at(16,3),game.at(17,3),game.at(14,12)]
+		var posGiro1 = [game.at(18,3),game.at(15,12)]
+		var posGiro3 = [game.at(15,3),game.at(13,12)]
+		
+		self.setearObjetosDeCasillas(posRioVertical, rioVertical)
+		self.setearObjetosDeCasillas(posRioHorizontal, rioHorizontal)
+		self.setearObjetosDeCasillas(posGiro1, rioGiro1)
+		self.setearObjetosDeCasillas(posGiro3, rioGiro3)
 	}
 	
 	method siguiente() = nivel3
