@@ -22,7 +22,7 @@ class Nivel {
 	method getCantUnidadesMuertas() = cantUnidadesMuertas
 	
 	method generarNivel()
-	method tienda() {
+	method mostrarTienda() {
 		var comandanteJ1 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", idUnico=1, rangoDeAccion = 3, rangoEspecial = 8, vida = 10, nivelAtaque = 28, nivelDefensa = 25)
 		var comandanteJ2 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", idUnico=2,rangoDeAccion = 3, rangoEspecial = 8, vida = 10, nivelAtaque = 28, nivelDefensa = 25)
 		
@@ -56,57 +56,37 @@ class Nivel {
 		turnoManager.setJugadorActual(jugador1)
 		turnoManager.iniciarTurno()
 	}
+	method obtenerPeloton(jugador,x,y) = jugador.getUnidades().subList(x,y)
+	method darPosicionAPeloton(peloton,xFija,yInicial,comandante) {
+		// Le da la posicion a cada unidad de cada peloton en función a su comandante.
+		// Ver imagen "explicación_seteo_unidades.png" de assets.
+		var y = yInicial
+		peloton.forEach{ unidad =>
+			unidad.position(game.at(xFija,y))
+			y--
+			if(comandante.position() == game.at(xFija,y)) { y-- }
+		}
+	}
 	method posicionarUnidades() {	
 		const comandanteJ1 = jugador1.getUnidades().head()
 		const comandanteJ2 = jugador2.getUnidades().head()
-		const primerPelotonUnidadesJ1 = jugador1.getUnidades().subList(1,4)
-		const primerPelotonUnidadesJ2 = jugador2.getUnidades().subList(1,4)
-		const segundoPelotonUnidadesJ1 = jugador1.getUnidades().subList(5,7)
-		const segundoPelotonUnidadesJ2 = jugador2.getUnidades().subList(5,7)
-		const tercerPelotonUnidadesJ1 = jugador1.getUnidades().subList(8,10)
-		const tercerPelotonUnidadesJ2 = jugador2.getUnidades().subList(8,10)
-		var coordY
+		const peloton1UnidadesJ1 = self.obtenerPeloton(jugador1,1,4)
+		const peloton1UnidadesJ2 = self.obtenerPeloton(jugador2,1,4)
+		const peloton2UnidadesJ1 = self.obtenerPeloton(jugador1,5,7)
+		const peloton2UnidadesJ2 = self.obtenerPeloton(jugador2,5,7)
+		const peloton3UnidadesJ1 = self.obtenerPeloton(jugador1,8,10)
+		const peloton3UnidadesJ2 = self.obtenerPeloton(jugador2,8,10)
 
 		comandanteJ1.position(game.at(2,8))
 		comandanteJ2.position(game.at(game.width()-3,8))
 
-	// Pelotones J1	 - Logica fea pero funcional
-	// Agrega los pelotones de unidades alrededor del comandante correspondiente
-	// ver imagen en assets explicacion_seteo_unidades
-		coordY = comandanteJ1.position().y() + 2
-		primerPelotonUnidadesJ1.forEach{ unidad => 
-			unidad.position(game.at(comandanteJ1.position().x(), coordY))
-			coordY--
-			if (coordY == comandanteJ1.position().y() ) { coordY-- }
-		}
-		coordY = comandanteJ1.position().y() + 1
-		segundoPelotonUnidadesJ1.forEach{ unidad => 
-			unidad.position(game.at(comandanteJ1.position().x()+1, coordY))
-			coordY--
-		}
-		coordY = comandanteJ1.position().y() + 1
-		tercerPelotonUnidadesJ1.forEach{ unidad => 
-			unidad.position(game.at(comandanteJ1.position().x()-1, coordY))
-			coordY--
-		}
-
-	// Pelotones J2
-		coordY = comandanteJ2.position().y() + 2
-		primerPelotonUnidadesJ2.forEach{ unidad => 
-			unidad.position(game.at(comandanteJ2.position().x(), coordY))
-			coordY--
-			if (coordY == comandanteJ2.position().y() ) { coordY-- }
-		}
-		coordY = comandanteJ2.position().y() + 1
-		segundoPelotonUnidadesJ2.forEach{ unidad => 
-			unidad.position(game.at(comandanteJ2.position().x()+1, coordY))
-			coordY--
-		}
-		coordY = comandanteJ2.position().y() + 1
-		tercerPelotonUnidadesJ2.forEach{ unidad => 
-			unidad.position(game.at(comandanteJ2.position().x()-1, coordY))
-			coordY--
-		}	
+		self.darPosicionAPeloton(peloton1UnidadesJ1,comandanteJ1.position().x(),  comandanteJ1.position().y()+2,comandanteJ1)
+		self.darPosicionAPeloton(peloton2UnidadesJ1,comandanteJ1.position().x()+1,comandanteJ1.position().y()+1,comandanteJ1)
+		self.darPosicionAPeloton(peloton3UnidadesJ1,comandanteJ1.position().x()-1,comandanteJ1.position().y()+1,comandanteJ1)
+		self.darPosicionAPeloton(peloton1UnidadesJ2,comandanteJ2.position().x(),  comandanteJ2.position().y()+2,comandanteJ2)
+		self.darPosicionAPeloton(peloton2UnidadesJ2,comandanteJ2.position().x()+1,comandanteJ2.position().y()+1,comandanteJ2)
+		self.darPosicionAPeloton(peloton3UnidadesJ2,comandanteJ2.position().x()-1,comandanteJ2.position().y()+1,comandanteJ2)
+			
 		self.agregarUnidadesEnCampo(jugador1)
 		self.agregarUnidadesEnCampo(jugador2)			
 	}
@@ -173,7 +153,7 @@ object nivel1 inherits Nivel{
 		game.schedule(800, {nivelImg.image("nivel1_A.png")})
 		game.schedule(2000, {
 			game.removeVisual(nivelImg)
-			self.tienda()
+			self.mostrarTienda()
 		})
 	}
 	
@@ -216,7 +196,7 @@ object nivel2 inherits Nivel{
 		game.schedule(800, {nivelImg.image("nivel2_A.png")})
 		game.schedule(2000, {
 			game.removeVisual(nivelImg)
-			self.tienda()
+			self.mostrarTienda()
 		})
 	}
 	
@@ -259,7 +239,7 @@ object nivel3 inherits Nivel{
 		game.schedule(800, {nivelImg.image("nivel3_A.png")})
 		game.schedule(2000, {
 			game.removeVisual(nivelImg)
-			self.tienda()
+			self.mostrarTienda()
 		})
 	}
 	
