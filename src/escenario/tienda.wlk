@@ -14,6 +14,7 @@ object tienda {
 	
 	const maxUnidadesPorJugador = 10
 	var cantComprada = 0
+	var property idUnicoUnidad = 3
 	var property unidadReservada
 	const property carritoDeCompras = []
 	
@@ -82,6 +83,7 @@ object tienda {
 		self.verificarQueHayaUnidadSeleccionada()
 		carritoDeCompras.add(unidadReservada.tomarUna())
 		cantComprada++
+		idUnicoUnidad++
 		self.actualizarContadoresPorUnidad()
 		self.actualizarContadorDisponibles()
 	} 	
@@ -91,6 +93,7 @@ object tienda {
 		self.verificarQueHayaUnidadesCompradas()
 		carritoDeCompras.remove(carritoDeCompras.last())
 		cantComprada--
+		idUnicoUnidad--
 		self.actualizarContadoresPorUnidad()
 		self.actualizarContadorDisponibles()
 	}
@@ -142,7 +145,7 @@ object guerrero {
 		tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "gris.png")
 		tienda.unidadReservada(self)
 	}
-	method tomarUna() = new Guerrero(position = game.at(1,1), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "guerrero", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 3, rangoEspecial = 1,nivelAtaque = 24, nivelDefensa = 20)
+	method tomarUna() = new Guerrero(position = game.at(1,1), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "guerrero", idUnico=tienda.idUnicoUnidad(),comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 3, rangoEspecial = 1,nivelAtaque = 24, nivelDefensa = 20)
 }
 object tirador {
 	method reservarUnidad() {
@@ -151,7 +154,7 @@ object tirador {
 		tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "gris.png")	
 		tienda.unidadReservada(self)
 	}
-	method tomarUna() = new Tirador(position = game.at(2,2), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "tirador", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 4, rangoEspecial = 2,nivelAtaque = 22, nivelDefensa = 18)
+	method tomarUna() = new Tirador(position = game.at(2,2), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "tirador", idUnico=tienda.idUnicoUnidad(), comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 4, rangoEspecial = 2,nivelAtaque = 22, nivelDefensa = 18)
 }
 object caballeria {
 	method reservarUnidad() {
@@ -160,5 +163,5 @@ object caballeria {
 		tienda.getCaballeroJug().image("caballeria" + tienda.jugadorActual().getId() + "iddle1.png")	
 		tienda.unidadReservada(self)
 	}
-	method tomarUna() = new Caballeria(position = game.at(3,3), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "caballeria", comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 5, rangoEspecial = 1,nivelAtaque = 25, nivelDefensa = 17) 
+	method tomarUna() = new Caballeria(position = game.at(3,3), image = "transparente.png", jugadorDuenio = tienda.jugadorActual(), tipo = "caballeria", idUnico=tienda.idUnicoUnidad(), comandante = tienda.jugadorActual().getUnidades().head(), rangoDeAccion = 5, rangoEspecial = 1,nivelAtaque = 25, nivelDefensa = 17) 
 }

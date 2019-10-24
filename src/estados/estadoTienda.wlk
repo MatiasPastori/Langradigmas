@@ -31,6 +31,7 @@ object jugador2Comprando {
 		tienda.imagenesTienda().forEach{imagen => game.removeVisual(imagen)}
 		tienda.imagenesTienda().clear()
 		tienda.jugadorActual(jugador1)
+		tienda.idUnicoUnidad(3)
 		tienda.estado(jugador1Comprando)
 		tienda.habilitada(false)
 		escenario.nivelActual().iniciar()

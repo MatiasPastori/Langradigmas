@@ -59,6 +59,12 @@ class Montana {
 	method buffAtaque() = 0
 	method buffDefensa() = 0
 }
+class PisoCastillo {
+	method esAtacable() = false	
+	method esObjetoGrande() = false
+	method buffAtaque() = 1
+	method buffDefensa() = 1
+}
 
 object torre inherits Muralla{
 	method image() = "casillaTorre.png"
@@ -123,4 +129,10 @@ object montania inherits Montana{
 }
 object montania2 inherits Montana{
 	method image() = "casillaMontana2.png"	
+}
+object pisoRombo inherits PisoCastillo{
+	method image() = "casillaPisoRombo.png"	
+}
+object pisoPiedraRoja inherits PisoCastillo{
+	method image() = "casillaPisoPiedrasRojas.png"	
 }

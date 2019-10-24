@@ -13,9 +13,11 @@ class EstadoAgarrado {
 			cursor.descaptarEnemigosCercanos()
 			unidad.mover(cursor.position())
 			cursor.borrarRango()
+			unidad.cambiarSprite(iddle)
 			cursor.captarEnemigosCercanos()
-			unidad.cambiarSprite(deseleccion)
 			if (cursor.noHayEnemigosCerca()) {
+				game.removeTickEvent("iddle" + unidad.getIdUnico().toString())
+				unidad.cambiarSprite(deseleccion)
 				cursor.unidad(null)
 				cursor.estadoSeleccion(estadoVacio)				
 			}

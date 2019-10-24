@@ -12,6 +12,7 @@ class Unidad {
 	const property rangoEspecial
 	var vida = 10
 	var tipo
+	var idUnico
 	
 	var property position
 	var property image
@@ -39,6 +40,7 @@ class Unidad {
 	
 	method getVida() = vida
 	method getTipo() = tipo
+	method getIdUnico() = idUnico
 	
 	method habilidadEspecialDisponible() = cooldown == 0
 	

@@ -12,12 +12,12 @@ import turnos.*
 
 
 describe "Acciones sobre las unidades"{
-var comandanteJ1 = new Comandante(position = game.at(3,5), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 8, rangoEspecial = 6, vida = 10, nivelAtaque = 20, nivelDefensa =16 )
-var comandanteJ2 = new Comandante(position = game.at(11,5), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", rangoDeAccion = 8, rangoEspecial = 6, vida = 10, nivelAtaque = 20, nivelDefensa =16 )
-var unidad1 = new Guerrero(position = game.at(3,4), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = comandanteJ1, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
-var unidad2 =new Guerrero(position = game.at(11,4), image = "transparente.png", jugadorDuenio = jugador2, tipo = "guerrero", comandante = comandanteJ2, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
-var unidad3 =new Guerrero(position = game.at(3,6), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = comandanteJ1, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
-var unidad4 =new Guerrero(position = game.at(11,6), image = "transparente.png", jugadorDuenio = jugador2, tipo = "guerrero", comandante = comandanteJ2, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
+var comandanteJ1 = new Comandante(position = game.at(3,5), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", idUnico=1,rangoDeAccion = 8, rangoEspecial = 6, vida = 10, nivelAtaque = 20, nivelDefensa =16 )
+var comandanteJ2 = new Comandante(position = game.at(11,5), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", idUnico=2, rangoDeAccion = 8, rangoEspecial = 6, vida = 10, nivelAtaque = 20, nivelDefensa =16 )
+var unidad1 = new Guerrero(position = game.at(3,4), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", idUnico=3, comandante = comandanteJ1, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
+var unidad2 =new Guerrero(position = game.at(11,4), image = "transparente.png", jugadorDuenio = jugador2, tipo = "guerrero", idUnico=4, comandante = comandanteJ2, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
+var unidad3 =new Guerrero(position = game.at(3,6), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", idUnico=5, comandante = comandanteJ1, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
+var unidad4 =new Guerrero(position = game.at(11,6), image = "transparente.png", jugadorDuenio = jugador2, tipo = "guerrero", idUnico=6, comandante = comandanteJ2, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
 
 	fixture{
 		jugador1.comprar(unidad1)
@@ -65,12 +65,12 @@ test "Recibe daño"{
 
 describe "Funciones del cursor"{
 
-var comandanteJ1 = new Comandante(position = game.at(3,5), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 8, rangoEspecial = 6, vida = 10, nivelAtaque = 20, nivelDefensa =16 )
-var comandanteJ2 = new Comandante(position = game.at(11,5), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", rangoDeAccion = 8, rangoEspecial = 6, vida = 10, nivelAtaque = 20, nivelDefensa =16 )
-var unidad1 = new Guerrero(position = game.at(3,4), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = comandanteJ1, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
-var unidad2 =new Guerrero(position = game.at(4,4), image = "transparente.png", jugadorDuenio = jugador2, tipo = "guerrero", comandante = comandanteJ2, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
-var unidad3 =new Guerrero(position = game.at(3,6), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = comandanteJ1, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
-var unidad4 =new Guerrero(position = game.at(4,6), image = "transparente.png", jugadorDuenio = jugador2, tipo = "guerrero", comandante = comandanteJ2, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
+var comandanteJ1 = new Comandante(position = game.at(3,5), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", idUnico=1, rangoDeAccion = 8, rangoEspecial = 6, vida = 10, nivelAtaque = 20, nivelDefensa =16 )
+var comandanteJ2 = new Comandante(position = game.at(11,5), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", idUnico=2, rangoDeAccion = 8, rangoEspecial = 6, vida = 10, nivelAtaque = 20, nivelDefensa =16 )
+var unidad1 = new Guerrero(position = game.at(3,4), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", idUnico=3, comandante = comandanteJ1, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
+var unidad2 =new Guerrero(position = game.at(4,4), image = "transparente.png", jugadorDuenio = jugador2, tipo = "guerrero", idUnico=4, comandante = comandanteJ2, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
+var unidad3 =new Guerrero(position = game.at(3,6), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", idUnico=5, comandante = comandanteJ1, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
+var unidad4 =new Guerrero(position = game.at(4,6), image = "transparente.png", jugadorDuenio = jugador2, tipo = "guerrero", idUnico=6, comandante = comandanteJ2, rangoDeAccion = 5, rangoEspecial = 2, nivelAtaque = 15, nivelDefensa = 12)
 
 	fixture{
 		jugador1.comprar(unidad1)
@@ -92,18 +92,12 @@ test "Ataca a la unidad"{
 	assert.that(unidad2.getVida()<=10)
 }
 test "Usar habilidad especial"{
-	unidad1.cooldown(5)
+	unidad1.cooldown(0)
 	cursor.position(game.at(3,4))
 	cursor.seleccionar()
 	cursor.position(game.at(4,4))
 	cursor.usarHabilidadEspecial()
 	assert.that(unidad2.getVida()<=10)
-}
-test "Captar enemigos"{
-	cursor.position(game.at(3,4))
-	cursor.seleccionar()
-	cursor.captarEnemigosCercanos()
-//	assert.equals(1,cursor.enemigosAtacables().size())
 }
 test "Hay enemigos en una posición"{
 	cursor.position(game.at(3,4))
@@ -122,8 +116,8 @@ test "No es casilla ocupable porque hay una unidad"{
 
 
 describe "metodos de unidades" {
-	var comandanteJ1 = new Comandante(position = game.at(1,2), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", rangoDeAccion = 5, rangoEspecial = 4, vida = 10, nivelAtaque = 28, nivelDefensa =24 )
-	var guerreroJ1 = new Guerrero(position = game.at(1,1), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", comandante = jugador1.getUnidades().head(), rangoDeAccion = 4, rangoEspecial = 1, nivelAtaque = 24, nivelDefensa = 20)
+	var comandanteJ1 = new Comandante(position = game.at(1,2), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", idUnico=1, rangoDeAccion = 5, rangoEspecial = 4, vida = 10, nivelAtaque = 28, nivelDefensa =24 )
+	var guerreroJ1 = new Guerrero(position = game.at(1,1), image = "transparente.png", jugadorDuenio = jugador1, tipo = "guerrero", idUnico=2, comandante = jugador1.getUnidades().head(), rangoDeAccion = 4, rangoEspecial = 1, nivelAtaque = 24, nivelDefensa = 20)
 
 	fixture {
 		jugador1.comprar(comandanteJ1)

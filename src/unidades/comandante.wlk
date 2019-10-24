@@ -27,7 +27,7 @@ class Comandante inherits Unidad {
 		cooldown = 6
 		if(cursor.hayAtacableEn(cursor.position()) and cursor.enRangoEspecial() and !cursor.unidadEn(cursor.position()).equals(self)) {
 			var enemigos = cursor.objetosAmenazantes(cursor.position())
-			enemigos.forEach { enemigo => enemigo.recibirDanio(1.randomUpTo(2).truncante(0))}		
+			enemigos.forEach { enemigo => enemigo.recibirDanio(1.randomUpTo(3).roundUp())}		
 			cursor.unidadEn(cursor.position()).recibirDanio(6)
 		}
 	}
