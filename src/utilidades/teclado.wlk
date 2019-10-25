@@ -17,7 +17,8 @@ object teclado {
 		keyboard.left().onPressDo  { self.mover(izquierda, cursor)}
 		keyboard.right().onPressDo { self.mover(derecha, cursor)}
 	}
-	method mover(direccion, cursor) { cursor.position(direccion.siguiente(cursor.position())) }
+	//method mover(direccion, cursor) { cursor.position(cursor,direccion.siguiente(cursor.position())) }
+	method mover(direccion, cursor) { direccion.siguiente(cursor) }
 	method setearTeclasAccion(cursor) {
 		keyboard.s().onPressDo { cursor.seleccionar() }	
 		keyboard.a().onPressDo { cursor.atacar() }	
@@ -56,11 +57,31 @@ object teclado {
 	}}
 }
 
-object izquierda { method siguiente(position) = position.left(1) }
+object izquierda { 
+	method siguiente(cursor) {
+		if (cursor.position().left(1).x() != 0)
+			cursor.position(cursor.position().left(1))
+	}
+}
 
-object derecha { method siguiente(position) = position.right(1) }
+object derecha { 
+	method siguiente(cursor) {
+		if (cursor.position().right(1).x() != game.width()-1)
+			cursor.position(cursor.position().right(1))
+	}
+}
 
-object abajo { method siguiente(position) = position.down(1) }
+object abajo { 
+	method siguiente(cursor) {
+		if (cursor.position().down(1).y() != 0)
+			cursor.position(cursor.position().down(1))
+	}
+}
 
-object arriba { method siguiente(position) = position.up(1) }
+object arriba { 
+	method siguiente(cursor) {
+		if (cursor.position().up(1).y() != game.height()-1)
+			cursor.position(cursor.position().up(1))
+	}
+}
 

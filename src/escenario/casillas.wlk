@@ -7,9 +7,9 @@ class Casilla {
 	
 	var property objeto = null
 	var property esAtacable = false
-	
-	method esSeleccionable() = false
+
 	method esCasillaFija() = true
+	method esSeleccionable() = false
 	method esObjetoGrande() = false
 }
 
@@ -64,7 +64,6 @@ object mapManager {
 				bordeCentral.add(casilla)	
 			}
 		}
-	method accederABordes(_x,_y) = game.getObjectsIn(game.at(_x,_y)).filter{obj => obj.esCasillaFija()}.head()
 }
 
 

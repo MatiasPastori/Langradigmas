@@ -75,6 +75,7 @@ object cursor {
 	method hayObjetoRompibleEn(pos) = self.rompibleEn(pos) != null
 	method hayUnidadEn(pos) = self.unidadEn(pos) != null
 	method hayAtacableEn(pos) = self.atacableEn(pos) != null
+	method hayCasillaFijaEn(pos) = self.casillaEn(pos) != null
 	method hayEnemigoEn(pos) = self.hayUnidadEn(pos) and !turnoManager.esDelJugadorActual(self.unidadEn(pos))
 	method hayObjetoGrandeEn(pos) = self.objetoGrandeEn(pos) != null
 	method noHayEnemigosCerca() = objetosAtacables.isEmpty()
@@ -117,7 +118,7 @@ object cursor {
 	method enRangoEspecial() = !rangoMarcadoPorUnidad.filter{visual => visual.position() == self.position()}.isEmpty()
 	
 	// Otros
-	method esCasillaOcupable(pos) = !self.hayAtacableEn(pos) and mapManager.estaEnInternas(pos) and !self.hayObjetoGrandeEn(pos)
+	method esCasillaOcupable(pos) = !self.hayAtacableEn(pos) and !self.hayObjetoGrandeEn(pos)
 	
 	// Chequeo de errores
 	method verificarLaUnidadPuedaAtacar() {

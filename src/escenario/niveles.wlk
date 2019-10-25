@@ -116,6 +116,7 @@ class Nivel {
 		} )
 	}
 	
+	
 	method siguientePantalla() {
 		escenario.actualizarNivel()
 		escenario.iniciarNivel()	
@@ -132,12 +133,15 @@ class Nivel {
 			casilla => casilla.image(borde)
 		}			
 	}
-	method setearObjetosDeCasillas(posiciones, objeto) { 
+	method setearObjetosDeInternas(posiciones, objeto) { 
 		posiciones.forEach{pos => 
 			var casilla = mapManager.accederAInterna(pos)
 			casilla.objeto(new ObjetoCasilla(tipo=objeto, position=pos))
 			game.addVisual(casilla.objeto())
 		}
+	}
+	method setearObjetosDeBordes(posiciones, objeto) {
+		posiciones.forEach{pos => game.addVisual(new ObjetoCasilla(tipo=objeto, position=pos))}
 	}
 }
 
@@ -162,25 +166,22 @@ object nivel1 inherits Nivel{
 		var posMurallasHor = [game.at(1,4),game.at(2,4),game.at(3,4),game.at(4,4),game.at(5,4),game.at(1,12),game.at(2,12),game.at(3,12),game.at(4,12),game.at(5,12)]
 		var posMurallasVer = [game.at(6,5),game.at(6,11)]
 		var posTorres = [game.at(6,4),game.at(6,6),game.at(6,12),game.at(6,10)]
-		var pisoCastillo = [game.at(0,11),game.at(1,11),game.at(2,11),game.at(3,11),game.at(4,11),game.at(5,11),game.at(0,10),game.at(1,10),game.at(2,10),game.at(3,10),game.at(4,10),game.at(5,10),game.at(0,9),game.at(1,9),game.at(2,9),game.at(3,9),game.at(4,9),game.at(5,9),game.at(6,9),game.at(0,8),game.at(1,8),game.at(2,8),game.at(3,8),game.at(4,8),game.at(5,8),game.at(6,8),game.at(0,7),game.at(1,7),game.at(2,7),game.at(3,7),game.at(4,7),game.at(5,7),game.at(6,7),game.at(0,6),game.at(1,6),game.at(2,6),game.at(3,6),game.at(4,6),game.at(5,6),game.at(0,5),game.at(1,5),game.at(2,5),game.at(3,5),game.at(4,5),game.at(5,5)]
+		var pisoCastillo = [game.at(1,11),game.at(2,11),game.at(3,11),game.at(4,11),game.at(5,11),game.at(1,10),game.at(2,10),game.at(3,10),game.at(4,10),game.at(5,10),game.at(1,9),game.at(2,9),game.at(3,9),game.at(4,9),game.at(5,9),game.at(6,9),game.at(1,8),game.at(2,8),game.at(3,8),game.at(4,8),game.at(5,8),game.at(6,8),game.at(1,7),game.at(2,7),game.at(3,7),game.at(4,7),game.at(5,7),game.at(6,7),game.at(1,6),game.at(2,6),game.at(3,6),game.at(4,6),game.at(5,6),game.at(1,5),game.at(2,5),game.at(3,5),game.at(4,5),game.at(5,5)]
 		var casitas = [game.at(12,14),game.at(12,13),game.at(11,14),game.at(11,13),game.at(12,12),game.at(14,13),game.at(13,4),game.at(12,3),game.at(10,3),game.at(5,2)]
 		var arbolitos = [game.at(13,13),game.at(18,4),game.at(27,13),game.at(26,13),game.at(24,11),game.at(23,6),game.at(23,5),game.at(25,4),game.at(12,4),game.at(17,9)]
 		var montanias = [game.at(20,12),game.at(20,13),game.at(18,14),game.at(18,5),game.at(17,4),game.at(17,3),game.at(19,13)]		
-		var borde1 = mapManager.accederABordes(0,4)
-		var borde2 = mapManager.accederABordes(0,12)
 		
-		self.setearObjetosDeCasillas(posMurallasVer, murallaVertical)
-		self.setearObjetosDeCasillas(posMurallasHor, murallaHorizontal)
-		self.setearObjetosDeCasillas(posTorres, torre)
-		self.setearObjetosDeCasillas(pisoCastillo, pisoRombo)
-		self.setearObjetosDeCasillas(casitas, casas)
-		self.setearObjetosDeCasillas(arbolitos, arboles)
-		self.setearObjetosDeCasillas(montanias, montania)
-		// Setear dos objetos en bordes, no puedo usar el método de arriba
-		borde1.objeto(new ObjetoCasilla(tipo=murallaHorizontal, position=borde1.position()))
-		borde2.objeto(new ObjetoCasilla(tipo=murallaHorizontal, position=borde2.position()))
-		game.addVisual(borde1.objeto())
-		game.addVisual(borde2.objeto())
+		self.setearObjetosDeInternas(posMurallasVer, murallaVertical)
+		self.setearObjetosDeInternas(posMurallasHor, murallaHorizontal)
+		self.setearObjetosDeInternas(posTorres, torre)
+		self.setearObjetosDeInternas(pisoCastillo, pisoRombo)
+		self.setearObjetosDeInternas(casitas, casas)
+		self.setearObjetosDeInternas(arbolitos, arboles)
+		self.setearObjetosDeInternas(montanias, montania)
+		
+		self.setearObjetosDeBordes([game.at(0,4),game.at(0,12)],murallaHorizontal)
+		self.setearObjetosDeBordes([game.at(0,11),game.at(0,10),game.at(0,9),game.at(0,8),game.at(0,7),game.at(0,6),game.at(0,5)],pisoRombo)
+
 	}
 	
 	method siguiente() = nivel2
@@ -213,16 +214,16 @@ object nivel2 inherits Nivel{
 		var casitas2 = [game.at(23,3),game.at(23,2),game.at(24,5)]
 		var arbolillos = [game.at(4,13),game.at(5,13),game.at(8,11),game.at(6,13),game.at(7,13),game.at(7,12),game.at(6,12),game.at(7,11),game.at(6,11),game.at(18,13),game.at(19,14),game.at(22,12),game.at(20,14),game.at(21,14),game.at(21,13),game.at(20,13),game.at(21,12),game.at(20,12),game.at(24,3),game.at(23,4),game.at(7,4),game.at(6,3)]
 		
-		self.setearObjetosDeCasillas(posRioVertical, rioVertical)
-		self.setearObjetosDeCasillas(posRioHorizontal, rioHorizontal)
-		self.setearObjetosDeCasillas(posGiro1, rioGiro1)
-		self.setearObjetosDeCasillas(posGiro3, rioGiro3)
-		self.setearObjetosDeCasillas(posMurallasH, murallaHorizontal)
-		self.setearObjetosDeCasillas(posMurallasV, murallaVertical)
-		self.setearObjetosDeCasillas(posTorres, torre)
-		self.setearObjetosDeCasillas(casitas, casas)
-		self.setearObjetosDeCasillas(casitas2, casas2)
-		self.setearObjetosDeCasillas(arbolillos, arboles)
+		self.setearObjetosDeInternas(posRioVertical, rioVertical)
+		self.setearObjetosDeInternas(posRioHorizontal, rioHorizontal)
+		self.setearObjetosDeInternas(posGiro1, rioGiro1)
+		self.setearObjetosDeInternas(posGiro3, rioGiro3)
+		self.setearObjetosDeInternas(posMurallasH, murallaHorizontal)
+		self.setearObjetosDeInternas(posMurallasV, murallaVertical)
+		self.setearObjetosDeInternas(posTorres, torre)
+		self.setearObjetosDeInternas(casitas, casas)
+		self.setearObjetosDeInternas(casitas2, casas2)
+		self.setearObjetosDeInternas(arbolillos, arboles)
 	}
 	
 	method siguiente() = nivel3
@@ -248,25 +249,22 @@ object nivel3 inherits Nivel{
 		var posMurallasHor = [game.at(game.width()-2,4),game.at(game.width()-3,4),game.at(game.width()-4,4),game.at(game.width()-5,4),game.at(game.width()-6,4),game.at(game.width()-2,12),game.at(game.width()-3,12),game.at(game.width()-4,12),game.at(game.width()-5,12),game.at(game.width()-6,12)]
 		var posMurallasVer = [game.at(game.width()-7,5),game.at(game.width()-7,11)]
 		var posTorres = [game.at(game.width()-7,4),game.at(game.width()-7,6),game.at(game.width()-7,12),game.at(game.width()-7,10)]
-		var pisoCastillo = [game.at(25,11),game.at(30,11),game.at(29,11),game.at(28,11),game.at(27,11),game.at(26,11),game.at(25,10),game.at(30,10),game.at(29,10),game.at(28,10),game.at(27,10),game.at(26,10),game.at(24,9),game.at(30,9),game.at(29,9),game.at(28,9),game.at(27,9),game.at(26,9),game.at(25,9),game.at(24,8),game.at(30,8),game.at(29,8),game.at(28,8),game.at(27,8),game.at(26,8),game.at(25,8),game.at(24,7),game.at(30,7),game.at(29,7),game.at(28,7),game.at(27,7),game.at(26,7),game.at(25,7),game.at(25,6),game.at(30,6),game.at(29,6),game.at(28,6),game.at(27,6),game.at(26,6),game.at(25,5),game.at(30,5),game.at(29,5),game.at(28,5),game.at(27,5),game.at(26,5)]
+		var pisoCastillo = [game.at(25,11),game.at(29,11),game.at(28,11),game.at(27,11),game.at(26,11),game.at(25,10),game.at(29,10),game.at(28,10),game.at(27,10),game.at(26,10),game.at(24,9),game.at(29,9),game.at(28,9),game.at(27,9),game.at(26,9),game.at(25,9),game.at(24,8),game.at(29,8),game.at(28,8),game.at(27,8),game.at(26,8),game.at(25,8),game.at(24,7),game.at(29,7),game.at(28,7),game.at(27,7),game.at(26,7),game.at(25,7),game.at(25,6),game.at(29,6),game.at(28,6),game.at(27,6),game.at(26,6),game.at(25,5),game.at(29,5),game.at(28,5),game.at(27,5),game.at(26,5)]
 		var casitas = [game.at(19,14),game.at(19,13),game.at(20,14),game.at(20,13),game.at(19,12),game.at(17,13),game.at(18,4),game.at(19,3),game.at(21,3),game.at(26,2)]
 		var arbolitos = [game.at(18,13),game.at(13,4),game.at(4,13),game.at(5,13),game.at(7,11),game.at(8,6),game.at(8,5),game.at(6,4),game.at(19,4),game.at(14,9)]
 		var montanias = [game.at(11,12),game.at(11,13),game.at(13,14),game.at(13,5),game.at(14,4),game.at(14,3),game.at(12,13)]
-		var borde1 = mapManager.accederABordes(game.width()-1,4)
-		var borde2 = mapManager.accederABordes(game.width()-1,12)
 				
-		self.setearObjetosDeCasillas(posMurallasVer, murallaVertical2)
-		self.setearObjetosDeCasillas(posMurallasHor, murallaHorizontal2)
-		self.setearObjetosDeCasillas(posTorres, torre2)
-		self.setearObjetosDeCasillas(pisoCastillo, pisoPiedraRoja)
-		self.setearObjetosDeCasillas(casitas, casas2)
-		self.setearObjetosDeCasillas(arbolitos, arboles2)
-		self.setearObjetosDeCasillas(montanias, montania2)
-		// Setear dos objetos en bordes, no puedo usar el método de arriba
-		borde1.objeto(new ObjetoCasilla(tipo=murallaHorizontal2, position=borde1.position()))
-		borde2.objeto(new ObjetoCasilla(tipo=murallaHorizontal2, position=borde2.position()))
-		game.addVisual(borde1.objeto())
-		game.addVisual(borde2.objeto())
+		self.setearObjetosDeInternas(posMurallasVer, murallaVertical2)
+		self.setearObjetosDeInternas(posMurallasHor, murallaHorizontal2)
+		self.setearObjetosDeInternas(posTorres, torre2)
+		self.setearObjetosDeInternas(pisoCastillo, pisoPiedraRoja)
+		self.setearObjetosDeInternas(casitas, casas2)
+		self.setearObjetosDeInternas(arbolitos, arboles2)
+		self.setearObjetosDeInternas(montanias, montania2)
+		
+		self.setearObjetosDeBordes([game.at(game.width()-1,4),game.at(game.width()-1,12)],murallaHorizontal2)
+		self.setearObjetosDeBordes([game.at(30,11),game.at(30,10),game.at(30,9),game.at(30,8),game.at(30,7),game.at(30,6),game.at(30,5)],pisoPiedraRoja)
+
 	}
 
 	override method siguientePantalla() {
