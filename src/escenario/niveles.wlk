@@ -3,10 +3,10 @@ import escenario.escenario.*
 import escenario.casillas.*
 import escenario.objetosEnCasillas.*
 import escenario.tienda.*
-import unidades.comandante.*
 import utilidades.acciones.*
 import utilidades.visuals.*
 import utilidades.comentarios.*
+import utilidades.creadorDeUnidades.*
 import jugadores.*
 import turnos.*
 import cursor.*
@@ -23,8 +23,8 @@ class Nivel {
 	
 	method generarNivel()
 	method mostrarTienda() {
-		var comandanteJ1 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", idUnico=1, rangoDeAccion = 3, rangoEspecial = 50, vida = 10, nivelAtaque = 28, nivelDefensa = 25)
-		var comandanteJ2 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", idUnico=2,rangoDeAccion = 3, rangoEspecial = 8, vida = 1, nivelAtaque = 28, nivelDefensa = 25)
+		var comandanteJ1 = creadorDeUnidades.crearComandante(jugador1,1)
+		var comandanteJ2 = creadorDeUnidades.crearComandante(jugador2,2)
 		
 		game.addVisual(tiendaImg)
 		jugador1.getUnidades().clear()
@@ -56,17 +56,6 @@ class Nivel {
 		turnoManager.setJugadorActual(jugador1)
 		turnoManager.iniciarTurno()
 	}
-	method obtenerPeloton(jugador,x,y) = jugador.getUnidades().subList(x,y)
-	method darPosicionAPeloton(peloton,xFija,yInicial,comandante) {
-		// Le da la posicion a cada unidad de cada peloton en función a su comandante.
-		// Ver imagen "explicación_seteo_unidades.png" de assets.
-		var y = yInicial
-		peloton.forEach{ unidad =>
-			unidad.position(game.at(xFija,y))
-			y--
-			if(comandante.position() == game.at(xFija,y)) { y-- }
-		}
-	}
 	method posicionarUnidades() {	
 		const comandanteJ1 = jugador1.getUnidades().head()
 		const comandanteJ2 = jugador2.getUnidades().head()
@@ -90,6 +79,18 @@ class Nivel {
 		self.agregarUnidadesEnCampo(jugador1)
 		self.agregarUnidadesEnCampo(jugador2)			
 	}
+	method obtenerPeloton(jugador,x,y) = jugador.getUnidades().subList(x,y)
+	method darPosicionAPeloton(peloton,xFija,yInicial,comandante) {
+		// Le da la posicion a cada unidad de cada peloton en función a su comandante.
+		// Ver imagen "explicación_seteo_unidades.png" de assets.
+		// xFija -> es la posicion en X del comandante +-1 dependiendo del peloton
+		var y = yInicial
+		peloton.forEach{ unidad =>
+			unidad.position(game.at(xFija,y))
+			y--
+			if(comandante.position() == game.at(xFija,y)) { y-- }
+		}
+	}
 	method agregarUnidadesEnCampo(jugador) {
 		jugador.getUnidades().forEach{ unidad => 
 			game.addVisual(unidad)
@@ -98,6 +99,7 @@ class Nivel {
 			unidad.cambiarSprite(iddle)
 		}		
 	}
+	
 	method terminarNivel(jGanador) {
 		ganador = jGanador
 		var victoria = new Visual(position=game.at(0,0), image="victoria_" + ganador.getId() + ".png")
