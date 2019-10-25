@@ -13,8 +13,7 @@ object jugador1Comprando {
 			jugador1.comprar(unidad)
 			jugador1.getUnidades().head().reclutar(unidad)
 		}
-
-		
+	
 		tienda.jugadorActual(jugador2)
 		tienda.estado(jugador2Comprando)
 		tienda.iniciar()

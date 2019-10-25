@@ -23,8 +23,8 @@ class Nivel {
 	
 	method generarNivel()
 	method mostrarTienda() {
-		var comandanteJ1 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", idUnico=1, rangoDeAccion = 3, rangoEspecial = 8, vida = 10, nivelAtaque = 28, nivelDefensa = 25)
-		var comandanteJ2 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", idUnico=2,rangoDeAccion = 3, rangoEspecial = 8, vida = 10, nivelAtaque = 28, nivelDefensa = 25)
+		var comandanteJ1 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador1, tipo = "comandante", idUnico=1, rangoDeAccion = 3, rangoEspecial = 50, vida = 10, nivelAtaque = 28, nivelDefensa = 25)
+		var comandanteJ2 = new Comandante(position = game.center(), image = "transparente.png", jugadorDuenio = jugador2, tipo = "comandante", idUnico=2,rangoDeAccion = 3, rangoEspecial = 8, vida = 1, nivelAtaque = 28, nivelDefensa = 25)
 		
 		game.addVisual(tiendaImg)
 		jugador1.getUnidades().clear()
@@ -99,8 +99,8 @@ class Nivel {
 		}		
 	}
 	method terminarNivel(jGanador) {
-		var victoria = new Visual(position=game.at(0,0), image="victoria_" + jGanador.getId() + ".png")
 		ganador = jGanador
+		var victoria = new Visual(position=game.at(0,0), image="victoria_" + ganador.getId() + ".png")
 		game.addVisual(victoria)
 		cantUnidadesMuertas = self.calcularUnidadesCaidas()
 		game.schedule(2000, {
@@ -117,7 +117,6 @@ class Nivel {
 	method siguientePantalla() {
 		escenario.actualizarNivel()
 		escenario.iniciarNivel()	
-		return 0	
 	}
 	method calcularUnidadesCaidas() = 
 		unidadesPorJugador - jugador1.getUnidades().size() + unidadesPorJugador - jugador2.getUnidades().size()
@@ -288,8 +287,6 @@ object nivel3 inherits Nivel{
 		game.addVisual(pantallaFinal)
 		game.addVisual(cantUnidadesCaidasD1)
 		game.addVisual(cantUnidadesCaidasD2)
-		
-		return 0
 	}
 	
 	method siguiente() = null

@@ -3,6 +3,7 @@ import inicio.*
 import escenario.escenario.*
 import escenario.tienda.*
 import utilidades.comentarios.*
+import utilidades.creadorDeUnidades.*
 import turnos.*
 
 import escenario.casillas.*
@@ -33,9 +34,9 @@ object teclado {
 		}
 		keyboard.q().onPressDo {if(tienda.habilitada()) tienda.comprar()}
 		keyboard.e().onPressDo {if(tienda.habilitada()) tienda.vender()} 
-		keyboard.num(1).onPressDo {if(tienda.habilitada()) tienda.reservar(guerrero)}
-		keyboard.num(2).onPressDo {if(tienda.habilitada()) tienda.reservar(tirador)}
-		keyboard.num(3).onPressDo {if(tienda.habilitada()) tienda.reservar(caballeria)}
+		keyboard.num(1).onPressDo {if(tienda.habilitada()) tienda.reservar(unGuerrero)}
+		keyboard.num(2).onPressDo {if(tienda.habilitada()) tienda.reservar(unTirador)}
+		keyboard.num(3).onPressDo {if(tienda.habilitada()) tienda.reservar(unaCaballeria)}
 	}
 	method setearTeclasTurno() {keyboard.enter().onPressDo { 
 		if (turnoManager.habilitado()) {
