@@ -3,6 +3,12 @@ import utilidades.visuals.*
 import utilidades.teclado.*
 import cursor.*
 
+/*
+	Setea la configuración inicial. 
+	@inicioHabilitado: true cuando comienza el juego, false al pasar la primer pantalla.
+	@inicio: objeto de la clase Visual (ver utilidades/visuals.wlk) que contiene la imagen de inicio.
+*/
+
 object inicio {
 	const height = 17
 	const width = 31
@@ -14,8 +20,6 @@ object inicio {
 		game.title("Langradigmas")
 		game.height(height)
 		game.width(width)
-		
-		keyboard.num(9).onPressDo { game.say(cursor,cursor.casillaEn(cursor.position()).position().toString()) }
 		
 		teclado.setearTeclaInicio()
 	}

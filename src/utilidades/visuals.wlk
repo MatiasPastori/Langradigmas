@@ -1,5 +1,9 @@
 import wollok.game.*
 
+/*
+ 	Se utiliza para instanciar objetos cuyo único propósito es visual y no deben interactuar con el juego.
+*/
+
 class Visual {
 	var property image
 	var property position
@@ -9,4 +13,3 @@ class Visual {
 	method esObjetoGrande() = false
 	method esAtacable() = false
 }
-// Se usa para instanciar algunas imágenes como los personajes que aparecen en la tienda

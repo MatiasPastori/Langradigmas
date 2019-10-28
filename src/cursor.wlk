@@ -10,6 +10,16 @@ import escenario.casillas.*
 import jugadores.*
 import turnos.*
 
+/*
+	Maneja las principales funcionalidades del juego (seleccionar una unidad, atacar con la unidad seleccionada,
+	utilizar la habilidad especial de la unidad seleccionada).
+	@unidad: unidad seleccionada por el jugador que posee el turno.
+	@objetoAtacables: lista con objetos que pueden ser atacados por la unidad seleccionada.
+	@rangoMarcadoPorUnidad: casillas definidas dado un rango en base a la posición de la unidad seleccionada.
+	@estadoSeleccion: referencia al objeto que maneja la lógica de la selección de la unidad.
+	@estadoEspecial: referencia al objeto que maneja la lógica de la utilización de la habilidad especial.
+*/
+
 object cursor {
 	var property unidad = null
 	var property position = game.center()
@@ -61,6 +71,8 @@ object cursor {
 		objetosAtacables.clear()
 		espadasDeAtaque.forEach{espada => game.removeVisual(espada)}
 	}
+	
+	// Define que objetos pueden ser atacados por la unidad seleccionada en un rango de 1 casilla de distancia
 	method objetosAmenazantes(posicion) {
 		var posUnidad = posicion
 		var posicionesCerca = [posUnidad.right(1),posUnidad.left(1),posUnidad.up(1),posUnidad.down(1)]
@@ -72,6 +84,7 @@ object cursor {
 		}
 		return objetos.copyWithout(null)
 	}
+	
 	method hayObjetoRompibleEn(pos) = self.rompibleEn(pos) != null
 	method hayUnidadEn(pos) = self.unidadEn(pos) != null
 	method hayAtacableEn(pos) = self.atacableEn(pos) != null
@@ -80,11 +93,15 @@ object cursor {
 	method hayObjetoGrandeEn(pos) = self.objetoGrandeEn(pos) != null
 	method noHayEnemigosCerca() = objetosAtacables.isEmpty()
 	
-	
+	// Devuelve el objeto que puede ser destruído en una posición dada. Null si no hay
 	method rompibleEn(pos) = self.getObjeto({obj => obj.esAtacable() and !obj.esSeleccionable()}, pos)
+	// Devuelve la unidad en una posición dada. Null si no hay
 	method unidadEn(pos) = self.getObjeto({obj => obj.esSeleccionable()}, pos)
+	// Devuelve la casilla en una posición dada. Null si no hay
 	method casillaEn(pos) = self.getObjeto({obj => obj.esCasillaFija()}, pos)
+	// Devuelve el objeto que puede ser atacado en una posición dada. Null si no hay
 	method atacableEn(pos) = self.getObjeto({obj => obj.esAtacable()}, pos) 
+	// Devuelve el objeto que no permite que una unidad ocupe una casilla en una posición dada. Null si no hay
 	method objetoGrandeEn(pos) {
 		var objetoDeCasilla = self.getObjeto({obj => obj.esCasillaFija()},pos).objeto()
 		if (objetoDeCasilla != null) {
@@ -94,12 +111,14 @@ object cursor {
 		}
 		return null
 	}
+	// Dada una condición y una posición, devuelve el objeto que cumpla. Null si no hay
 	method getObjeto(condicion,pos) { 
 		var lista = game.getObjectsIn(pos).filter({obj => condicion.apply(obj)})
 		return if(lista.size() > 0) lista.head() else null
 	}
 	
 	// Métodos para mostrar o borrar rangos de movimientos
+	// @marca: path de imagen png que se quiere mostrar en las casillas alcanzadas por el rango.
 	method mostrarRango(rango, marca){
 		var casillasAMarcar = mapManager.getInternas().filter { 
 			casilla =>
@@ -115,6 +134,7 @@ object cursor {
 		game.removeVisual(visual)
 		rangoMarcadoPorUnidad.remove(visual)
 	}
+	// enRangoEspecial(): true si la posición del cursor se encuentra dentro del rango marcado para una unidad dada
 	method enRangoEspecial() = !rangoMarcadoPorUnidad.filter{visual => visual.position() == self.position()}.isEmpty()
 	
 	// Otros

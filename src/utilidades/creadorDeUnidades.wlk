@@ -4,6 +4,18 @@ import unidades.tirador.*
 import unidades.guerrero.*
 import unidades.caballeria.*
 
+/*
+	Encapsula la creación de unidades. Estos objetos se utilizan en escenario/tienda.wlk.
+	creadorDeUnidades: crea comandantes y subordinados con un duenio y en caso de los subordinados, con un tipo. 
+	unGuerrero: crea el tipo de subordinado "guerrero".
+	unTirador: crea el tipo de subordinado "tirador".
+	unaCaballeria: crea el tipo de subordinado "caballeria".
+	* 
+	method coloresPorSeleccionado(): retorna una lista con el siguiente orden [guerrero,tirador,caballeria]. El nombre
+		de la unidad seleccionada se reemplazará por "iddle1" mientras que los restantes por "gris".
+		Para ver su implementación ir a escenario/tienda.wlk.
+*/
+
 object creadorDeUnidades {
 	
 	method crearComandante(duenio, unId) {

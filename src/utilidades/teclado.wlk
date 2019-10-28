@@ -1,14 +1,15 @@
 import wollok.game.*
-import inicio.*
 import escenario.escenario.*
 import escenario.tienda.*
 import utilidades.comentarios.*
 import utilidades.creadorDeUnidades.*
+import inicio.*
 import turnos.*
-
-import escenario.casillas.*
 import cursor.*
-import jugadores.*
+
+/*
+ 	Maneja las acciones que se realizan al presionar teclas.
+*/
 
 object teclado {
 	method setearTeclasMovimiento(cursor) {
@@ -17,7 +18,6 @@ object teclado {
 		keyboard.left().onPressDo  { self.mover(izquierda, cursor)}
 		keyboard.right().onPressDo { self.mover(derecha, cursor)}
 	}
-	//method mover(direccion, cursor) { cursor.position(cursor,direccion.siguiente(cursor.position())) }
 	method mover(direccion, cursor) { direccion.siguiente(cursor) }
 	method setearTeclasAccion(cursor) {
 		keyboard.s().onPressDo { cursor.seleccionar() }	
@@ -49,7 +49,6 @@ object teclado {
 	}}
 	method setearTeclaInicio() {keyboard.enter().onPressDo { 
 		if (inicio.inicioHabilitado()) {
-			//game.sound("mainMenu.mp3")
 			inicio.inicioHabilitado(false)
 			game.removeVisual(inicio.getInicioVisual())
 			escenario.iniciar()	

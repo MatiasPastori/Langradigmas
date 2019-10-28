@@ -6,6 +6,15 @@ import utilidades.visuals.*
 import utilidades.acciones.*
 import escenario.escenario.*
 
+/*
+	Este objeto maneja la lógica de los turnos. Decide quien es el jugador que puede realizar sus acciones.
+	@habilitado: true cuando el nivel comienza, false cuando termina
+	@jugadorActual: indica de qué jugador es el turno
+	@unidadesLibres: unidades del jugadorActual que aún no realizaron ninguna acción
+	@unidadesMovidas: unidades que el jugadorActual movió
+	@unidadesUsadas: unidades con las que el jugadorActual atacó a un rival
+ */
+
 object turnoManager {
 	var property habilitado = false
 	var jugadorActual = jugador1
@@ -26,21 +35,6 @@ object turnoManager {
 	}
 	
 	method finalizarTurno() {
-//		jugadorActual.getUnidades().forEach{ unidad =>
-//			try {
-//				game.removeTickEvent("iddle" + unidad.getIdUnico().toString())
-//			} catch e {
-//				// Necesito catchear el error que tira wlk cuando removes un tick que no existe y no hacer nada.
-//				// Esto porque despues de atacar las unidades pierden su tick y se ponen grises. Entonces cuando
-//				// remuevo el tick de todas las unidades del jugador, hay algunas (las que atacaron) que ya no tienen
-//				// tick y tira error. Sin embargo, el juego puede seguir, no rompe nada. 
-//				// Me parece esta solución mucho mas simple que andar guardando en una lista los ticks activos y demás
-//				// Estaría bueno que game (quizás lo hace y no lo sé) guarde en una lista los ticks activos como hace
-//				// con los visuals.
-//			}
-//			then always unidad.cambiarSprite(iddle) // Perdon
-			
-//		}
 		self.reiniciarTicks(unidadesMovidas)
 		self.reiniciarTicks(unidadesUsadas)
 		unidadesMovidas.clear()
