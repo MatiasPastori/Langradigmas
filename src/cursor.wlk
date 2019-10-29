@@ -100,6 +100,7 @@ object cursor {
 	// Devuelve la casilla en una posición dada. Null si no hay
 	method casillaEn(pos) = self.getObjeto({obj => obj.esCasillaFija()}, pos)
 	// Devuelve el objeto que puede ser atacado en una posición dada. Null si no hay
+	// atacableEn es un método pensado para una futura implementación donde se podrá atacar objetos distintos a enemigos
 	method atacableEn(pos) = self.getObjeto({obj => obj.esAtacable()}, pos) 
 	// Devuelve el objeto que no permite que una unidad ocupe una casilla en una posición dada. Null si no hay
 	method objetoGrandeEn(pos) {
@@ -118,17 +119,26 @@ object cursor {
 	}
 	
 	// Métodos para mostrar o borrar rangos de movimientos
+	
+	// mostrarRango(rango,marca): genera un área de tamanio rango*rango alrededor de la unidad seleccionada
+	//			y evalúa que posiciones se encuentran a distancia <= a rango de la posición de la unidad
 	// @marca: path de imagen png que se quiere mostrar en las casillas alcanzadas por el rango.
 	method mostrarRango(rango, marca){
-		var casillasAMarcar = mapManager.getInternas().filter { 
-			casilla =>
-			distancia.distanciaEntre(casilla.position(), unidad.position()) <= rango
-		}
-		casillasAMarcar.forEach { casilla =>
-			var visual = new Visual(image = marca, position = casilla.position())
-			rangoMarcadoPorUnidad.add(visual)
-			game.addVisual(visual)
-		}
+		var eje_x = [] 
+		(unidad.position().x()+rango).times({ 
+			i =>
+			var eje_y = []
+			(unidad.position().y()+rango).times({ 
+				j =>
+				if (distancia.distanciaEntre(new Position(x=i,y=j),unidad.position()) <= rango) {
+					var rangoVisual = new Visual(image=marca, position = game.at(i, j))
+					game.addVisual(rangoVisual)
+					eje_y.add(rangoVisual)				
+				}
+			})
+			eje_x.add(eje_y)
+		})
+		rangoMarcadoPorUnidad = eje_x.flatten()
 	}
 	method borrarRango() = rangoMarcadoPorUnidad.forEach { visual => 
 		game.removeVisual(visual)

@@ -3,6 +3,12 @@ import unidades.unidad.*
 import cursor.*
 import turnos.*
 
+/*
+ 	iddle: setea la animación de movimiento de las unidades que no realizaron acción
+ 	seleccion: maneja el cambio de sprite cuando el cursor selecciona una unidad
+ 	deseleccion: maneja el cambio de sprite cuando el cursor deselecciona una unidad 
+*/
+
 object iddle {
 	method cambiarSprite(unidad, id_xjug) {
 		unidad.imagenVida().position(game.at(unidad.position().x(), unidad.position().y()))

@@ -5,7 +5,19 @@ import utilidades.distancia.*
 import jugadores.*
 import turnos.*
 
-// Superclase
+/*
+ 	Superclase de unidades de ambos jugadores
+ 	@jugadorDuenio: jugador duenio de la unidad
+ 	@rangoDeAccion: especifica la distancia máxima a la que puede llegar la unidad en número de casillas
+ 	@rangoEspecial: especifica la distancia máxima en número de casillas a la que la unidad puede realizar la habilidad especial
+	@tipo: especifica como String el tipo de la unidad (ej: "guerrero")
+	@idUnico: id único de la unidad. Se utiliza para generar los onTicks de movimiento (ver utilidades/acciones)
+	@imagenVida: objeto que representa visualmente la cantidad de vida de la unidad
+	@imagenCD: objeto que indica visualmente si la unidad tiene disponible su ataque especial
+	@nivelAtaque: danio base de la unidad
+	@nivelDefensa: defensa base de la unidad
+	@cooldown: cantidad de turnos restantes para disponer nuevamente de la habilidad especial
+*/
 class Unidad {
 	const jugadorDuenio
 	const property rangoDeAccion
@@ -28,9 +40,9 @@ class Unidad {
 	method esCasillaFija() = false
 	method esObjetoGrande() = false
 	
+	// modificaciones de ataque/defensa por casilla
 	method buffAtaque(casilla) = self.buffCasilla(casilla, {objeto => objeto.buffAtaqueQueOtorga()})
 	method buffDefensa(casilla) = self.buffCasilla(casilla, {objeto => objeto.buffDefensaQueOtorga()})
-	
 	method buffCasilla(casilla, bloque) {
 		if (casilla.objeto() != null) {
 			return bloque.apply(casilla.objeto())
@@ -58,6 +70,7 @@ class Unidad {
 		enemigo.recibirDanio(danioNeto)
 	}
 	
+	// Calcula el danioBruto que una unidad le puede hacer a su enemigo
 	method potencialDeDanio(enemigo, casilla) = self.nivelAtaque() + self.buffAtaque(casilla) - enemigo.nivelDefensa() - enemigo.buffDefensa(casilla)
 
 	method recibirDanio(danio) {
@@ -79,6 +92,8 @@ class Unidad {
 		game.removeVisual(self)
 	}
 	
+	// true si la unidad se encuentra a una casilla de distancia de su comandante.
+	// jugadorDuenio.getUnidades().head() es el comandante.
 	method codoACodo() {
 		return distancia.distanciaEntre(position, jugadorDuenio.getUnidades().head().position()) == 1
 	}
