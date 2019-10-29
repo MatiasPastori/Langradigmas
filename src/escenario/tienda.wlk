@@ -8,6 +8,30 @@ import unidades.tirador.*
 import unidades.caballeria.*
 import jugadores.*
 
+/*
+	Compra de unidades por jugador.
+	@habilitada: indica si la tienda está abierta o no para comprar unidades
+	@estado: ir a /estados/estadoTienda
+	@jugadorActual: jugador comprando en la tienda
+	@maxUnidadesPorJugador: cantidad máxima que un jugador puede comprar por nivel
+	@cantComprada: cantidad de unidades que el jugador lleva comprada
+	@idUnicoUnidad: se usa para setear animaciones (ver /utilidades/acciones). Comienza en 3 ya que el comandante del J1 es 1 y el del J2 es 2
+	@tipoUnidadReservada: ver /utilidades/creadorDeUnidades
+	@carritoDeCompras: unidades que el jugadorActual quiere comprar
+	@imagenesTienda: lista de imagenes que se muestran en la tienda. Les da un feedback al jugador de qué está comprando, unidades compradas, etc
+	@numJug: visual de número del jugador (1 J1, 2 J2)
+	@cantDisp1erDigito: visual de la cantidad disponible a comprar (1er dígito)
+	@cantDisp2doDigito: visual de la cantidad disponible a comprar (2do dígito)
+	@contadorGuerrerosComprados: visual que indica la cantidad de guerreros comprados por el jugadorActual
+	@contadorTiradoresComprados: visual que indica la cantidad de tiradores comprados por el jugadorActual
+	@contadorCaballeriaComprada: visual que indica la cantidad de caballeros comprados por el jugadorActual
+	@imagenComandanteDelJugador: visual del comandante del jugadorActual
+	@imagenGuerreroAVender: visual de un guerrero del jugadorActual
+	@imagenTiradorAVender: visual de un tirador del jugadorActual
+	@imagenCaballeroAVender: visual de un caballero del jugadorActual
+	
+*/
+
 object tienda {
 	var property habilitada = false
 	var property estado = jugador1Comprando
@@ -47,6 +71,8 @@ object tienda {
 		self.restablecerTienda()
 		self.agregarVisuales()
 	}
+	
+	// Pone a la tienda en un estado inicial reseteando las imágenes visuales
 	method restablecerTienda() {
 		imagenesTienda.forEach{imagen => game.removeVisual(imagen)}
 		imagenesTienda.clear()
@@ -90,6 +116,8 @@ object tienda {
 		self.actualizarContadoresPorUnidad()
 		self.actualizarContadorDisponibles()
 	} 	
+	
+	// Este método se invoca cuando el jugador selecciona un tipo de unidad que luego va a comprar y le da un feedback visual de cuál seleccionó
 	method reservar(tipoDeLaUnidad) {
 		self.colorearAlSeleccionado(tipoDeLaUnidad)
 		tipoUnidadReservada = tipoDeLaUnidad
@@ -116,6 +144,10 @@ object tienda {
 	
 	method terminarCompra() { 
 		cantComprada = 0
+		carritoDeCompras.forEach{unidad => 
+			jugadorActual.comprar(unidad)
+			jugadorActual.getUnidades().head().reclutar(unidad)
+		}
 		estado.terminarCompra()
 	}
 		

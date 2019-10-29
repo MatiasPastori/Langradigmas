@@ -4,6 +4,10 @@ import comandante.*
 import utilidades.distancia.*
 import utilidades.visuals.*
 
+/*
+	Clase abstracta. De ella heredan las unidades del jugador distintas al comandante.
+	A su vez, hereda de Unidad, la superclase de todas las unidades. 
+*/
 class Subordinado inherits Unidad {
 	var comandante
 	

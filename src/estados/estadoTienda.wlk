@@ -7,13 +7,13 @@ import unidades.caballeria.*
 import unidades.tirador.*
 import jugadores.*
 
+/*
+ 	Maneja la lógica de la tienda cuando un jugador termina su compra dependiendo de quien es.
+ 	Para ver su uso ir a /escenario/tienda 
+*/
+
 object jugador1Comprando {
 	method terminarCompra() {
-		tienda.carritoDeCompras().forEach{unidad => 
-			jugador1.comprar(unidad)
-			jugador1.getUnidades().head().reclutar(unidad)
-		}
-	
 		tienda.jugadorActual(jugador2)
 		tienda.estado(jugador2Comprando)
 		tienda.iniciar()
@@ -22,11 +22,6 @@ object jugador1Comprando {
 
 object jugador2Comprando {
 	method terminarCompra() {
-		tienda.carritoDeCompras().forEach{unidad => 
-			jugador2.comprar(unidad)
-			jugador2.getUnidades().head().reclutar(unidad)
-		}
-		
 		tienda.imagenesTienda().forEach{imagen => game.removeVisual(imagen)}
 		tienda.imagenesTienda().clear()
 		tienda.jugadorActual(jugador1)

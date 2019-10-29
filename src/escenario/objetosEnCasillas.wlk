@@ -1,5 +1,9 @@
 import wollok.game.*
 
+/*
+ 	Crea los objetos que se ven sobre las casillas (casas, arboles, etc) que le dan bonificaciones a las unidades o son meramente visuales.
+*/
+
 class ObjetoCasilla {
 	var property vidaObjeto = 10
 	var property imagenVida = null

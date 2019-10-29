@@ -5,6 +5,12 @@ import utilidades.comentarios.*
 import unidades.unidad.*
 import turnos.*
 
+/*
+ 	Maneja la lógica de seleccionar, deseleccionar y mover una unidad con todo lo que ello conlleva dependiendo
+ 	de si el cusror previamente tiene una unidad seleccionada o no.
+ 	Para ver su uso ir a /cursor 
+*/
+
 class EstadoAgarrado {
 	var unidad
 	
