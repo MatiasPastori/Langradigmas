@@ -15,7 +15,7 @@ Integrantes:
 
 - El juego:
   Consiste en tres escenarios diferentes donde se enfrentarán dos tropas de 11 unidades (10 subordinados y su comandante).
-  Cada tropa responde a un reino, Langradigmas y Duloc (¿quién dijo Shrek? cero imaginación, gente.)
+  Cada tropa responde a un reino, Langradigmas y Duloc (cero imaginación, gente.)
 - El objetivo:
   Eliminar al comandante rival hará que ganes el nivel.
   Se considerará ganador al jugador que vensa en dos de los tres niveles. 
