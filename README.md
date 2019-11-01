@@ -22,7 +22,7 @@ Integrantes:
 - Los jugadores:
   El juego está diseñado para dos jugadores. Cada uno en control de un reino.
 - Las unidades:
-  Además del comandante hay tres tipos de unidades: guerrero, tirador, caballero. Los dos jugadores tienen los mismos tipos de unidades mas allá de que se vean diferentes.
+  Además del comandante hay tres tipos de unidades: guerrero, tirador, caballero. Los dos jugadores tienen los mismos tipos de unidades mas allá de que se vean diferentes. Cada una (incluyendo al comandante) tiene su habilidad especial propia además de rango de movimiento, niveles de ataque y defensa propios.
 - Los escenarios:
   Como se mencionó anteriormente, hay tres niveles. En el primero, el jugador 1 comandando a Langradigmas defenderá en su castillo. El segundo nivel es un enfrentamiento a campo abierto. Y en el tercero, quien tiene las bonificaciones por castillo es el jugador 2 del reino de Duloc.
 - Las casillas:
