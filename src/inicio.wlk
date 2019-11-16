@@ -3,6 +3,8 @@ import utilidades.visuals.*
 import utilidades.teclado.*
 import cursor.*
 
+import jugadores.* // import just for testing
+
 /*
 	Setea la configuración inicial. 
 	@inicioHabilitado: true cuando comienza el juego, false al pasar la primer pantalla.
@@ -22,6 +24,8 @@ object inicio {
 		game.width(width)
 		
 		teclado.setearTeclaInicio()
+		
+		keyboard.num(9).onPressDo { jugador1.getUnidades().head().recibirDanio(10) }
 	}
 	method mostrarInicio() = game.addVisual(inicio)
 	method getInicioVisual() = inicio

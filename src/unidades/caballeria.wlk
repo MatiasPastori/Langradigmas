@@ -15,8 +15,10 @@ class Caballeria inherits Subordinado {
 				self.recibirDanio(1.randomUpTo(3).truncate(0))
 				game.say(self, "Hay alguien detrás y recibí daño al volver")			
 			}
-			else 
-				self.position(nuevaPos)
+			else {
+				self.mover(nuevaPos)
+				imagenCD.position(game.at(position.x(), position.y()))
+			}
 		} 
 	}
 }
