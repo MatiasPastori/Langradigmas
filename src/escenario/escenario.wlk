@@ -5,21 +5,26 @@ import escenario.tienda.*
 import escenario.casillas.*
 import cursor.*
 import utilidades.visuals.*
+import utilidades.pantallaCarga.*
 
 object escenario {
 	var nivelActual = nivel1
 
 	method iniciar() {
-		teclado.setearTeclasMovimiento(cursor)
-		teclado.setearTeclasAccion(cursor)
-		teclado.setearTeclasTienda()
-		teclado.setearTeclasTurno()
-		
-		mapManager.generarCasillas()
-		mapManager.generarBordes()
-		
-		self.iniciarNivel()
-		return 0
+		pantallaCarga.iniciarPantallaCarga()
+		game.schedule(500, {
+			
+			mapManager.generarCasillas()
+			mapManager.generarBordes()
+			
+			teclado.setearTeclasMovimiento(cursor)
+			teclado.setearTeclasAccion(cursor)
+			teclado.setearTeclasTienda()
+			teclado.setearTeclasTurno()
+			
+			pantallaCarga.desactivarPantallaCarga()
+			self.iniciarNivel()
+		})
 	}
 	method iniciarNivel() = nivelActual.generarNivel() 
 	method nivelActual() = nivelActual
