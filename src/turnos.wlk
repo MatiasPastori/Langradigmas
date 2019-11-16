@@ -13,7 +13,7 @@ import escenario.escenario.*
 	@unidadesLibres: unidades del jugadorActual que aún no realizaron ninguna acción
 	@unidadesMovidas: unidades que el jugadorActual movió
 	@unidadesUsadas: unidades con las que el jugadorActual atacó a un rival
- */
+*/
 
 object turnoManager {
 	var property habilitado = false

@@ -86,6 +86,7 @@ class Unidad {
 	method chequearMuerte() {if(self.getVida() < 1) self.morir()}
 		
 	method morir() {
+		game.removeTickEvent("iddle" + idUnico.toString())
 		jugadorDuenio.getUnidades().remove(self)
 		game.removeVisual(imagenVida)
 		game.removeVisual(imagenCD)

@@ -109,6 +109,8 @@ class Nivel {
 			game.allVisuals().filter{visual => !visual.esCasillaFija()}.forEach{ visual =>
 				game.removeVisual(visual)
 			}
+			self.removerTicks(jugador1.getUnidades())
+			self.removerTicks(jugador2.getUnidades())
 			jugador1.getUnidades().clear()
 			jugador2.getUnidades().clear()
 			
@@ -116,6 +118,9 @@ class Nivel {
 		} )
 	}
 	
+	method removerTicks(unidades) {
+		unidades.forEach{unidad => game.removeTickEvent("iddle" + unidad.getIdUnico().toString())}
+	}
 	
 	method siguientePantalla() {
 		escenario.actualizarNivel()
