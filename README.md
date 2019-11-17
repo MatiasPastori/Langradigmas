@@ -34,3 +34,6 @@ Integrantes:
   1) Aunque un jugador sea el vencedor de los dos primeros niveles se jugará el tercero. Lo diseñamos para algo, che. MÍNIMO jugalo.
   2) En cada nivel se resetean las unidades. No importan los sobrevivientes. Esto se hace para que cada nivel sea independiente del    anterior. En otro caso, se podría dar que el ganador del primer nivel tenga una ventanja adicional sobre el otro jugador y se torne irreversible. 
   3) Es obligatoria la compra de 10 unidades por nivel. Es una decisión de diseño y no una limitación de implementación.
+
+#### Trailer
+https://www.youtube.com/watch?v=hMy3qGc68u4&feature=youtu.be
