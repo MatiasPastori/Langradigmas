@@ -119,7 +119,17 @@ class Nivel {
 	}
 	
 	method removerTicks(unidades) {
-		unidades.forEach{unidad => game.removeTickEvent("iddle" + unidad.getIdUnico().toString())}
+		unidades.forEach{unidad => 
+			try {
+				game.removeTickEvent("iddle" + unidad.getIdUnico().toString())		
+			} catch e {
+				// Se catchea el error y no se hace nada con él. Esto sucede porque no tengo
+				// forma de obtener una lista de onTicks activos y necesito remover todos los ticks
+				// activos. Existe algún caso en que una unidad pierde su tick antes de que termine el nivel
+				// y entonces al hacer el remove tira error y se corta la ejecución del juego
+				// No es la manera mas elegante pero es la que funciona.
+			}
+		}
 	}
 	
 	method siguientePantalla() {
